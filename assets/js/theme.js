@@ -185,52 +185,52 @@ window.addEventListener("load", () => {
                 $(this).is(":checked") ? $(".sidebar").addClass("version-2") : $(".sidebar").removeClass("version-2");
             });
     }),
-    // $(function () {
-    //     "use strict";
-    //     var t = document.querySelector('.theme-switch input[type="checkbox"]'),
-    //         c = document.querySelector('.theme-high-contrast input[type="checkbox"]'),
-    //         o = document.querySelector('.theme-dark input[type="checkbox"]'),
-    //         e = localStorage.getItem("theme");
-    //     e &&
-    //         (document.documentElement.setAttribute("data-theme", e),
-    //             "dark" === e && ((t.checked = !0), (o.checked = !1), (c.checked = !1)),
-    //             "theme-dark" === e && ((o.checked = !0), (c.checked = !1), (t.checked = !1)),
-    //             "high-contrast" === e) &&
-    //         ((c.checked = !0), (t.checked = !1), (o.checked = !1)),
-    //         t.addEventListener(
-    //             "change",
-    //             function (e) {
-    //                 e.target.checked
-    //                     ? (document.documentElement.setAttribute("data-theme", "dark"), localStorage.setItem("theme", "dark"), (c.checked = !1), (o.checked = !1))
-    //                     : (document.documentElement.setAttribute("data-theme", "light"), localStorage.setItem("theme", "light"));
-    //             },
-    //             !1
-    //         ),
-    //         c.addEventListener(
-    //             "change",
-    //             function (e) {
-    //                 e.target.checked
-    //                     ? (document.documentElement.setAttribute("data-theme", "high-contrast"), localStorage.setItem("theme", "high-contrast"), (t.checked = !1), (o.checked = !1))
-    //                     : (document.documentElement.setAttribute("data-theme", "light"), localStorage.setItem("theme", "light"));
-    //             },
-    //             !1
-    //         ),
-    //         o.addEventListener(
-    //             "change",
-    //             function (e) {
-    //                 e.target.checked
-    //                     ? (document.documentElement.setAttribute("data-theme", "theme-dark"), localStorage.setItem("theme", "theme-dark"), (t.checked = !1), (c.checked = !1))
-    //                     : (document.documentElement.setAttribute("data-theme", "light"), localStorage.setItem("theme", "light"));
-    //             },
-    //             !1
-    //         ),
-    //         $(".quick-light-dark").on("click", function () {
-    //             $(this).toggleClass("active"),
-    //                 "light" == localStorage.getItem("theme")
-    //                     ? (document.documentElement.setAttribute("data-theme", "dark"), localStorage.setItem("theme", "dark"), $("#theme-switch").prop("checked", !0))
-    //                     : (document.documentElement.setAttribute("data-theme", "light"), localStorage.setItem("theme", "light"), $("#theme-switch").prop("checked", !1));
-    //         });
-    // }),
+    $(function () {
+        "use strict";
+        // var t = document.querySelector('.theme-switch input[type="checkbox"]'),
+        //     c = document.querySelector('.theme-high-contrast input[type="checkbox"]'),
+        //     o = document.querySelector('.theme-dark input[type="checkbox"]'),
+        //     e = localStorage.getItem("theme");
+        // e &&
+        //     (document.documentElement.setAttribute("data-theme", e),
+        //         "dark" === e && ((t.checked = !0), (o.checked = !1), (c.checked = !1)),
+        //         "theme-dark" === e && ((o.checked = !0), (c.checked = !1), (t.checked = !1)),
+        //         "high-contrast" === e) &&
+        //     ((c.checked = !0), (t.checked = !1), (o.checked = !1)),
+        //     t.addEventListener(
+        //         "change",
+        //         function (e) {
+        //             e.target.checked
+        //                 ? (document.documentElement.setAttribute("data-theme", "dark"), localStorage.setItem("theme", "dark"), (c.checked = !1), (o.checked = !1))
+        //                 : (document.documentElement.setAttribute("data-theme", "light"), localStorage.setItem("theme", "light"));
+        //         },
+        //         !1
+        //     ),
+        //     c.addEventListener(
+        //         "change",
+        //         function (e) {
+        //             e.target.checked
+        //                 ? (document.documentElement.setAttribute("data-theme", "high-contrast"), localStorage.setItem("theme", "high-contrast"), (t.checked = !1), (o.checked = !1))
+        //                 : (document.documentElement.setAttribute("data-theme", "light"), localStorage.setItem("theme", "light"));
+        //         },
+        //         !1
+        //     ),
+        //     o.addEventListener(
+        //         "change",
+        //         function (e) {
+        //             e.target.checked
+        //                 ? (document.documentElement.setAttribute("data-theme", "theme-dark"), localStorage.setItem("theme", "theme-dark"), (t.checked = !1), (c.checked = !1))
+        //                 : (document.documentElement.setAttribute("data-theme", "light"), localStorage.setItem("theme", "light"));
+        //         },
+        //         !1
+        //     ),
+        $(".quick-light-dark").on("click", function () {
+            $(this).toggleClass("active"),
+                "light" == localStorage.getItem("theme")
+                    ? (document.documentElement.setAttribute("data-theme", "dark"), localStorage.setItem("theme", "dark"), $("#theme-switch").prop("checked", !0))
+                    : (document.documentElement.setAttribute("data-theme", "light"), localStorage.setItem("theme", "light"), $("#theme-switch").prop("checked", !1));
+        });
+    }),
     $(function () {
         $(".next").on("click", function () {
             var e = $(this).parents(".tab-pane").next().attr("id");
