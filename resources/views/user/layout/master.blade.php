@@ -11,7 +11,7 @@
     <link rel="icon" href="{{ asset('assets/img/favicon.ico') }}" type="image/x-icon"> <!-- Favicon-->
     <title>@yield('title') | NHire Group</title>
     <!-- Application vendor css url -->
-    @yield('styles')
+    <link rel="stylesheet" href="{{ asset('assets/cssbundle/daterangepicker.min.css') }}">
     <!-- project css file  -->
     <link rel="stylesheet" href="{{ asset('assets/css/luno-style.css') }}">
     <!-- Jquery Core Js -->
@@ -20,13 +20,13 @@
 
 <body class="layout-1 font-quicksand" data-luno="theme-blue">
 
-    @include('admin.layout.includes.sidebar')
+    @include('user.layout.includes.sidebar')
     <!-- start: body area -->
     <div class="wrapper">
         
-        @include('admin.layout.includes.header')
+        @include('user.layout.includes.header')
 
-        @include('admin.layout.includes.toolbar')
+        @include('user.layout.includes.toolbar')
         <!-- start: page body -->
         <div class="page-body px-xl-4 px-sm-2 px-0 py-lg-2 py-1 mt-0 mt-lg-3">
             <div class="container-fluid">
@@ -34,13 +34,15 @@
             </div>
         </div>
 
-        @include('admin.layout.includes.footer')
+        @include('user.layout.includes.footer')
     </div>
     
     <!-- Jquery Page Js -->
     <script src="{{ asset('assets/js/theme.js') }}"></script>
     <!-- Plugin Js -->
-    @yield('scripts')
+    <script src="{{ asset('assets/js/bundle/apexcharts.bundle.js') }}"></script>
+    <!-- Vendor Script -->
+    <script src="{{ asset('assets/js/bundle/apexcharts.bundle.js') }}"></script>
     <script>
         // // LUNO Revenue
         // var options = {

@@ -3,7 +3,7 @@
     <div class="container-fluid">
         <!-- sidebar: title-->
         <div class="title-text d-flex align-items-center mb-4 mt-1">
-            <h4 class="sidebar-title mb-0 flex-grow-1"><span class="sm-txt">L</span><span>UNO Admin</span></h4>
+            <h4 class="sidebar-title mb-0 flex-grow-1"><span class="sm-txt">L</span><span>UNO User</span></h4>
             {{-- <div class="dropdown morphing scale-left">
                 <a class="dropdown-toggle more-icon" href="#" role="button" data-bs-toggle="dropdown"><i
                         class="fa fa-ellipsis-h"></i></a>
@@ -31,8 +31,8 @@
                 {{-- <li class="divider py-2 lh-sm"><span class="small">MAIN</span><br> <small class="text-muted">Unique
                         dashboard designs </small></li> --}}
                 <li>
-                    <a class="m-link @if (Route::is('admin.dashboard')) active @endif"
-                        href="{{ route('admin.dashboard') }}">
+                    <a class="m-link @if (Route::is('user.dashboard')) active @endif"
+                        href="{{ route('user.dashboard') }}">
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="currentColor" viewBox="0 0 16 16">
                             <path fill-rule="evenodd"
                                 d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6zm5-.793V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z" />
@@ -40,18 +40,6 @@
                                 d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z" />
                         </svg>
                         <span class="ms-2">Dashboard</span>
-                    </a>
-                </li>
-                <li>
-                    <a class="m-link @if (Route::is('admin.settings.*')) active @endif"
-                        href="{{ route('admin.settings.edit') }}">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="currentColor" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd"
-                                d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6zm5-.793V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z" />
-                            <path class="var(--secondary-color)" fill-rule="evenodd"
-                                d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z" />
-                        </svg>
-                        <span class="ms-2">Settings</span>
                     </a>
                 </li>
                 {{-- <li class="collapsed">
@@ -246,9 +234,9 @@
                 </li> --}}
             </ul>
             {{-- <ul class="menu-list"> --}}
-            {{-- <li class="divider py-2 lh-sm"><span class="small">RESOURCES</span><br> <small
+                {{-- <li class="divider py-2 lh-sm"><span class="small">RESOURCES</span><br> <small
                         class="text-muted">you need to know about LUNO</small></li> --}}
-            {{-- <li>
+                {{-- <li>
                     <a class="m-link" href="layouts.html">
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="currentColor"
                             viewBox="0 0 16 16">
@@ -260,7 +248,7 @@
                         <span class="ms-2">Layouts</span>
                     </a>
                 </li> --}}
-            {{-- <li>
+                {{-- <li>
                     <a class="m-link" href="modals.html">
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="currentColor"
                             viewBox="0 0 16 16">
@@ -272,7 +260,7 @@
                         <span class="ms-2">Modals Popups</span>
                     </a>
                 </li> --}}
-            {{-- <li>
+                {{-- <li>
                     <a class="m-link" href="docs/w-cards.html">
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="currentColor"
                             viewBox="0 0 16 16">
@@ -286,7 +274,7 @@
                         <span class="ms-2">Widget's</span>
                     </a>
                 </li> --}}
-            {{-- <li>
+                {{-- <li>
                     <a class="m-link" href="./docs/index.html">
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="currentColor"
                             viewBox="0 0 16 16">
@@ -300,7 +288,7 @@
                         <span class="ms-2">Documentation</span>
                     </a>
                 </li> --}}
-            {{-- <li>
+                {{-- <li>
                     <a class="m-link" href="./docs/doc-changelog.html">
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="currentColor"
                             viewBox="0 0 16 16">

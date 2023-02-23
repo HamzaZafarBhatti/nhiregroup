@@ -15,7 +15,6 @@ class Authenticate extends Middleware
         if (in_array('admin', explode('/', $_SERVER['REDIRECT_URL']))) {
             return route('admin.login');
         }
-        // return route('user.login');
-        return route('login');
+        return route('user.login');
     }
 }
