@@ -1,0 +1,69 @@
+/* 1170px to 980px or 768px */
+@media screen and (max-width: 1200px) {
+
+	[class*="col-lg"], [class*="col-md"], [class*="col-sm"] [class*="col-xs"] {display:inline-block; vertical-align:top; margin:0 -4px 0 0; float:none; }
+	.img-holder figure img{width: 100%;}
+}
+
+/* 980px to 768px */
+/* If Required */
+@media screen and (max-width: 980px) {
+	.cs-table .table-responsive { overflow: scroll; }
+	.column-text p{color: #000;}
+	.img-holder-left figure img{opacity: 0.5;}
+	.table-holder{width: 100%; overflow-x: scroll;}
+	.table-holder table{width: 800px;}
+	.top-nav .slicknav_menu {display: inline-block;}
+	.top-nav .menu-list {display: none;}
+	.top-nav {display: flex; align-items: center; flex-direction: row-reverse; padding: 0 20px;}
+	.top-nav .slicknav_menu .slicknav_nav {position: absolute; top: 100%; right: 20px; width: 200px; background-color: #61747b; transition: none; padding: 15px 15px 20px;}
+	.top-nav .slicknav_menu .slicknav_nav li {margin: 0 0 15px; display: block; border-left: 0;}
+	.top-nav .slicknav_menu .slicknav_nav li:last-child {margin-bottom: 0; padding-bottom: 0;}
+	/*Responsive Menu Style Start*/
+	.slicknav_menu { display: none; }
+	.slicknav_btn { display: block; position: relative; overflow: hidden; margin: 0; padding: 0; width: 30px; height: 30px; font-size: 0; text-indent: -9999px; -webkit-appearance: none; -moz-appearance: none; appearance: none; -webkit-box-shadow: none; box-shadow: none; border-radius: 3px; border: none; cursor: pointer; -webkit-transition: background 0.3s; -moz-transition: background 0.3s; transition: background 0.3s; }
+	.slicknav_btn .slicknav_icon-bar + .slicknav_icon-bar { margin-top: 4px; }
+	.slicknav_menu .slicknav_menutxt { display: none; float: left; color: #fff; font-weight: bold; line-height: 14px; border: none; margin-right: 6px; }
+	.slicknav_menu .slicknav_icon { display: block; position: absolute; top: 14px; left: 5px; right: 5px; height: 2px; background: white; }
+	.slicknav_menu .slicknav_icon:before, .slicknav_menu .slicknav_icon:after { position: absolute; display: block; left: 0; width: 100%; height: 2px; background-color: #fff; content: ""; }
+	.slicknav_menu .slicknav_icon:before { top: -6px; }
+	.slicknav_menu .slicknav_icon:after { bottom: -6px; }
+	.slicknav_btn { background-color: #55a747; }
+	.slicknav_btn .slicknav_icon { -moz-transition: background 0.3s; -webkit-transition: background 0.3s; transition: background 0.3s; }
+	.slicknav_btn .slicknav_icon:before, .slicknav_btn .slicknav_icon:after { -webkit-transition-duration: 0.3s, 0.3s; -moz-transition-duration: 0.3s, 0.3s; transition-duration: 0.3s, 0.3s; -webkit-transition-delay: .3s, 0s; -moz-transition-delay: .3s, 0s; transition-delay: .3s, 0s; }
+	.slicknav_btn .slicknav_icon:before { -webkit-transition-property: top, transform; -moz-transition-property: top, transform; -webkit-transition-property: top, -webkit-transform; transition-property: top, -webkit-transform; -moz-transition-property: top, transform, -moz-transform; transition-property: top, transform; transition-property: top, transform, -webkit-transform, -moz-transform; }
+	.slicknav_btn .slicknav_icon:after { -webkit-transition-property: bottom, transform; -moz-transition-property: bottom, transform; -webkit-transition-property: bottom, -webkit-transform; transition-property: bottom, -webkit-transform; -moz-transition-property: bottom, transform, -moz-transform; transition-property: bottom, transform; transition-property: bottom, transform, -webkit-transform, -moz-transform; }
+	/* active state, i.e. menu open Start*/
+	.slicknav_btn.slicknav_open .slicknav_icon { background: none; }
+	.slicknav_btn.slicknav_open .slicknav_icon:before { top: 0; -webkit-transform: rotate(45deg); -moz-transform: rotate(45deg); -ms-transform: rotate(45deg); transform: rotate(45deg); }
+	.slicknav_btn.slicknav_open .slicknav_icon:after { bottom: 0; -webkit-transform: rotate(-45deg); -moz-transform: rotate(-45deg); -ms-transform: rotate(-45deg); transform: rotate(-45deg); }
+	.slicknav_btn.slicknav_open .slicknav_icon:before, .slicknav_btn.slicknav_open .slicknav_icon:after { background: #fff !important; -webkit-transition-delay: 0s, 0.3s; -moz-transition-delay: 0s, 0.3s; transition-delay: 0s, 0.3s; }
+	/* active state, i.e. menu open End*/
+	.img-holder-left figure {position: initial;}
+	.column-text {padding: 30px 0 30px;}
+	.img-holder-price figure img {max-width: 100%;}
+	.bg-holder img {max-width: 100%; width: auto;}
+	ul.demo-list {margin: 0 -15px;}
+}
+/* 767px to 480px */
+@media screen and (max-width: 767px) {
+	.cs-btn + .cs-btn{margin-top: 10px;}
+	body.header-overlay .overlay ul li {width: 49%;}
+	body.header-overlay .overlay .overlay-close {width: 30px; height: 30px; top: 10px;}
+	ul.testimonial-slides-main li .cs-inner-slide {padding-right: 10px;}
+}
+/* 480px to 320px */
+@media screen and (max-width: 480px) {
+	.pricetable-holder.classic{width: 100%;}
+	.main-heading-top h2{font-size: 30px; line-height: 40px;}
+	.main-heading-top h2 span{font-size: 45px;}
+	.heading-holder .cs-media {width: 100%; padding-bottom: 30px;}
+	.heading-holder .cs-media .cs-text {width: 100%;}
+	body.header-overlay .overlay ul li {width: 100%;}
+	.heading-holder h2 {font-size: 30px;}
+	.main-heading-top {padding-bottom: 220px;}
+}
+@media screen and (max-width: 360px) {
+}
+@media screen and (max-width: 320px) {
+}

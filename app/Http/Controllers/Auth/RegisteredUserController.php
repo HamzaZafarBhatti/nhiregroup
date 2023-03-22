@@ -36,8 +36,6 @@ class RegisteredUserController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
-
-        $data = $request->except('_token');
         
         $user = User::create([
             'name' => $request->name,

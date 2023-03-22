@@ -25,7 +25,7 @@
     <div class="wrapper">
         
         @include('admin.layout.includes.header')
-
+        
         @include('admin.layout.includes.toolbar')
         <!-- start: page body -->
         <div class="page-body px-xl-4 px-sm-2 px-0 py-lg-2 py-1 mt-0 mt-lg-3">
