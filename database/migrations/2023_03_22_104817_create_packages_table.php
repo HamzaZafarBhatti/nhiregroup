@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('packages', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->integer('price');
+            $table->integer('grade');
+            $table->integer('direct_ref_bonus');
+            $table->integer('indirect_ref_bonus');
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
     }

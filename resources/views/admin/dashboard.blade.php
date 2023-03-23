@@ -3,7 +3,7 @@
 @section('title', 'Dashboard')
 
 @section('content')
-    <div class="row g-3 row-deck vh-100">
+    <div class="row g-3 row-deck">
         {{-- <div class="col-lg-3 col-md-6 col-sm-6">
             <div class="card overflow-hidden">
                 <div class="card-body">

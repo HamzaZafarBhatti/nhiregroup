@@ -12,6 +12,7 @@
     <title>@yield('title') | NHire Group</title>
     <!-- Application vendor css url -->
     @yield('styles')
+    <link rel="stylesheet" href="{{ asset('assets/cssbundle/sweetalert2.min.css') }}" />
     <!-- project css file  -->
     <link rel="stylesheet" href="{{ asset('assets/css/luno-style.css') }}">
     <!-- Jquery Core Js -->
@@ -23,12 +24,12 @@
     @include('admin.layout.includes.sidebar')
     <!-- start: body area -->
     <div class="wrapper">
-        
+
         @include('admin.layout.includes.header')
-        
+
         @include('admin.layout.includes.toolbar')
         <!-- start: page body -->
-        <div class="page-body px-xl-4 px-sm-2 px-0 py-lg-2 py-1 mt-0 mt-lg-3">
+        <div class="page-body px-xl-4 px-sm-2 px-0 py-lg-2 py-1 mt-0 mt-lg-3 min-vh-100">
             <div class="container-fluid">
                 @yield('content')
             </div>
@@ -36,12 +37,44 @@
 
         @include('admin.layout.includes.footer')
     </div>
-    
+
+    <!-- Plugin Js -->
+    <script src="{{ asset('assets/js/plugins.js') }}"></script>
     <!-- Jquery Page Js -->
     <script src="{{ asset('assets/js/theme.js') }}"></script>
     <!-- Plugin Js -->
+    <script src="{{ asset('assets/js/bundle/sweetalert2.bundle.js') }}"></script>
     @yield('scripts')
     <script>
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            // timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
+        @if (session()->has('success'))
+            Toast.fire({
+                icon: 'success',
+                title: "{{ session('success') }}"
+            })
+        @endif
+        @if (session()->has('error'))
+            Toast.fire({
+                icon: 'danger',
+                title: "{{ session('error') }}"
+            })
+        @endif
+        @if (session()->has('warning'))
+            Toast.fire({
+                icon: 'warning',
+                title: "{{ session('warning') }}"
+            })
+        @endif
         // // LUNO Revenue
         // var options = {
         //     chart: {
