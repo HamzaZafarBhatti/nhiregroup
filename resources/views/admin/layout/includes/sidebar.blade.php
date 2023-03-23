@@ -62,7 +62,7 @@
                                 href="{{ route('admin.packages.create') }}">Add Package</a></li>
                     </ul>
                 </li>
-                <li>
+                {{-- <li>
                     <a class="m-link @if (Route::is('admin.settings.*')) active @endif"
                         href="{{ route('admin.settings.edit') }}">
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="currentColor" viewBox="0 0 16 16">
@@ -73,7 +73,7 @@
                         </svg>
                         <span class="ms-2">Settings</span>
                     </a>
-                </li>
+                </li> --}}
                 {{-- <li class="collapsed">
                     <a class="m-link" data-bs-toggle="collapse" data-bs-target="#menu_dashboard" href="#">
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="currentColor" viewBox="0 0 16 16">
