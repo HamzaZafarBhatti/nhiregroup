@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="@if (Auth::check() && Auth::user()->darkmode == 1) dark @else light @endif">
 
 <head>
     <meta charset="utf-8">
@@ -46,6 +46,9 @@
     <script src="{{ asset('assets/js/bundle/sweetalert2.bundle.js') }}"></script>
     @yield('scripts')
     <script>
+        var theme = localStorage.getItem("theme");
+        document.documentElement.setAttribute("data-theme", theme)
+
         const Toast = Swal.mixin({
             toast: true,
             position: 'top-end',
@@ -75,6 +78,31 @@
                 title: "{{ session('warning') }}"
             })
         @endif
+
+
+        // $(".quick-light-dark").on("click", function() {
+        //     $(this).toggleClass("active")
+        //     if ("light" == localStorage.getItem("theme")) {
+        //         document.documentElement.setAttribute("data-theme", "dark")
+        //         localStorage.setItem("theme", "dark")
+        //         setTheme("dark")
+        //     } else {
+        //         document.documentElement.setAttribute("data-theme", "light")
+        //         localStorage.setItem("theme", "light")
+        //         setTheme("light")
+        //     }
+        // });
+
+        // function setTheme(theme) {
+        //     $.ajax({
+        //         url: "{{ route('admin.settings.set_theme') }}",
+        //         type: "POST",
+        //         data: theme,
+        //         success: function(data) {
+
+        //         }
+        //     })
+        // }
         // // LUNO Revenue
         // var options = {
         //     chart: {

@@ -37,6 +37,7 @@ Route::middleware(['auth', 'verified', 'admin'])->name('admin.')->prefix('admin'
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
     Route::controller(SettingController::class)->prefix('settings')->name('settings.')->group(function () {
         Route::get('/', 'edit')->name('edit');
+        Route::get('/set-theme', 'set_theme')->name('set_theme');
     });
     Route::resource('packages', PackageController::class);
 });
