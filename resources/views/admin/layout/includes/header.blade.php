@@ -443,7 +443,7 @@
                                     </div>
                                 </div>
                                 <div class="list-group m-2 mb-3">
-                                    <a class="list-group-item list-group-item-action border-0" href="#"><i
+                                    <a class="list-group-item list-group-item-action border-0" href="{{ route('admin.profile.edit') }}"><i
                                             class="w30 fa fa-user"></i>My Profile</a>
                                 </div>
                                 <a href="{{ route('admin.logout') }}"

@@ -26,4 +26,17 @@ class PasswordController extends Controller
 
         return back()->with('status', 'password-updated');
     }
+    public function admin_update(Request $request)
+    {
+        $validated = $request->validate([
+            'current_password' => ['required', 'current_password'],
+            'password' => ['required', Password::defaults(), 'confirmed'],
+        ]);
+        
+        $request->user()->update([
+            'password' => bcrypt($validated['password']),
+        ]);
+
+        return back()->with('success', 'Password Updated');
+    }
 }

@@ -39,6 +39,10 @@ Route::middleware(['auth', 'verified', 'admin'])->name('admin.')->prefix('admin'
         Route::get('/', 'edit')->name('edit');
         Route::get('/set-theme', 'set_theme')->name('set_theme');
     });
+    Route::controller(ProfileController::class)->prefix('profile')->name('profile.')->group(function () {
+        Route::get('/', 'admin_edit')->name('edit');
+        Route::patch('/', 'admin_update')->name('update');
+    });
     Route::resource('packages', PackageController::class);
 });
 Route::middleware('auth')->group(function () {

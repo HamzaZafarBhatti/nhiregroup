@@ -33,6 +33,7 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('logout', [AuthenticatedSessionController::class, 'admindestroy'])->name('logout');
+        Route::put('password', [PasswordController::class, 'admin_update'])->name('password.update');
     });
     Route::prefix('user')->name('user.')->group(function () {
         Route::get('verify-email', EmailVerificationPromptController::class)->name('verification.notice');

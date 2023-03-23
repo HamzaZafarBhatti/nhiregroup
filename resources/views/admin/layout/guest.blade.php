@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="@if (Auth::check() && Auth::user()->darkmode == 1) dark @else light @endif">
 
 <head>
     <meta charset="utf-8">
@@ -27,6 +27,10 @@
     <script src="{{ secure_asset('assets/js/theme.js') }}"></script>
     <!-- Plugin Js -->
     <!-- Vendor Script -->
+    <script>
+        var theme = localStorage.getItem("theme");
+        document.documentElement.setAttribute("data-theme", theme)
+    </script>
 </body>
 
 </html>
