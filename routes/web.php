@@ -30,6 +30,9 @@ Route::get('/', [FrontendController::class, 'index'])->name('home');
 Route::middleware(['auth', 'verified', 'user'])->name('user.')->prefix('user')->group(function () {
     Route::get('/', [UserController::class, 'dashboard'])->name('dashboard');
     Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 Route::middleware(['auth', 'verified', 'admin'])->name('admin.')->prefix('admin')->group(function () {
@@ -44,11 +47,6 @@ Route::middleware(['auth', 'verified', 'admin'])->name('admin.')->prefix('admin'
         Route::patch('/', 'admin_update')->name('update');
     });
     Route::resource('packages', PackageController::class);
-});
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 require __DIR__ . '/auth.php';

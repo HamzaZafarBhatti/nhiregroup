@@ -1,30 +1,36 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+<html lang="en" data-theme="@if (Auth::check() && Auth::user()->darkmode == 1) dark @else light @endif">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Responsive Bootstrap 5 admin dashboard template & web App ui kit.">
+    <meta name="keyword"
+        content="LUNO, Bootstrap 5, ReactJs, Angular, Laravel, VueJs, ASP .Net, Admin Dashboard, Admin Theme, HRMS, Projects, Hospital Admin, CRM Admin, Events, Fitness, Music, Inventory, Job Portal">
+    <link rel="icon" href="{{ secure_asset('assets/img/favicon.ico') }}" type="image/x-icon"> <!-- Favicon-->
+    <title>@yield('title') | NHire Group</title>
+    <!-- Application vendor css url -->
+    <!-- project css file  -->
+    <link rel="stylesheet" href="{{ secure_asset('assets/css/luno-style.css') }}">
+    <!-- Jquery Core Js -->
+    <script src="{{ secure_asset('assets/js/plugins.js') }}"></script>
+</head>
 
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+<body id="layout-1" data-luno="theme-blue">
+    <!-- start: body area -->
+    <div class="wrapper">
+        @yield('content')
+    </div>
+    <!-- Jquery Page Js -->
+    <!-- Jquery Page Js -->
+    <script src="{{ secure_asset('assets/js/theme.js') }}"></script>
+    <!-- Plugin Js -->
+    <!-- Vendor Script -->
+    <script>
+        var theme = localStorage.getItem("theme");
+        document.documentElement.setAttribute("data-theme", theme)
+    </script>
+</body>
 
-        <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-    </head>
-    <body class="font-sans text-gray-900 antialiased">
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
-            <div>
-                <a href="/">
-                    <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-                </a>
-            </div>
-
-            <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
-                {{ $slot }}
-            </div>
-        </div>
-    </body>
 </html>

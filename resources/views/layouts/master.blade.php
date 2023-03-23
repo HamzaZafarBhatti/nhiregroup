@@ -20,14 +20,16 @@
 </head>
 
 <body class="layout-1 font-quicksand" data-luno="theme-blue">
-
-    @include('admin.layout.includes.sidebar')
+    @php
+        $role = auth()->user()->role;
+    @endphp
+    @include('layouts.includes.sidebar')
     <!-- start: body area -->
     <div class="wrapper">
 
-        @include('admin.layout.includes.header')
+        @include('layouts.includes.header')
 
-        @include('admin.layout.includes.toolbar')
+        @include('layouts.includes.toolbar')
         <!-- start: page body -->
         <div class="page-body px-xl-4 px-sm-2 px-0 py-lg-2 py-1 mt-0 mt-lg-3 min-vh-100">
             <div class="container-fluid">
@@ -35,7 +37,7 @@
             </div>
         </div>
 
-        @include('admin.layout.includes.footer')
+        @include('layouts.includes.footer')
     </div>
 
     <!-- Plugin Js -->
