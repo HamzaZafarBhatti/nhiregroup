@@ -3,10 +3,10 @@
     <div class="container-fluid">
         <!-- sidebar: title-->
         <div class="title-text d-flex align-items-center mb-4 mt-1">
-            @if (empty($settings->site_favicon))
+            @if (empty($settings->site_logo))
                 <h4 class="sidebar-title mb-0 flex-grow-1"><span class="sm-txt">L</span><span>UNO Admin</span></h4>
             @else
-                <img src="{{ asset('assets/uploads/logo/' . $settings->site_favicon) }}" alt="">
+                <img src="{{ asset($settings->getLogoPath() . $settings->site_logo) }}" alt="">
             @endif
         </div>
         <!-- sidebar: menu list -->

@@ -2,9 +2,13 @@
 
 @section('title', 'Settings')
 
+@section('styles')
+    <link rel="stylesheet" href="{{ asset('assets/vendor/tagify/tagify.css') }}">
+@endsection
+
 @section('content')
     <div class="row g-3 row-deck vh-100">
-        <div class="col-lg-12 col-md-12 col-sm-12">
+        <div class="col-lg-8 col-md-8 col-sm-8">
             <div class="card">
                 <div class="card-header py-3 bg-transparent border-bottom-0">
                     <h6 class="card-title mb-0">Settings</h6>
@@ -20,6 +24,14 @@
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Site Keywords</label>
+                            <input name="site_keywords" value="{{ $settings->site_keywords }}"
+                                class="@error('site_keywords') is-invalid @enderror" required>
+                            @error('site_keywords')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
                         <div class="col-md-12">
                             <label class="form-label">Site Description</label>
                             <textarea name="site_description" id="site_description" cols="30" rows="3"
@@ -29,54 +41,83 @@
                             @enderror
                         </div>
                         <div class="col-md-6">
-                            <label class="form-label">Price</label>
-                            <div class="input-group has-validation">
-                                <span class="input-group-text" id="inputGroupPrice">₦</span>
-                                <input type="number" class="form-control @error('price') is-invalid @enderror"
-                                    value="" name="price" aria-describedby="inputGroupPrice" required />
-                                @error('price')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
+                            <label class="form-label">Email</label>
+                            <input type="text" class="form-control @error('email') is-invalid @enderror"
+                                value="{{ $settings->email }}" name="email" required />
+                            @error('email')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="col-md-6">
-                            <label class="form-label">Direct Referral Bonus</label>
-                            <div class="input-group has-validation">
-                                <span class="input-group-text" id="inputGroupdirect_ref_bonus">₦</span>
-                                <input type="number" class="form-control @error('direct_ref_bonus') is-invalid @enderror"
-                                    value="" name="direct_ref_bonus" aria-describedby="inputGroupdirect_ref_bonus"
-                                    required />
-                                @error('direct_ref_bonus')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
+                            <label class="form-label">Address</label>
+                            <input type="text" class="form-control @error('address') is-invalid @enderror"
+                                value="{{ $settings->address }}" name="address" required />
+                            @error('address')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="col-md-6">
-                            <label class="form-label">Indirect Referral Bonus</label>
-                            <div class="input-group has-validation">
-                                <span class="input-group-text" id="inputGroupindirect_ref_bonus">₦</span>
-                                <input type="number" class="form-control @error('indirect_ref_bonus') is-invalid @enderror"
-                                    value="" name="indirect_ref_bonus" aria-describedby="inputGroupindirect_ref_bonus"
-                                    required />
-                                @error('indirect_ref_bonus')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
+                            <label class="form-label">Phone</label>
+                            <input type="text" class="form-control @error('phone') is-invalid @enderror"
+                                value="{{ $settings->phone }}" name="phone" required />
+                            @error('phone')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="col-md-6">
-                            <label class="form-label">Status</label>
-                            <select class="form-select @error('is_active') is-invalid @enderror" name="is_active" required>
-                                <option selected disabled value="">Choose Status</option>
-                                <option value="1">Active</option>
-                                <option value="0">Inactive</option>
+                            <label class="form-label">Email Notifications</label>
+                            <select class="form-select @error('email_notification') is-invalid @enderror"
+                                name="email_notification" required>
+                                <option selected disabled value="">Choose...</option>
+                                <option value="1" @if ($settings->email_notification) selected @endif>Active</option>
+                                <option value="0" @if (!$settings->email_notification) selected @endif>Inactive</option>
                             </select>
-                            @error('is_active')
+                            @error('email_notification')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="col-12">
                             <button class="btn btn-primary" type="submit">
-                                Edit Package
+                                Update
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4">
+            <div class="card">
+                <div class="card-header py-3 bg-transparent border-bottom-0">
+                    <h6 class="card-title mb-0">Logo & Favicon</h6>
+                </div>
+                <div class="card-body">
+                    <form class="row g-3" action="{{ route('admin.settings.update_logos') }}" method="post" enctype="multipart/form-data">
+                        @csrf
+                        <div class="col-md-12">
+                            <label class="form-label">Logo</label>
+                            <input class="form-control @error('site_logo') is-invalid @enderror" type="file" accept="image/*"
+                                name="site_logo">
+                            @if (!empty($settings->site_logo))
+                                <span class="text-muted">{{ $settings->site_logo }}</span>
+                            @endif
+                            @error('site_logo')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="col-md-12">
+                            <label class="form-label">Favicon</label>
+                            <input class="form-control @error('site_favicon') is-invalid @enderror" type="file" accept="image/*"
+                                name="site_favicon">
+                            @if (!empty($settings->site_favicon))
+                                <span class="text-muted">{{ $settings->site_favicon }}</span>
+                            @endif
+                            @error('site_favicon')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="col-12">
+                            <button class="btn btn-primary" type="submit">
+                                Update
                             </button>
                         </div>
                     </form>
@@ -84,4 +125,16 @@
             </div>
         </div>
     </div> <!-- .row end -->
+@endsection
+
+@section('scripts')
+    <script src="{{ asset('assets/js/bundle/tagify.bundle.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            // The DOM element you wish to replace with Tagify    12
+            var input = document.querySelector('input[name=site_keywords]');
+            // initialize Tagify on the above input node reference
+            new Tagify(input)
+        });
+    </script>
 @endsection

@@ -9,7 +9,7 @@
     <meta name="keyword" content="{{ $settings->site_keywords }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon"
-        href="{{ asset(empty($settings->site_favicon) ? 'assets/img/favicon.ico' : 'assets/uploads/favicon/' . $settings->site_favicon) }}"
+        href="{{ asset(empty($settings->site_favicon) ? 'assets/img/favicon.ico' : $settings->getFaviconPath() . $settings->site_favicon) }}"
         type="image/x-icon"> <!-- Favicon-->
     <title>@yield('title') | {{ $settings->site_name }}</title>
     <!-- Application vendor css url -->

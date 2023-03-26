@@ -41,6 +41,7 @@ Route::middleware(['auth', 'verified', 'admin'])->name('admin.')->prefix('admin'
     Route::controller(SettingController::class)->prefix('settings')->name('settings.')->group(function () {
         Route::get('/', 'edit')->name('edit');
         Route::post('/', 'update')->name('update');
+        Route::post('/update_logos', 'update_logos')->name('update_logos');
         Route::post('/update_epin', 'update_epin')->name('update_epin');
         Route::post('/set-theme', 'set_theme')->name('set_theme');
     });

@@ -9,6 +9,9 @@ class Setting extends Model
 {
     use HasFactory;
 
+    protected $logo_path = 'assets/uploads/logo/';
+    protected $favicon_path = 'assets/uploads/favicon/';
+
     protected $fillable = [
         'site_name',
         'site_description',
@@ -20,4 +23,14 @@ class Setting extends Model
         'phone',
         'email_notification',
     ];
+
+    public function getLogoPath()
+    {
+        return $this->logo_path;
+    }
+
+    public function getFaviconPath()
+    {
+        return $this->favicon_path;
+    }
 }
