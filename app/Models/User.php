@@ -34,6 +34,7 @@ class User extends Authenticatable
         'phone',
         'parent_id',
         'is_blocked',
+        'darkmode',
     ];
 
     /**

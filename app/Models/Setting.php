@@ -10,7 +10,14 @@ class Setting extends Model
     use HasFactory;
 
     protected $fillable = [
-        'key',
-        'value',
+        'site_name',
+        'site_description',
+        'site_keywords',
+        'site_logo',
+        'site_favicon',
+        'email',
+        'address',
+        'phone',
+        'email_notification',
     ];
 }

@@ -80,6 +80,30 @@
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
+                        <div class="col-md-4">
+                            <label class="form-label">E-Pin Prefix</label>
+                            <input type="text" class="form-control @error('epin_prefix') is-invalid @enderror"
+                                value="{{ $package->epin_prefix }}" name="epin_prefix" required />
+                            @error('epin_prefix')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">E-Pin Length</label>
+                            <input type="number" class="form-control @error('epin_length') is-invalid @enderror" step="1"
+                                value="{{ $package->epin_length }}" name="epin_length" required />
+                            @error('epin_length')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Minimum Points Required to Cashout</label>
+                            <input type="number" class="form-control @error('min_points_to_cashout') is-invalid @enderror" step=".01"
+                                value="{{ $package->min_points_to_cashout }}" name="min_points_to_cashout" required />
+                            @error('min_points_to_cashout')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
                         <div class="col-12">
                             <button class="btn btn-primary" type="submit">
                                 Edit Package

@@ -29,6 +29,9 @@ class UpdateRequest extends FormRequest
             'direct_ref_bonus' => 'required|integer',
             'indirect_ref_bonus' => 'required|integer',
             'is_active' => 'required|boolean',
+            'epin_prefix' => 'required',
+            'epin_length' => 'required|integer',
+            'min_points_to_cashout' => 'required|integer',
         ];
     }
 }

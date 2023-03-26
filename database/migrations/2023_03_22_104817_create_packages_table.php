@@ -19,6 +19,9 @@ return new class extends Migration
             $table->integer('direct_ref_bonus');
             $table->integer('indirect_ref_bonus');
             $table->boolean('is_active')->default(true);
+            $table->string('epin_prefix');
+            $table->integer('epin_length');
+            $table->integer('min_points_to_cashout');
             $table->timestamps();
         });
     }

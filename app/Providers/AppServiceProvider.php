@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Setting;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -26,13 +27,15 @@ class AppServiceProvider extends ServiceProvider
     {
         //
         Schema::defaultStringLength(191);
-        // View::composer('*', function ($view) {
-        //     if (Auth::check()) {
-        //         $user = User::with('settings')->find(Auth::user()->id);
-        //         Log::info($user);
-        //         // $view->with('user_proof', Auth::user()->show_popup);
-        //         // $view->with('user', Auth::user());
-        //     }
-        // });
+        View::composer('*', function ($view) {
+            $settings = Setting::first();
+            $view->with('settings', $settings);
+            // if (Auth::check()) {
+            //     $user = User::with('settings')->find(Auth::user()->id);
+            //     Log::info($user);
+            //     // $view->with('user_proof', Auth::user()->show_popup);
+            //     // $view->with('user', Auth::user());
+            // }
+        });
     }
 }

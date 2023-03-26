@@ -16,5 +16,8 @@ class Package extends Model
         'direct_ref_bonus',
         'indirect_ref_bonus',
         'is_active',
+        'epin_prefix',
+        'epin_length',
+        'min_points_to_cashout',
     ];
 }

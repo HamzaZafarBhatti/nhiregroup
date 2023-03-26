@@ -23,6 +23,9 @@
                                 <th>Price</th>
                                 <th>Direct Referral Bonus</th>
                                 <th>Indirect Referral Bonus</th>
+                                <th>E-Pin Prefix</th>
+                                <th>E-Pin Length</th>
+                                <th>Minimum Points Required to Cashout</th>
                                 <th>Status</th>
                                 <th>Actions</th>
                             </tr>
@@ -36,6 +39,9 @@
                                     <td>₦{{ $item->price }}</td>
                                     <td>₦{{ $item->direct_ref_bonus }}</td>
                                     <td>₦{{ $item->indirect_ref_bonus }}</td>
+                                    <td>{{ $item->epin_prefix }}</td>
+                                    <td>{{ $item->epin_length }}</td>
+                                    <td>{{ $item->min_points_to_cashout }}</td>
                                     <td>
                                         @if ($item->is_active)
                                             <span class="badge bg-success">Active</span>

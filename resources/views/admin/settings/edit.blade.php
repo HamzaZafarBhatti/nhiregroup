@@ -10,75 +10,74 @@
                     <h6 class="card-title mb-0">Settings</h6>
                 </div>
                 <div class="card-body">
-                    <form class="row g-3" method="post" action="{{ route('') }}">
-                        <div class="col-12">
-                            <label for="TextInput" class="form-label">Text Input</label>
-                            <input type="text" class="form-control">
+                    <form class="row g-3" action="{{ route('admin.settings.update') }}" method="post">
+                        @csrf
+                        <div class="col-md-6">
+                            <label class="form-label">Site Name</label>
+                            <input type="text" class="form-control @error('site_name') is-invalid @enderror"
+                                value="{{ $settings->site_name }}" name="site_name" required />
+                            @error('site_name')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
-                        <div class="col-12">
-                            <label for="TextInputD" class="form-label">Text Input Disabled</label>
-                            <input type="text" class="form-control" disabled>
-                        </div>
-                        <div class="col-12">
-                            <label for="PasswordInput" class="form-label">Password Input</label>
-                            <input type="password" class="form-control">
-                        </div>
-                        <div class="col-12">
-                            <label for="PasswordInputD" class="form-label">Password Input Disabled</label>
-                            <input type="password" class="form-control" disabled>
-                        </div>
-                        <div class="col-12">
-                            <label for="textareaInput" class="form-label">Textarea Input</label>
-                            <textarea name="" cols="30" rows="5" class="form-control"></textarea>
-                        </div>
-                        <div class="col-12">
-                            <label for="textareaInputD" class="form-label">Textarea Input Disabled</label>
-                            <textarea name="" cols="30" rows="5" class="form-control" disabled></textarea>
+                        <div class="col-md-12">
+                            <label class="form-label">Site Description</label>
+                            <textarea name="site_description" id="site_description" cols="30" rows="3"
+                                class="form-control @error('site_description') is-invalid @enderror" required>{{ $settings->site_description }}</textarea>
+                            @error('site_description')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="col-md-6">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault">Default checkbox</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked"
-                                    checked>
-                                <label class="form-check-label" for="flexCheckChecked">Checked checkbox</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDisabled"
-                                    disabled>
-                                <label class="form-check-label" for="flexCheckDisabled">Disabled checkbox</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckCheckedDisabled"
-                                    checked disabled>
-                                <label class="form-check-label" for="flexCheckCheckedDisabled">Disabled checked
-                                    checkbox</label>
+                            <label class="form-label">Price</label>
+                            <div class="input-group has-validation">
+                                <span class="input-group-text" id="inputGroupPrice">₦</span>
+                                <input type="number" class="form-control @error('price') is-invalid @enderror"
+                                    value="" name="price" aria-describedby="inputGroupPrice" required />
+                                @error('price')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                    id="flexRadioDefault1">
-                                <label class="form-check-label" for="flexRadioDefault1">Default radio</label>
+                            <label class="form-label">Direct Referral Bonus</label>
+                            <div class="input-group has-validation">
+                                <span class="input-group-text" id="inputGroupdirect_ref_bonus">₦</span>
+                                <input type="number" class="form-control @error('direct_ref_bonus') is-invalid @enderror"
+                                    value="" name="direct_ref_bonus" aria-describedby="inputGroupdirect_ref_bonus"
+                                    required />
+                                @error('direct_ref_bonus')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                    id="flexRadioDefault2" checked>
-                                <label class="form-check-label" for="flexRadioDefault2">Default checked radio</label>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Indirect Referral Bonus</label>
+                            <div class="input-group has-validation">
+                                <span class="input-group-text" id="inputGroupindirect_ref_bonus">₦</span>
+                                <input type="number" class="form-control @error('indirect_ref_bonus') is-invalid @enderror"
+                                    value="" name="indirect_ref_bonus" aria-describedby="inputGroupindirect_ref_bonus"
+                                    required />
+                                @error('indirect_ref_bonus')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDisabled"
-                                    id="flexRadioDisabled" disabled>
-                                <label class="form-check-label" for="flexRadioDisabled">Disabled radio</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDisabled"
-                                    id="flexRadioCheckedDisabled" checked disabled>
-                                <label class="form-check-label" for="flexRadioCheckedDisabled">Disabled checked
-                                    radio</label>
-                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Status</label>
+                            <select class="form-select @error('is_active') is-invalid @enderror" name="is_active" required>
+                                <option selected disabled value="">Choose Status</option>
+                                <option value="1">Active</option>
+                                <option value="0">Inactive</option>
+                            </select>
+                            @error('is_active')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="col-12">
+                            <button class="btn btn-primary" type="submit">
+                                Edit Package
+                            </button>
                         </div>
                     </form>
                 </div>

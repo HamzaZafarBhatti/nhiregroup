@@ -1,15 +1,17 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="@if (Auth::check() && Auth::user()->darkmode == 1) dark @else light @endif">
+<html lang="en" data-theme="{{ Auth::check() && Auth::user()->darkmode == 1 ? 'dark' : 'light' }}">
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Responsive Bootstrap 5 admin dashboard template & web App ui kit.">
-    <meta name="keyword"
-        content="LUNO, Bootstrap 5, ReactJs, Angular, Laravel, VueJs, ASP .Net, Admin Dashboard, Admin Theme, HRMS, Projects, Hospital Admin, CRM Admin, Events, Fitness, Music, Inventory, Job Portal">
-    <link rel="icon" href="{{ asset('assets/img/favicon.ico') }}" type="image/x-icon"> <!-- Favicon-->
-    <title>@yield('title') | NHire Group</title>
+    <meta name="description" content="{{ $settings->site_description }}">
+    <meta name="keyword" content="{{ $settings->site_keywords }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="icon"
+        href="{{ asset(empty($settings->site_favicon) ? 'assets/img/favicon.ico' : 'assets/uploads/favicon/' . $settings->site_favicon) }}"
+        type="image/x-icon"> <!-- Favicon-->
+    <title>@yield('title') | {{ $settings->site_name }}</title>
     <!-- Application vendor css url -->
     @yield('styles')
     <link rel="stylesheet" href="{{ asset('assets/cssbundle/sweetalert2.min.css') }}" />
@@ -29,7 +31,9 @@
 
         @include('layouts.includes.header')
 
-        @include('layouts.includes.toolbar')
+        @if (Route::is(['admin.dashboard', 'user.dashboard']))
+            @include('layouts.includes.toolbar')
+        @endif
         <!-- start: page body -->
         <div class="page-body px-xl-4 px-sm-2 px-0 py-lg-2 py-1 mt-0 mt-lg-3 min-vh-100">
             <div class="container-fluid">
@@ -48,9 +52,11 @@
     <script src="{{ asset('assets/js/bundle/sweetalert2.bundle.js') }}"></script>
     @yield('scripts')
     <script>
-        var theme = localStorage.getItem("theme");
-        document.documentElement.setAttribute("data-theme", theme)
-
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
         const Toast = Swal.mixin({
             toast: true,
             position: 'top-end',
@@ -82,90 +88,36 @@
         @endif
 
 
-        // $(".quick-light-dark").on("click", function() {
-        //     $(this).toggleClass("active")
-        //     if ("light" == localStorage.getItem("theme")) {
-        //         document.documentElement.setAttribute("data-theme", "dark")
-        //         localStorage.setItem("theme", "dark")
-        //         setTheme("dark")
-        //     } else {
-        //         document.documentElement.setAttribute("data-theme", "light")
-        //         localStorage.setItem("theme", "light")
-        //         setTheme("light")
-        //     }
-        // });
+        $(".quick-light-dark").on("click", function() {
+            if ("light" == localStorage.getItem("theme")) {
+                setTheme("dark")
+            } else {
+                setTheme("light")
+            }
+        });
 
-        // function setTheme(theme) {
-        //     $.ajax({
-        //         url: "{{ route('admin.settings.set_theme') }}",
-        //         type: "POST",
-        //         data: theme,
-        //         success: function(data) {
-
-        //         }
-        //     })
-        // }
-        // // LUNO Revenue
-        // var options = {
-        //     chart: {
-        //         height: 260,
-        //         type: 'line',
-        //         toolbar: {
-        //             show: false,
-        //         },
-        //     },
-        //     colors: ['var(--chart-color1)', 'var(--chart-color5)'],
-        //     series: [{
-        //         name: 'Income',
-        //         type: 'line',
-        //         data: [440, 505, 414, 671, 227, 413, 201, 352, 752, 320, 257, 160]
-        //     }, {
-        //         name: 'Expenses',
-        //         type: 'line',
-        //         data: [23, 42, 35, 27, 43, 22, 17, 31, 22, 22, 12, 16]
-        //     }],
-        //     stroke: {
-        //         width: [2, 2]
-        //     },
-        //     // labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-        //     labels: ['01 Jan 2001', '02 Jan 2001', '03 Jan 2001', '04 Jan 2001', '05 Jan 2001', '06 Jan 2001',
-        //         '07 Jan 2001', '08 Jan 2001', '09 Jan 2001', '10 Jan 2001', '11 Jan 2001', '12 Jan 2001'
-        //     ],
-        //     xaxis: {
-        //         type: 'datetime'
-        //     },
-        //     yaxis: [{
-        //         title: {
-        //             text: 'Income',
-        //         },
-        //     }, {
-        //         opposite: true,
-        //         title: {
-        //             text: 'Expenses'
-        //         }
-        //     }]
-        // }
-        // var chart = new ApexCharts(document.querySelector("#apex-AudienceOverview"), options);
-        // chart.render();
-        // // Sales by Category
-        // var options = {
-        //     chart: {
-        //         height: 280,
-        //         type: 'donut',
-        //     },
-        //     dataLabels: {
-        //         enabled: false,
-        //     },
-        //     legend: {
-        //         position: 'bottom',
-        //         horizontalAlign: 'center',
-        //         show: true,
-        //     },
-        //     colors: ['var(--chart-color1)', 'var(--chart-color2)', 'var(--chart-color3)'],
-        //     series: [55, 35, 10],
-        // }
-        // var chart = new ApexCharts(document.querySelector("#apex-SalesbyCategory"), options);
-        // chart.render();
+        function setTheme(theme) {
+            $.ajax({
+                url: "{{ route('admin.settings.set_theme') }}",
+                type: "POST",
+                data: {
+                    theme: theme,
+                },
+                success: function(data) {
+                    if (data.status) {
+                        Toast.fire({
+                            icon: 'success',
+                            title: data.message
+                        })
+                    } else {
+                        Toast.fire({
+                            icon: 'danger',
+                            title: "Theme cannot be changed."
+                        })
+                    }
+                }
+            })
+        }
     </script>
 </body>
 

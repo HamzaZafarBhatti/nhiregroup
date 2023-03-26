@@ -13,8 +13,15 @@ return new class extends Migration
     {
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
-            $table->string('key');
-            $table->string('value');
+            $table->string('site_name');
+            $table->string('site_description');
+            $table->string('site_keywords');
+            $table->string('site_logo');
+            $table->string('site_favicon');
+            $table->string('email');
+            $table->string('address');
+            $table->string('phone');
+            $table->boolean('email_notification')->default(false);
             $table->timestamps();
         });
     }

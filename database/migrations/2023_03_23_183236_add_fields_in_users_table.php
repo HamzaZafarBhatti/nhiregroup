@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('phone')->nullable();
             $table->foreignId('parent_id')->nullable();
             $table->boolean('is_blocked')->default(false);
+            $table->boolean('darkmode')->default(false);
         });
     }
 
@@ -45,6 +46,7 @@ return new class extends Migration
             $table->dropColumn('phone');
             $table->dropColumn('parent_id');
             $table->dropColumn('is_blocked');
+            $table->dropColumn('darkmode');
         });
     }
 };
