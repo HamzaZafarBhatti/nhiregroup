@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\EpinController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\PackageController;
 use App\Http\Controllers\ProfileController;
@@ -50,6 +51,7 @@ Route::middleware(['auth', 'verified', 'admin'])->name('admin.')->prefix('admin'
         Route::patch('/', 'admin_update')->name('update');
     });
     Route::resource('packages', PackageController::class);
+    Route::resource('epins', EpinController::class)->except('create', 'edit', 'show', 'update');
 });
 
 require __DIR__ . '/auth.php';

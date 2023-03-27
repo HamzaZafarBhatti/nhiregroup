@@ -6,7 +6,6 @@ use App\Http\Requests\Package\StoreRequest;
 use App\Http\Requests\Package\UpdateRequest;
 use App\Models\Package;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Log;
 use Illuminate\View\View;
@@ -89,7 +88,7 @@ class PackageController extends Controller
             $package->delete();
             return back()->with('success', 'Package deleted successfully!');
         } catch (\Throwable $th) {
-            Log::error('Package Update Error: ' . $th->getMessage());
+            Log::error('Package Delete Error: ' . $th->getMessage());
             return back()->with('error', 'Something went wrong');
         }
     }

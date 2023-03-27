@@ -20,4 +20,9 @@ class Package extends Model
         'epin_length',
         'min_points_to_cashout',
     ];
+
+    public function scopeActive($query)
+    {
+        $query->where('is_active', 1);
+    }
 }
