@@ -19,6 +19,12 @@
     <link rel="stylesheet" href="{{ asset('assets/css/luno-style.css') }}">
     <!-- Jquery Core Js -->
     <script src="{{ asset('assets/js/plugins.js') }}"></script>
+    <style>
+        html[data-theme="dark"] .swal2-popup {
+            background: #272828;
+            color: #fff;
+        }
+    </style>
 </head>
 
 <body class="layout-1 font-quicksand" data-luno="theme-blue">
@@ -50,7 +56,6 @@
     <script src="{{ asset('assets/js/theme.js') }}"></script>
     <!-- Plugin Js -->
     <script src="{{ asset('assets/js/bundle/sweetalert2.bundle.js') }}"></script>
-    @yield('scripts')
     <script>
         $.ajaxSetup({
             headers: {
@@ -98,7 +103,7 @@
 
         function setTheme(theme) {
             $.ajax({
-                url: "{{ route('admin.settings.set_theme') }}",
+                url: "{{ route('settings.set_theme') }}",
                 type: "POST",
                 data: {
                     theme: theme,
@@ -119,6 +124,7 @@
             })
         }
     </script>
+    @yield('scripts')
 </body>
 
 </html>

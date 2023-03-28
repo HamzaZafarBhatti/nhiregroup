@@ -28,8 +28,13 @@ Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'i
 
 Route::get('/', [FrontendController::class, 'index'])->name('home');
 
+Route::controller(SettingController::class)->prefix('settings')->name('settings.')->group(function () {
+    Route::post('/set-theme', 'set_theme')->name('set_theme');
+});
+
 Route::middleware(['auth', 'verified', 'user'])->name('user.')->prefix('user')->group(function () {
     Route::get('/', [UserController::class, 'dashboard'])->name('dashboard');
+    Route::get('/update-is-first-login', [UserController::class, 'updateIsFirstLogin'])->name('updateIsFirstLogin');
     Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -44,7 +49,6 @@ Route::middleware(['auth', 'verified', 'admin'])->name('admin.')->prefix('admin'
         Route::post('/', 'update')->name('update');
         Route::post('/update_logos', 'update_logos')->name('update_logos');
         Route::post('/update_epin', 'update_epin')->name('update_epin');
-        Route::post('/set-theme', 'set_theme')->name('set_theme');
     });
     Route::controller(ProfileController::class)->prefix('profile')->name('profile.')->group(function () {
         Route::get('/', 'admin_edit')->name('edit');
