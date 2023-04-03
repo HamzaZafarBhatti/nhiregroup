@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -25,6 +26,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'role',
         'avatar',
         'ref_bonus',
+        'indirect_ref_bonus',
         'points',
         'address',
         'city',
@@ -36,6 +38,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'is_blocked',
         'darkmode',
         'is_first_login',
+        'package_id',
+        'epin_id',
     ];
 
     /**
@@ -60,5 +64,28 @@ class User extends Authenticatable implements MustVerifyEmail
     public function settings()
     {
         return $this->hasMany(SettingUser::class);
+    }
+
+    public function parent()
+    {
+        return $this->belongsTo(self::class, 'parent_id');
+    }
+
+    public function children()
+    {
+        return $this->hasMany(self::class, 'parent_id', 'id');
+    }
+
+    protected function getFullAddress(): Attribute
+    {
+        $address_arr = [
+            $this->address,
+            $this->city,
+            $this->state,
+            $this->country,
+        ];
+        return Attribute::make(
+            get: fn ($val, $attr) => implode(', ', $address_arr)
+        );
     }
 }

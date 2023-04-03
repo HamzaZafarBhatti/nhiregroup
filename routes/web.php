@@ -7,6 +7,7 @@ use App\Http\Controllers\PackageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\VendorController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -55,6 +56,7 @@ Route::middleware(['auth', 'verified', 'admin'])->name('admin.')->prefix('admin'
         Route::patch('/', 'admin_update')->name('update');
     });
     Route::resource('packages', PackageController::class);
+    // Route::resource('vendors', VendorController::class);
     Route::resource('epins', EpinController::class)->except('create', 'edit', 'show', 'update');
 });
 

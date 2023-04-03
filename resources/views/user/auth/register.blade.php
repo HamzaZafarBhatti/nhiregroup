@@ -29,7 +29,8 @@
                         </div>
                         <div class="col-12">
                             <div class="form-floating">
-                                <input type="text" name="username" class="form-control @error('username') is-invalid @enderror" placeholder="Username"
+                                <input type="text" name="username"
+                                    class="form-control @error('username') is-invalid @enderror" placeholder="Username"
                                     value="{{ old('username') }}" required>
                                 <label>Username</label>
                                 @error('username')
@@ -39,7 +40,8 @@
                         </div>
                         <div class="col-12">
                             <div class="form-floating">
-                                <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="name@example.com"
+                                <input type="email" name="email"
+                                    class="form-control @error('email') is-invalid @enderror" placeholder="Email address"
                                     value="{{ old('email') }}" required>
                                 <label>Email address</label>
                                 @error('email')
@@ -66,6 +68,30 @@
                                 @enderror
                             </div>
                         </div>
+                        <div class="col-12">
+                            <div class="form-floating">
+                                <input type="text" name="epin"
+                                    class="form-control @error('epin') is-invalid @enderror" placeholder="E-Pin"
+                                    value="{{ old('epin') }}" required>
+                                <label>E-Pin</label>
+                                @error('epin')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        @if ($referral)
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <input type="text" name="referral"
+                                        class="form-control @error('referral') is-invalid @enderror" placeholder="Referral"
+                                        value="{{ $referral }}" id="referral" readonly required>
+                                    <label>Referral</label>
+                                    @error('referral')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                        @endif
                         <div class="col-12">
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="1" id="flexCheckDefault"

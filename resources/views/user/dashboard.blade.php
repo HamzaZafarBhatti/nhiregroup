@@ -3,7 +3,22 @@
 @section('title', 'Dashboard')
 
 @section('content')
-    <div class="row g-3 row-deck vh-100">
+    <div class="row g-3 vh-100">
+        <div class="col-md-6">
+            <div class="card overflow-hidden">
+                <div class="card-body">
+                    <h5>Referral Link</h5>
+                    <div class="input-group has-validation">
+                        <input type="text" class="form-control"
+                            value="{{ route('user.register') . '?referral=' . auth()->user()->username }}" readonly
+                            id="referral_link" aria-describedby="inputGroupPrice" />
+                        <span class="input-group-text" id="inputGroupPrice">
+                            <i class="fa fa-copy"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
         {{-- <div class="col-lg-3 col-md-6 col-sm-6">
             <div class="card overflow-hidden">
                 <div class="card-body">
@@ -90,74 +105,8 @@
                         aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
             </div>
-        </div>
-        <div class="col-xxl-3 col-xl-4 col-lg-4 col-md-12">
-            <div class="card text-center bg-primary-gradient">
-                <div class="card-body d-flex align-items-center justify-content-center">
-                    <div>
-                        <h4 class="mt-4">Welcome Back, Chris!!</h4>
-                        <p class="card-text fs-6 mb-5"><strong>Need help?</strong> Check out the
-                            documentation of Luno Admin. It includes tons of <strong>Widgets</strong>,
-                            <strong>Components</strong>, and Elements with <strong>easy-to-follow</strong>
-                            documentation.
-                        </p>
-                        <a class="btn btn-lg bg-white text-uppercase px-4 lift" href="./docs/index.html"
-                            title="">Visit Documentation</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xxl-6 col-xl-8 col-lg-8">
-            <div class="card">
-                <div class="card-header">
-                    <h6 class="card-title m-0">LUNO Revenue</h6>
-                    <!-- widgest: Card more action icon -->
-                    <div class="dropdown morphing scale-left">
-                        <a href="#" class="card-fullscreen" data-bs-toggle="tooltip" title="Card Full-Screen"><i
-                                class="icon-size-fullscreen"></i></a>
-                        <a href="#" class="more-icon dropdown-toggle" data-bs-toggle="dropdown"
-                            aria-expanded="false"><i class="fa fa-ellipsis-h"></i></a>
-                        <ul class="dropdown-menu shadow border-0 p-2">
-                            <li><a class="dropdown-item" href="#">File Info</a></li>
-                            <li><a class="dropdown-item" href="#">Copy to</a></li>
-                            <li><a class="dropdown-item" href="#">Move to</a></li>
-                            <li><a class="dropdown-item" href="#">Rename</a></li>
-                            <li><a class="dropdown-item" href="#">Block</a></li>
-                            <li><a class="dropdown-item" href="#">Delete</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div id="apex-AudienceOverview"></div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xxl-3 col-xl-4 col-lg-4 col-md-6">
-            <div class="card">
-                <div class="card-header">
-                    <h6 class="card-title mb-0">Sales by Category</h6>
-                    <!-- widgest: Card more action icon -->
-                    <div class="dropdown morphing scale-left">
-                        <a href="#" class="card-fullscreen" data-bs-toggle="tooltip" title="Card Full-Screen"><i
-                                class="icon-size-fullscreen"></i></a>
-                        <a href="#" class="more-icon dropdown-toggle" data-bs-toggle="dropdown"
-                            aria-expanded="false"><i class="fa fa-ellipsis-h"></i></a>
-                        <ul class="dropdown-menu shadow border-0 p-2">
-                            <li><a class="dropdown-item" href="#">File Info</a></li>
-                            <li><a class="dropdown-item" href="#">Copy to</a></li>
-                            <li><a class="dropdown-item" href="#">Move to</a></li>
-                            <li><a class="dropdown-item" href="#">Rename</a></li>
-                            <li><a class="dropdown-item" href="#">Block</a></li>
-                            <li><a class="dropdown-item" href="#">Delete</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div id="apex-SalesbyCategory"></div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xxl-3 col-xl-4 col-lg-4 col-md-6 col-sm-6">
+        </div> --}}
+        {{-- <div class="col-xxl-3 col-xl-4 col-lg-4 col-md-6 col-sm-6">
             <div class="card">
                 <div class="card-header">
                     <h6 class="card-title mb-0">My Wallet</h6>
@@ -335,7 +284,25 @@
 
 @section('scripts')
     <script>
-        @if(auth()->user()->is_first_login)
+        function copyToClipboard(text) {
+            var sampleTextarea = document.createElement("textarea");
+            document.body.appendChild(sampleTextarea);
+            sampleTextarea.value = text; //save main text in it
+            sampleTextarea.select(); //select textarea contenrs
+            document.execCommand("copy");
+            document.body.removeChild(sampleTextarea);
+        }
+        $(document).ready(function() {
+            $('#inputGroupPrice').click(function() {
+                var text = $('#referral_link').val();
+                copyToClipboard(text);
+                Toast.fire({
+                    icon: 'success',
+                    text: 'Referral Link Successfully Copied!',
+                })
+            })
+        })
+        @if (auth()->user()->is_first_login)
             Swal.fire({
                 icon: 'info',
                 allowOutsideClick: false,
