@@ -19,6 +19,7 @@ class Package extends Model
         'epin_prefix',
         'epin_length',
         'min_points_to_cashout',
+        'points',
     ];
 
     public function scopeActive($query)

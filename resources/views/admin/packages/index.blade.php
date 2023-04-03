@@ -20,6 +20,7 @@
                                 <th>Sr. #</th>
                                 <th>Name</th>
                                 <th>Grade</th>
+                                <th>Points</th>
                                 <th>Price</th>
                                 <th>Direct Referral Bonus</th>
                                 <th>Indirect Referral Bonus</th>
@@ -36,6 +37,7 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $item->name }}</td>
                                     <td>{{ $item->grade }}</td>
+                                    <td>{{ $item->points }}</td>
                                     <td>₦{{ $item->price }}</td>
                                     <td>₦{{ $item->direct_ref_bonus }}</td>
                                     <td>₦{{ $item->indirect_ref_bonus }}</td>

@@ -34,6 +34,25 @@
                             @enderror
                         </div>
                         <div class="col-md-6">
+                            <label class="form-label">Status</label>
+                            <select class="form-select @error('is_active') is-invalid @enderror" name="is_active" required>
+                                <option selected disabled value="">Choose Status</option>
+                                <option value="1" @if($package->is_active) selected @endif>Active</option>
+                                <option value="0" @if(!$package->is_active) selected @endif>Inactive</option>
+                            </select>
+                            @error('is_active')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Points</label>
+                            <input type="number" class="form-control @error('points') is-invalid @enderror" step=".1"
+                                value="{{ old('points') }}" name="points" required />
+                            @error('points')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="col-md-4">
                             <label class="form-label">Price</label>
                             <div class="input-group has-validation">
                                 <span class="input-group-text" id="inputGroupPrice">₦</span>
@@ -45,7 +64,7 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <label class="form-label">Direct Referral Bonus</label>
                             <div class="input-group has-validation">
                                 <span class="input-group-text" id="inputGroupdirect_ref_bonus">₦</span>
@@ -57,7 +76,7 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <label class="form-label">Indirect Referral Bonus</label>
                             <div class="input-group has-validation">
                                 <span class="input-group-text" id="inputGroupindirect_ref_bonus">₦</span>
@@ -68,17 +87,6 @@
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label">Status</label>
-                            <select class="form-select @error('is_active') is-invalid @enderror" name="is_active" required>
-                                <option selected disabled value="">Choose Status</option>
-                                <option value="1" @if($package->is_active) selected @endif>Active</option>
-                                <option value="0" @if(!$package->is_active) selected @endif>Inactive</option>
-                            </select>
-                            @error('is_active')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
                         </div>
                         <div class="col-md-4">
                             <label class="form-label">E-Pin Prefix</label>

@@ -85,7 +85,10 @@ class RegisteredUserController extends Controller
                             'downline_id' => $user->id,
                             'amount' => $downline_package->direct_ref_bonus,
                         ]);
-                        $upline->update(['ref_bonus' => $upline->ref_bonus + $downline_package->direct_ref_bonus]);
+                        $upline->update([
+                            'ref_bonus' => $upline->ref_bonus + $downline_package->direct_ref_bonus,
+                            'points' => $upline->points + $downline_package->points
+                        ]);
                         if (!empty($upline->parent) && $upline->parent->pacakge->grade === 10) {
                             IndirectReferralLog::create([
                                 'upline_id' => $upline->parent->id,
@@ -102,7 +105,10 @@ class RegisteredUserController extends Controller
                         'downline_id' => $user->id,
                         'amount' => $downline_package->direct_ref_bonus,
                     ]);
-                    $upline->update(['ref_bonus' => $upline->ref_bonus + $downline_package->direct_ref_bonus]);
+                    $upline->update([
+                        'ref_bonus' => $upline->ref_bonus + $downline_package->direct_ref_bonus,
+                        'points' => $upline->points + $downline_package->points
+                    ]);
                     if (!empty($upline->parent)) {
                         IndirectReferralLog::create([
                             'upline_id' => $upline->parent->id,
