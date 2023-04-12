@@ -1,5 +1,13 @@
 @extends('front.layouts.app')
 
+@section('styles')
+    <style>
+        .btn-hire:hover {
+            transform: scale(1.2)
+        }
+    </style>
+@endsection
+
 @section('content')
     <div class="pm-presentation-container pm-parallax-panel" data-stellar-background-ratio="0.5"
         data-stellar-vertical-offset="97" style="background-position: 0% 8.3125px;">
@@ -122,7 +130,7 @@
                                 Candidate Research<br>
                                 Candidate Screening<br>
                             </p>
-                            <a href="http://wehire.us/innerpages/services.html">View deatils »</a>
+                            <a href="{{ route('front.services') }}">View deatils »</a>
                         </div>
                     </div>
 
@@ -141,7 +149,7 @@
                                 Soft Skills Training<br>
                                 Personality Development Training<br>
                             </p>
-                            <a href="http://wehire.us/innerpages/t&amp;d_services.html">View deatils »</a>
+                            <a href="{{ route('front.tdservices') }}">View deatils »</a>
                         </div>
                     </div>
 
@@ -160,7 +168,7 @@
                                 Direct Placement<br>
                             </p><br>
 
-                            <a href="http://wehire.us/innerpages/staffing_services.html">View deatils »</a>
+                            <a href="{{ route('front.staffing_services') }}">View deatils »</a>
                         </div>
                     </div>
 
@@ -169,6 +177,62 @@
             </div>
         </div>
 
+    </div>
+    <div class="pm-column-container pm-containerPadding80">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3"></div>
+                <div class="col-sm-6 col-12">
+                    <h3 class="pm-center">NHire Salary Structure</h3>
+                    <h6 class="pm-center">Calculate Your Take Home Salary</h6>
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label for="work_category" class="col-lg-3 control-label">Work Category</label>
+                            <div class="col-lg-9">
+                                <select name="work_category" class="form-control" style="margin-top: 0;">
+                                    <option value="">Select Work Category</option>
+                                    <option value="part_time">Part Time</option>
+                                    <option value="full_time">Full Time</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="currency" class="col-lg-3 control-label">Currency</label>
+                            <div class="col-lg-9">
+                                <select name="currency" class="form-control" style="margin-top: 0;">
+                                    <option value="">Select Currency</option>
+                                    <option value="naira">Naira</option>
+                                    <option value="usd">USD</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="working_days" class="col-lg-3 control-label">Working Days</label>
+                            <div class="col-lg-9">
+                                <select name="working_days" class="form-control" style="margin-top: 0;">
+                                    <option value="">Select Working Days</option>
+                                    <option value="7">7 days</option>
+                                    <option value="15">15 days</option>
+                                    <option value="30">30 days</option>
+                                    <option value="365">365 days</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary">Calculate Salary</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-sm-3"></div>
+            </div>
+            <div>
+                <a href="#" class="btn btn-danger btn-lg btn-block btn-hire" type="button">
+                    GET HIRED!
+                </a>
+            </div>
+        </div>
     </div>
 
     <div class="pm-column-container pm-containerPadding80">

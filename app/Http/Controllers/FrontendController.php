@@ -48,6 +48,11 @@ class FrontendController extends Controller
         return view('front.staffing_services');
     }
 
+    public function tdservices()
+    {
+        return view('front.tdservices');
+    }
+
     public function rpo_services()
     {
         return view('front.rpo_services');

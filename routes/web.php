@@ -31,6 +31,7 @@ Route::middleware(['guest'])->name('front.')->controller(FrontendController::cla
     Route::get('/', 'index')->name('index');
     Route::get('/aboutus', 'aboutus')->name('aboutus');
     Route::get('/services', 'services')->name('services');
+    Route::get('/tdservices', 'tdservices')->name('tdservices');
     Route::get('/training', 'training')->name('training');
     Route::get('/ojt', 'ojt')->name('ojt');
     Route::get('/softskills', 'softskills')->name('softskills');
