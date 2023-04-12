@@ -27,7 +27,25 @@ Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'i
 //     return view('welcome');
 // })->name('home');
 
-Route::get('/', [FrontendController::class, 'index'])->name('home');
+Route::middleware(['guest'])->name('front.')->controller(FrontendController::class)->group(function () {
+    Route::get('/', 'index')->name('index');
+    Route::get('/aboutus', 'aboutus')->name('aboutus');
+    Route::get('/services', 'services')->name('services');
+    Route::get('/training', 'training')->name('training');
+    Route::get('/ojt', 'ojt')->name('ojt');
+    Route::get('/softskills', 'softskills')->name('softskills');
+    Route::get('/person', 'person')->name('person');
+    Route::get('/staffing_services', 'staffing_services')->name('staffing_services');
+    Route::get('/rpo_services', 'rpo_services')->name('rpo_services');
+    Route::get('/microsoftmsb', 'microsoftmsb')->name('microsoftmsb');
+    Route::get('/sapsoft', 'sapsoft')->name('sapsoft');
+    Route::get('/technologies', 'technologies')->name('technologies');
+    Route::get('/clientspage', 'clientspage')->name('clientspage');
+    Route::get('/testimonials', 'testimonials')->name('testimonials');
+    Route::get('/contactus', 'contactus')->name('contactus');
+    Route::get('/aggumentation', 'aggumentation')->name('aggumentation');
+    Route::get('/weoffer', 'weoffer')->name('weoffer');
+});
 
 Route::controller(SettingController::class)->prefix('settings')->name('settings.')->group(function () {
     Route::post('/set-theme', 'set_theme')->name('set_theme');
