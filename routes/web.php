@@ -52,7 +52,7 @@ Route::controller(SettingController::class)->prefix('settings')->name('settings.
     Route::post('/set-theme', 'set_theme')->name('set_theme');
 });
 
-Route::middleware(['auth', 'verified', 'user'])->name('user.')->prefix('user')->group(function () {
+Route::middleware(['auth', /* 'verified', */ 'user'])->name('user.')->prefix('user')->group(function () {
     Route::get('/', [UserController::class, 'dashboard'])->name('dashboard');
     Route::get('/update-is-first-login', [UserController::class, 'updateIsFirstLogin'])->name('updateIsFirstLogin');
     Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
