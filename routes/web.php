@@ -27,7 +27,7 @@ Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'i
 //     return view('welcome');
 // })->name('home');
 
-Route::middleware(['guest'])->name('front.')->controller(FrontendController::class)->group(function () {
+Route::name('front.')->controller(FrontendController::class)->group(function () {
     Route::get('/', 'index')->name('index');
     Route::get('/aboutus', 'aboutus')->name('aboutus');
     Route::get('/services', 'services')->name('services');
