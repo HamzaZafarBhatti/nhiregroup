@@ -40,6 +40,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'is_first_login',
         'package_id',
         'epin_id',
+        'clear_points_at',
     ];
 
     /**
@@ -74,6 +75,21 @@ class User extends Authenticatable implements MustVerifyEmail
     public function children()
     {
         return $this->hasMany(self::class, 'parent_id', 'id');
+    }
+
+    public function package()
+    {
+        return $this->belongsTo(Package::class);
+    }
+
+    public function direct_refferals()
+    {
+        return $this->hasMany(DirectReferralLog::class, 'upline_id');
+    }
+
+    public function indirect_refferals()
+    {
+        return $this->hasMany(IndirectReferralLog::class, 'upline_id');
     }
 
     protected function getFullAddress(): Attribute

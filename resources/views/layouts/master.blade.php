@@ -28,9 +28,6 @@
 </head>
 
 <body class="layout-1 font-quicksand" data-luno="theme-blue">
-    @php
-        $role = auth()->user()->role;
-    @endphp
     @include('layouts.includes.sidebar')
     <!-- start: body area -->
     <div class="wrapper">

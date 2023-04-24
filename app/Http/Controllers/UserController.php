@@ -24,4 +24,16 @@ class UserController extends Controller
             return response('Something went wrong');
         }
     }
+
+    public function referrals_direct ()
+    {
+        $referrals = auth()->user()->direct_refferals;
+        return view('user.referrals.direct', compact('referrals'));
+    }
+
+    public function referrals_indirect ()
+    {
+        $referrals = auth()->user()->indirect_refferals;
+        return view('user.referrals.indirect', compact('referrals'));
+    }
 }

@@ -283,11 +283,11 @@
                             <div class="card border-0 w240">
                                 <div class="card-body border-bottom d-flex">
                                     <div class="flex-fill">
-                                        <h6 class="card-title mb-0">{{ auth()->user()->name }}</h6>
-                                        <span class="text-muted">{{ auth()->user()->email }}</span>
+                                        <h6 class="card-title mb-0">{{ $user->name }}</h6>
+                                        <span class="text-muted">{{ $user->email }}</span>
                                     </div>
                                 </div>
-                                @if ($role === 'Admin')
+                                @if ($user->role === 'Admin')
                                     <div class="list-group m-2 mb-3">
                                         <a class="list-group-item list-group-item-action border-0"
                                             href="{{ route('admin.profile.edit') }}"><i class="w30 fa fa-user"></i>My

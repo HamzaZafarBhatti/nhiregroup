@@ -72,6 +72,7 @@ class RegisteredUserController extends Controller
             'parent_id' => $parent_id,
             'package_id' => $epin->package_id,
             'epin_id' => $epin->id,
+            'clear_points_at' => now(),
         ]);
         $epin->update(['is_purchased' => 1]);
         if (!empty($parent_id)) {

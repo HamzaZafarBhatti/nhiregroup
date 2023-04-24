@@ -55,7 +55,9 @@ Route::controller(SettingController::class)->prefix('settings')->name('settings.
 Route::middleware(['auth', /* 'verified', */ 'user'])->name('user.')->prefix('user')->group(function () {
     Route::get('/', [UserController::class, 'dashboard'])->name('dashboard');
     Route::get('/update-is-first-login', [UserController::class, 'updateIsFirstLogin'])->name('updateIsFirstLogin');
-    Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
+    Route::get('/dashboard', [UserController::class, 'dashboard']);
+    Route::get('/referrals/direct', [UserController::class, 'referrals_direct'])->name('referrals.direct');
+    Route::get('/referrals/indirect', [UserController::class, 'referrals_indirect'])->name('referrals.indirect');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -63,7 +65,7 @@ Route::middleware(['auth', /* 'verified', */ 'user'])->name('user.')->prefix('us
 
 Route::middleware(['auth', 'verified', 'admin'])->name('admin.')->prefix('admin')->group(function () {
     Route::get('/', [AdminController::class, 'dashboard'])->name('dashboard');
-    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+    Route::get('/dashboard', [AdminController::class, 'dashboard']);
     Route::controller(SettingController::class)->prefix('settings')->name('settings.')->group(function () {
         Route::get('/', 'edit')->name('edit');
         Route::post('/', 'update')->name('update');
