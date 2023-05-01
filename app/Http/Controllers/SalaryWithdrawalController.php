@@ -12,9 +12,9 @@ class SalaryWithdrawalController extends Controller
     public function index()
     {
         $withdraw_requests = SalaryWithdrawal::query();
-        if (auth()->user()->role === 'Sub-Admin') {
-            $withdraw_requests = $withdraw_requests->where('subadmin_id', auth()->user()->id);
-        }
+        // if (auth()->user()->role === 'Sub-Admin') {
+        //     $withdraw_requests = $withdraw_requests->where('subadmin_id', auth()->user()->id);
+        // }
         $withdraw_requests = $withdraw_requests->orderBy('status', 'asc')->latest('id')->get();
         // return $withdraw_requests;
         return view('admin.salary_withdraw_requests.index', compact('withdraw_requests'));
@@ -23,9 +23,9 @@ class SalaryWithdrawalController extends Controller
     public function pending()
     {
         $withdraw_requests = SalaryWithdrawal::where('status', 0);
-        if (auth()->user()->role === 'Sub-Admin') {
-            $withdraw_requests = $withdraw_requests->where('subadmin_id', auth()->user()->id);
-        }
+        // if (auth()->user()->role === 'Sub-Admin') {
+        //     $withdraw_requests = $withdraw_requests->where('subadmin_id', auth()->user()->id);
+        // }
         $withdraw_requests = $withdraw_requests->latest('id')->get();
         // return $withdraw_requests;
         return view('admin.salary_withdraw_requests.pending', compact('withdraw_requests'));
@@ -34,9 +34,9 @@ class SalaryWithdrawalController extends Controller
     public function accepted()
     {
         $withdraw_requests = SalaryWithdrawal::where('status', 1);
-        if (auth()->user()->role === 'Sub-Admin') {
-            $withdraw_requests = $withdraw_requests->where('subadmin_id', auth()->user()->id);
-        }
+        // if (auth()->user()->role === 'Sub-Admin') {
+        //     $withdraw_requests = $withdraw_requests->where('subadmin_id', auth()->user()->id);
+        // }
         $withdraw_requests = $withdraw_requests->latest('id')->get();
         // return $withdraw_requests;
         return view('admin.salary_withdraw_requests.accepted', compact('withdraw_requests'));
@@ -45,9 +45,9 @@ class SalaryWithdrawalController extends Controller
     public function rejected()
     {
         $withdraw_requests = SalaryWithdrawal::where('status', 2);
-        if (auth()->user()->role === 'Sub-Admin') {
-            $withdraw_requests = $withdraw_requests->where('subadmin_id', auth()->user()->id);
-        }
+        // if (auth()->user()->role === 'Sub-Admin') {
+        //     $withdraw_requests = $withdraw_requests->where('subadmin_id', auth()->user()->id);
+        // }
         $withdraw_requests = $withdraw_requests->latest('id')->get();
         // return $withdraw_requests;
         return view('admin.salary_withdraw_requests.rejected', compact('withdraw_requests'));
