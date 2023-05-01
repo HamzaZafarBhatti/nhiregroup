@@ -54,8 +54,8 @@ class UserController extends Controller
             if (!empty(auth()->user()->latest_salary_withdrawal) && auth()->user()->latest_salary_withdrawal->status == 0) {
                 return back()->with('warning', 'You have already requested salary withdrawal!');
             }
-            if (auth()->user()->points < 50) {
-                return back()->with('warning', 'You have to complete 50 points!');
+            if (auth()->user()->points < auth()->user()->package->min_points_to_cashout) {
+                return back()->with('warning', 'Not eligible to receive salary. Request for upfront payment!');
             }
             $data['user_id'] = auth()->user()->id;
             SalaryWithdrawal::create($data);
