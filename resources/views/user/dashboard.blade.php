@@ -1,9 +1,12 @@
 @extends('layouts.master')
 
-@section('title', 'Dashboard')
+@section('title', 'My Dashboard')
 
 @section('content')
     <div class="row g-3">
+        <div class="col-md-12">
+            <h3>My Dashboard</h3>
+        </div>
         <div class="col-md-6">
             <div class="card overflow-hidden">
                 <div class="card-body">
@@ -33,12 +36,6 @@
                     <div class="mb-2">
                         <span class="h4">{{ $user->points }}</span>
                     </div>
-                    @if ($user->points >= $user->package->min_points_to_cashout)
-                        <div class="text-center">
-                            <span class="h4">₦{{ $settings->pint_cashout_amount }}</span>
-                            <a href="{{ route('user.') }}" type="button" class="btn btn-success w-100">Cashout</a>
-                        </div>
-                    @endif
                 </div>
                 <div class="progress" style="height: 4px;">
                     <div class="progress-bar bg-secondary" role="progressbar"

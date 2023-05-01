@@ -6,7 +6,10 @@ use App\Http\Controllers\EpinController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\PackageController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SalaryprofileRequestController;
+use App\Http\Controllers\SalaryWithdrawalController;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\SubAdminController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VendorController;
 use Illuminate\Support\Facades\Route;
@@ -54,11 +57,16 @@ Route::controller(SettingController::class)->prefix('settings')->name('settings.
 });
 
 Route::middleware(['auth', /* 'verified', */ 'user'])->name('user.')->prefix('user')->group(function () {
-    Route::get('/', [UserController::class, 'dashboard'])->name('dashboard');
-    Route::get('/update-is-first-login', [UserController::class, 'updateIsFirstLogin'])->name('updateIsFirstLogin');
-    Route::get('/dashboard', [UserController::class, 'dashboard']);
-    Route::get('/referrals/direct', [UserController::class, 'referrals_direct'])->name('referrals.direct');
-    Route::get('/referrals/indirect', [UserController::class, 'referrals_indirect'])->name('referrals.indirect');
+    Route::controller(UserController::class)->group(function () {
+        Route::get('/', 'dashboard')->name('dashboard.main');
+        Route::get('/dashboard', 'dashboard');
+        Route::get('/salary-dashboard', 'salary_dashboard')->name('dashboard.salary');
+        Route::get('/update-is-first-login', 'updateIsFirstLogin')->name('updateIsFirstLogin');
+        Route::get('/referrals/direct', 'referrals_direct')->name('referrals.direct');
+        Route::get('/referrals/indirect', 'referrals_indirect')->name('referrals.indirect');
+        Route::post('/validate_salary_profile', 'validate_salary_profile')->name('validate_salary_profile');
+        Route::get('/salary_withdraw_request', 'salary_withdraw_request')->name('withdraw.request');
+    });
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -77,9 +85,24 @@ Route::middleware(['auth', 'verified', 'admin'])->name('admin.')->prefix('admin'
         Route::get('/', 'admin_edit')->name('edit');
         Route::patch('/', 'admin_update')->name('update');
     });
+    Route::controller(SalaryprofileRequestController::class)->prefix('salary-profile-requests')->name('salary_profile_requests.')->group(function () {
+        Route::get('/index', 'index')->name('index');
+        Route::get('/pending', 'pending')->name('pending');
+        Route::get('/accepted', 'accepted')->name('accepted');
+        Route::get('/rejected', 'rejected')->name('rejected');
+        Route::get('/accept/{id}', 'accept')->name('accept');
+        Route::get('/reject/{id}', 'reject')->name('reject');
+    });
+    Route::controller(SalaryWithdrawalController::class)->prefix('salary-withdrawal-requests')->name('salary_withdrawal_requests.')->group(function () {
+        Route::get('/index', 'index')->name('index');
+        Route::get('/pending', 'pending')->name('pending');
+        Route::get('/accepted', 'accepted')->name('accepted');
+        Route::get('/rejected', 'rejected')->name('rejected');
+        Route::get('/accept/{id}', 'accept')->name('accept');
+        Route::get('/reject/{id}', 'reject')->name('reject');
+    });
     Route::resource('packages', PackageController::class);
-    Route::resource('employers', EmployerController::class);
-    // Route::resource('vendors', VendorController::class);
+    Route::resource('subadmins', SubAdminController::class);
     Route::resource('epins', EpinController::class)->except('create', 'edit', 'show', 'update');
 });
 

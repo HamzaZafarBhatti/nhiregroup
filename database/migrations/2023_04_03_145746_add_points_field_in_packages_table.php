@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::table('packages', function (Blueprint $table) {
             //
-            $table->float('points');
+            $table->float('points')->default(0);
+            $table->integer('salary_dashboard_fee')->default(0);
         });
     }
 
@@ -25,6 +26,7 @@ return new class extends Migration
         Schema::table('packages', function (Blueprint $table) {
             //
             $table->dropColumn('points');
+            $table->dropColumn('salary_dashboard_fee');
         });
     }
 };

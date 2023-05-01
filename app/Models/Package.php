@@ -20,6 +20,7 @@ class Package extends Model
         'epin_length',
         'min_points_to_cashout',
         'points',
+        'salary_dashboard_fee',
     ];
 
     public function scopeActive($query)

@@ -87,7 +87,7 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <label class="form-label">E-Pin Prefix</label>
                             <input type="text" class="form-control @error('epin_prefix') is-invalid @enderror"
                                 value="{{ old('epin_prefix') }}" name="epin_prefix" required />
@@ -95,7 +95,7 @@
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <label class="form-label">E-Pin Length</label>
                             <input type="number" class="form-control @error('epin_length') is-invalid @enderror" step="1"
                                 value="{{ old('epin_length') }}" name="epin_length" required />
@@ -103,11 +103,19 @@
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <label class="form-label">Minimum Points Required to Cashout</label>
                             <input type="number" class="form-control @error('min_points_to_cashout') is-invalid @enderror" step=".01"
                                 value="{{ old('min_points_to_cashout') }}" name="min_points_to_cashout" required />
                             @error('min_points_to_cashout')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Salary Dashboard Access Fee</label>
+                            <input type="number" class="form-control @error('salary_dashboard_fee') is-invalid @enderror"
+                                value="{{ old('salary_dashboard_fee') }}" name="salary_dashboard_fee" required />
+                            @error('salary_dashboard_fee')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>

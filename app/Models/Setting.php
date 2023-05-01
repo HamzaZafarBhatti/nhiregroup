@@ -22,7 +22,7 @@ class Setting extends Model
         'address',
         'phone',
         'email_notification',
-        'pint_cashout_amount',
+        'point_cashout_amount',
     ];
 
     public function getLogoPath()

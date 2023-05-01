@@ -24,6 +24,20 @@
             background: #272828;
             color: #fff;
         }
+
+        .scale_up:hover {
+            animation: scale_up .25s linear forwards;
+        }
+
+        @keyframes scale_up {
+            from {
+                transform: scale(1);
+            }
+
+            to {
+                transform: scale(1.2);
+            }
+        }
     </style>
 </head>
 

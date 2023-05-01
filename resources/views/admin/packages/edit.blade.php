@@ -37,8 +37,8 @@
                             <label class="form-label">Status</label>
                             <select class="form-select @error('is_active') is-invalid @enderror" name="is_active" required>
                                 <option selected disabled value="">Choose Status</option>
-                                <option value="1" @if($package->is_active) selected @endif>Active</option>
-                                <option value="0" @if(!$package->is_active) selected @endif>Inactive</option>
+                                <option value="1" @if ($package->is_active) selected @endif>Active</option>
+                                <option value="0" @if (!$package->is_active) selected @endif>Inactive</option>
                             </select>
                             @error('is_active')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -47,7 +47,7 @@
                         <div class="col-md-6">
                             <label class="form-label">Points</label>
                             <input type="number" class="form-control @error('points') is-invalid @enderror" step=".1"
-                                value="{{ old('points') }}" name="points" required />
+                                value="{{ $package->points }}" name="points" required />
                             @error('points')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -88,7 +88,7 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <label class="form-label">E-Pin Prefix</label>
                             <input type="text" class="form-control @error('epin_prefix') is-invalid @enderror"
                                 value="{{ $package->epin_prefix }}" name="epin_prefix" required />
@@ -96,19 +96,28 @@
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <label class="form-label">E-Pin Length</label>
-                            <input type="number" class="form-control @error('epin_length') is-invalid @enderror" step="1"
-                                value="{{ $package->epin_length }}" name="epin_length" required />
+                            <input type="number" class="form-control @error('epin_length') is-invalid @enderror"
+                                step="1" value="{{ $package->epin_length }}" name="epin_length" required />
                             @error('epin_length')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <label class="form-label">Minimum Points Required to Cashout</label>
-                            <input type="number" class="form-control @error('min_points_to_cashout') is-invalid @enderror" step=".01"
-                                value="{{ $package->min_points_to_cashout }}" name="min_points_to_cashout" required />
+                            <input type="number" class="form-control @error('min_points_to_cashout') is-invalid @enderror"
+                                step=".01" value="{{ $package->min_points_to_cashout }}" name="min_points_to_cashout"
+                                required />
                             @error('min_points_to_cashout')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Salary Dashboard Access Fee</label>
+                            <input type="number" class="form-control @error('salary_dashboard_fee') is-invalid @enderror"
+                                value="{{ $package->salary_dashboard_fee }}" name="salary_dashboard_fee" required />
+                            @error('salary_dashboard_fee')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>

@@ -11,9 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('settings', function (Blueprint $table) {
-            //
-            $table->integer('point_cashout_amount')->default(0);
+        Schema::create('salary_withdrawals', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->smallInteger('status')->default(0);
+            $table->timestamps();
         });
     }
 
@@ -22,9 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('settings', function (Blueprint $table) {
-            //
-            $table->dropColumn('point_cashout_amount');
-        });
+        Schema::dropIfExists('salary_withdrawals');
     }
 };

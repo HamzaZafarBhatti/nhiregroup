@@ -66,9 +66,9 @@
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">Point Cashout Amount</label>
-                            <input type="number" class="form-control @error('pint_cashout_amount') is-invalid @enderror"
-                                value="{{ $settings->pint_cashout_amount }}" name="pint_cashout_amount" required />
-                            @error('pint_cashout_amount')
+                            <input type="number" class="form-control @error('point_cashout_amount') is-invalid @enderror"
+                                value="{{ $settings->point_cashout_amount }}" name="point_cashout_amount" required />
+                            @error('point_cashout_amount')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>

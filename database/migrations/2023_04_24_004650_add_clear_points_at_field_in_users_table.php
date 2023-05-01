@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             //
             $table->dateTime('clear_points_at')->nullable();
+            $table->boolean('salary_dashboard_access')->default(false);
         });
     }
 
@@ -25,6 +26,7 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             //
             $table->dropColumn('clear_points_at');
+            $table->dropColumn('salary_dashboard_access');
         });
     }
 };

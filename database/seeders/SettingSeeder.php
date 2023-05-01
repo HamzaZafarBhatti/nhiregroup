@@ -25,6 +25,7 @@ class SettingSeeder extends Seeder
             'address' => 'Demo Address',
             'phone' => '123123123123',
             'email_notification' => true,
+            'point_cashout_amount' => 128000,
         ]);
     }
 }
