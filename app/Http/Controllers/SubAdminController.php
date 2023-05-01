@@ -39,7 +39,9 @@ class SubAdminController extends Controller
             $data['role'] = 'Sub-Admin';
             $data['password'] = bcrypt($request->password);
             // return $data;
-            User::create($data);
+            $user = User::create($data);
+            $user->email_verified_at = now();
+            $user->save();
             return redirect()->route('admin.subadmins.index')->with('success', 'Subadmin added successfully!');
         } catch (\Throwable $th) {
             Log::error('Subadmin Store Error: ' . $th->getMessage());
