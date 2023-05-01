@@ -149,6 +149,8 @@
                                     href="{{ route('admin.salary_withdrawal_requests.rejected') }}">Rejected</a></li>
                         </ul>
                     </li>
+                @endif
+                @if ($user->role === 'Admin')
                     <li>
                         <a class="m-link @if (Route::is('admin.epins.index')) active @endif"
                             href="{{ route('admin.epins.index') }}">
@@ -162,8 +164,6 @@
                             <span class="ms-2">E-Pins</span>
                         </a>
                     </li>
-                @endif
-                @if ($user->role === 'Admin')
                     <li>
                         <a class="m-link @if (Route::is('admin.settings.edit')) active @endif"
                             href="{{ route('admin.settings.edit') }}">
