@@ -55,7 +55,7 @@ class UserController extends Controller
                 return back()->with('warning', 'You have already requested salary withdrawal!');
             }
             if (auth()->user()->points < 50) {
-                return back()->with('warning', 'You have already requested salary withdrawal!');
+                return back()->with('warning', 'You have to complete 50 points!');
             }
             $data['user_id'] = auth()->user()->id;
             SalaryWithdrawal::create($data);
