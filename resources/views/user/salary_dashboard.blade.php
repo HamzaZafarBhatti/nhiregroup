@@ -69,7 +69,7 @@
                         <div class="text-center">
                             <h4>₦{{ $settings->point_cashout_amount }}</h4>
                             <a href="{{ route('user.withdraw.request') }}" type="button"
-                                class="btn btn-lg btn-success w-100 @if (auth()->user()->latest_salary_withdrawal->status === 0) disabled @endif">Cashout</a>
+                                class="btn btn-lg btn-success w-100 @if (!empty(auth()->user()->latest_salary_withdrawal) && auth()->user()->latest_salary_withdrawal->status === 0) disabled @endif">Cashout</a>
                         </div>
                     </div>
                 </div>

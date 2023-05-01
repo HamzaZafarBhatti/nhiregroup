@@ -31,7 +31,7 @@
                     </li>
                 @else
                     <li class="collapsed">
-                        <a class="m-link @if (Route::is('user.dashboard.*')) active @endif" data-bs-toggle="collapse"
+                        <a class="m-link @if (Route::is('user.dashboard.*', 'user.')) active @endif" data-bs-toggle="collapse"
                             data-bs-target="#packages" href="#">
                             <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="currentColor"
                                 viewBox="0 0 16 16">
@@ -44,8 +44,8 @@
                             <span class="arrow fa fa-angle-right ms-auto text-end"></span>
                         </a>
                         <!-- Menu: Sub menu ul -->
-                        <ul class="sub-menu collapse @if (Route::is('user.dashboard.*')) show @endif" id="packages">
-                            <li><a class="ms-link @if (Route::is('user.dashboard.main')) active @endif"
+                        <ul class="sub-menu collapse @if (Route::is('user.dashboard.*', 'user.')) show @endif" id="packages">
+                            <li><a class="ms-link @if (Route::is('user.dashboard.main', 'user.')) active @endif"
                                     href="{{ route('user.dashboard.main') }}">Main Dashboard</a></li>
                             <li><a class="ms-link @if (Route::is('user.dashboard.salary')) active @endif"
                                     href="{{ route('user.dashboard.salary') }}">Salary Dashboard</a></li>
