@@ -37,6 +37,7 @@ class SubAdminController extends Controller
         try {
             $data = $request->validated();
             $data['role'] = 'Sub-Admin';
+            $data['password'] = bcrypt($request->password);
             // return $data;
             User::create($data);
             return redirect()->route('admin.subadmins.index')->with('success', 'Subadmin added successfully!');
