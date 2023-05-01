@@ -51,7 +51,10 @@ class UserController extends Controller
     public function salary_withdraw_request()
     {
         try {
-            if (auth()->user()->latest_salary_withdrawal->status == 0) {
+            if (!empty(auth()->user()->latest_salary_withdrawal) && auth()->user()->latest_salary_withdrawal->status == 0) {
+                return back()->with('warning', 'You have already requested salary withdrawal!');
+            }
+            if (auth()->user()->points < 50) {
                 return back()->with('warning', 'You have already requested salary withdrawal!');
             }
             $data['user_id'] = auth()->user()->id;
