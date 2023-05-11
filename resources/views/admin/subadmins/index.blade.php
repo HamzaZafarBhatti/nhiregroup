@@ -4,6 +4,7 @@
 
 @section('styles')
     <link rel="stylesheet" href="{{ asset('assets/cssbundle/dataTables.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/cssbundle/sweetalert2.min.css') }}" />
 @endsection
 
 @section('content')
@@ -20,6 +21,8 @@
                                 <th>Sr. #</th>
                                 <th>Name</th>
                                 <th>Email</th>
+                                <th>Whatsapp</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -28,6 +31,24 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $item->name }}</td>
                                     <td>{{ $item->email }}</td>
+                                    <td>{{ $item->phone ?? 'N/A' }}</td>
+                                    <td>
+                                        <a href="{{ route('admin.subadmins.edit', $item->id) }}" type="button"
+                                            class="btn btn-link btn-sm text-info" data-bs-toggle="tooltip"
+                                            data-bs-placement="top" aria-label="Edit" data-bs-original-title="Edit">
+                                            <i class="fa fa-pencil"></i>
+                                        </a>
+                                        <button type="button" class="btn btn-link btn-sm text-danger"
+                                            data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Delete"
+                                            onclick="deleteRecord({{ $item->id }})" data-bs-original-title="Delete">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                        <form action="{{ route('admin.subadmins.destroy', $item->id) }}" method="post"
+                                            id="formDelete{{ $item->id }}" style="display: none;">
+                                            @csrf
+                                            @method('delete')
+                                        </form>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -46,5 +67,19 @@
                 responsive: true,
             });
         });
+
+        function deleteRecord(id) {
+            Swal.fire({
+                title: "Do you want to delete the record?",
+                showDenyButton: true,
+                confirmButtonText: "Delete",
+                denyButtonText: `No`,
+            }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                    $('#formDelete' + id).submit();
+                }
+            });
+        }
     </script>
 @endsection

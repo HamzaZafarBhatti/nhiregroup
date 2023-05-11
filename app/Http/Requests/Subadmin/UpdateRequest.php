@@ -3,8 +3,6 @@
 namespace App\Http\Requests\Subadmin;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
-use Illuminate\Validation\Rules;
 
 class UpdateRequest extends FormRequest
 {
@@ -13,7 +11,7 @@ class UpdateRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,10 +22,10 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'max:255'],
-            'username' => ['required', 'string', 'max:255', Rule::unique(User::class)->ignore($this->user()->id)],
-            'email' => ['required', 'string', 'email', 'max:255', Rule::unique(User::class)->ignore($this->user()->id)],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()]
+            'name' => ['sometimes', 'required', 'string', 'max:255'],
+            'phone' => ['sometimes', 'required', 'string', 'max:255'],
+            'username' => 'sometimes|required|string|max:255|unique:users,username,' . $this->subadmin,
+            'email' => 'sometimes|required|email|max:255|unique:users,email,' . $this->subadmin,
         ];
     }
 }
