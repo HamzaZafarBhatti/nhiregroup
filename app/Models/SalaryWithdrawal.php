@@ -13,11 +13,17 @@ class SalaryWithdrawal extends Model
     protected $fillable = [
         'user_id',
         'status', // 0 => pending, 1 => accepted, 2 => rejected
+        'subadmin_id',
     ];
 
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function subadmin_id()
+    {
+        return $this->belongsTo(User::class, 'subadmin_id');
     }
 
     protected function getStatus(): Attribute

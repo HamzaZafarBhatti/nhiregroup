@@ -68,8 +68,10 @@
                         <div class="mb-2 text-uppercase">Salary</div>
                         <div class="text-center">
                             <h4>₦{{ $settings->point_cashout_amount }}</h4>
-                            <a href="{{ route('user.withdraw.request') }}" type="button"
-                                class="btn btn-lg btn-success w-100 @if (!empty(auth()->user()->latest_salary_withdrawal) && auth()->user()->latest_salary_withdrawal->status === 0) disabled @endif">Cashout</a>
+                            @if (auth()->user()->points >= auth()->user()->package->min_points_to_cashout)
+                                <button type="button" onclick="requestWithdraw()"
+                                    class="btn btn-lg btn-success w-100 @if (!empty(auth()->user()->latest_salary_withdrawal) && auth()->user()->latest_salary_withdrawal->status === 0) disabled @endif">Cashout</button>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -80,45 +82,39 @@
 
 @section('scripts')
     <script>
-        function copyToClipboard(text) {
-            var sampleTextarea = document.createElement("textarea");
-            document.body.appendChild(sampleTextarea);
-            sampleTextarea.value = text; //save main text in it
-            sampleTextarea.select(); //select textarea contenrs
-            document.execCommand("copy");
-            document.body.removeChild(sampleTextarea);
-        }
-        $(document).ready(function() {
-            $('#inputGroupPrice').click(function() {
-                var text = $('#referral_link').val();
-                copyToClipboard(text);
-                Toast.fire({
-                    icon: 'success',
-                    text: 'Referral Link Successfully Copied!',
-                })
-            })
-        })
-        @if ($user->is_first_login)
+        function requestWithdraw() {
             Swal.fire({
-                icon: 'info',
-                allowOutsideClick: false,
-                title: "Welcome to Nhire Group",
-                text: "Thank you for registering yourself on this platform.",
-                confirmButtonText: "Continue using Nhire"
+                title: "Select Salary Auditor",
+                input: "select",
+                inputOptions: @php echo $subadmins @endphp,
+                inputPlaceholder: 'Select Salary Auditor',
+                showCancelButton: true,
+                confirmButtonText: "Confirm",
+                showLoaderOnConfirm: true,
+                allowOutsideClick: () => !Swal.isLoading(),
             }).then((result) => {
-                if (result.isConfirmed) {
-                    updateIsFirstLogin();
+                if (result.isConfirmed && result.value) {
+                    $.ajax({
+                        url: "{{ route('user.withdraw.request') }}",
+                        type: "POST",
+                        data: {
+                            subadmin_id: result.value,
+                        },
+                        success: function(response) {
+                            console.log(response);
+                            Toast.fire({
+                                icon: response.status,
+                                title: response.message
+                            })
+                            if(response.status === 'success') {
+                                setTimeout(() => {
+                                    window.location.reload();
+                                }, 3000);
+                            }
+                        }
+                    })
                 }
-            })
-
-            function updateIsFirstLogin() {
-                $.ajax({
-                    url: "{{ route('user.updateIsFirstLogin') }}",
-                    success: function(response) {
-                        console.log(response);
-                    }
-                })
-            }
-        @endif
+            });
+        }
     </script>
 @endsection

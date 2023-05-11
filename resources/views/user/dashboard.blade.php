@@ -314,27 +314,5 @@
                 })
             })
         })
-        @if ($user->is_first_login)
-            Swal.fire({
-                icon: 'info',
-                allowOutsideClick: false,
-                title: "Welcome to Nhire Group",
-                text: "Thank you for registering yourself on this platform.",
-                confirmButtonText: "Continue using Nhire"
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    updateIsFirstLogin();
-                }
-            })
-
-            function updateIsFirstLogin() {
-                $.ajax({
-                    url: "{{ route('user.updateIsFirstLogin') }}",
-                    success: function(response) {
-                        console.log(response);
-                    }
-                })
-            }
-        @endif
     </script>
 @endsection

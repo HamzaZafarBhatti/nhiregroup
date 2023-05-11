@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->smallInteger('status')->default(0);
+            $table->foreignId('subadmin_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -7,6 +7,7 @@ use App\Models\SalaryprofileRequest;
 use App\Models\SalaryWithdrawal;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\View\View;
 
@@ -17,9 +18,9 @@ class UserController extends Controller
     {
         return view('user.dashboard');
     }
-    public function salary_dashboard(): View
+    public function salary_dashboard()
     {
-        $subadmins = User::where('role', 'Sub-Admin')->get();
+        $subadmins = User::select('id', DB::raw("CONCAT(name,' - ',phone) AS name"))->where('role', 'Sub-Admin')->pluck('name', 'id');
         return view('user.salary_dashboard', compact('subadmins'));
     }
 
@@ -48,7 +49,7 @@ class UserController extends Controller
         }
     }
 
-    public function salary_withdraw_request()
+    public function salary_withdraw_request(Request $request)
     {
         try {
             if (!empty(auth()->user()->latest_salary_withdrawal) && auth()->user()->latest_salary_withdrawal->status == 0) {
@@ -58,11 +59,18 @@ class UserController extends Controller
                 return back()->with('warning', 'Not eligible to receive salary. Request for upfront payment!');
             }
             $data['user_id'] = auth()->user()->id;
+            $data['subadmin_id'] = $request->subadmin_id;
             SalaryWithdrawal::create($data);
-            return back()->with('success', 'Salary Withdrawal Request Submitted!');
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Salary Withdrawal Request Submitted!',
+            ]);
         } catch (\Throwable $th) {
             Log::error('Salary Dashboard Request Error: ' . $th->getMessage());
-            return back()->with('error', 'Something went wrong!');
+            return response()->json([
+                'status' => 'danger',
+                'message' => 'Something went wrong!',
+            ]);
         }
     }
 

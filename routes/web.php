@@ -65,14 +65,14 @@ Route::middleware(['auth', /* 'verified', */ 'user'])->name('user.')->prefix('us
         Route::get('/referrals/direct', 'referrals_direct')->name('referrals.direct');
         Route::get('/referrals/indirect', 'referrals_indirect')->name('referrals.indirect');
         Route::post('/validate_salary_profile', 'validate_salary_profile')->name('validate_salary_profile');
-        Route::get('/salary_withdraw_request', 'salary_withdraw_request')->name('withdraw.request');
+        Route::post('/salary_withdraw_request', 'salary_withdraw_request')->name('withdraw.request');
     });
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::middleware(['auth', 'verified', 'admin'])->name('admin.')->prefix('admin')->group(function () {
+Route::middleware(['auth', /* 'verified', */ 'admin'])->name('admin.')->prefix('admin')->group(function () {
     Route::get('/', [AdminController::class, 'dashboard'])->name('dashboard');
     Route::get('/dashboard', [AdminController::class, 'dashboard']);
     Route::controller(SettingController::class)->prefix('settings')->name('settings.')->group(function () {
