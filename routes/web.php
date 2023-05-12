@@ -10,6 +10,7 @@ use App\Http\Controllers\SalaryprofileRequestController;
 use App\Http\Controllers\SalaryWithdrawalController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SubAdminController;
+use App\Http\Controllers\TimeslotController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VendorController;
 use Illuminate\Support\Facades\Route;
@@ -103,6 +104,7 @@ Route::middleware(['auth', /* 'verified', */ 'admin'])->name('admin.')->prefix('
     });
     Route::resource('packages', PackageController::class);
     Route::resource('subadmins', SubAdminController::class);
+    Route::resource('timeslots', TimeslotController::class);
     Route::resource('epins', EpinController::class)->except('create', 'edit', 'show', 'update');
 });
 

@@ -50,6 +50,18 @@
                             @enderror
                         </div>
                         <div class="col-md-6">
+                            <label class="form-label">Timeslot</label>
+                            <select name="timeslot" id="timeslot"
+                                class="form-control @error('timeslot') is-invalid @enderror" required>
+                                <option value="">Select Time Slot</option>
+                                <option value="morning">Morning</option>
+                                <option value="evening">Evening</option>
+                            </select>
+                            @error('timeslot')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="col-md-6">
                             <label class="form-label">Password</label>
                             <input type="password" class="form-control @error('password') is-invalid @enderror"
                                 name="password" />

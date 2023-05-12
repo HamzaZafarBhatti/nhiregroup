@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="{{ Auth::check() && Auth::user()->darkmode == 1 ? 'dark' : 'light' }}">
+<html lang="en" data-theme="{{ Auth::check() && Auth::user()->darkmode === 1 ? 'dark' : 'light' }}">
 
 <head>
     <meta charset="utf-8">
@@ -128,8 +128,7 @@
 
 
         $(".quick-light-dark").on("click", function() {
-            let theme = {{ $user->darkmode }} === 0 ? "light" : "dark";
-            if ("light" === theme) {
+            if ("light" == localStorage.getItem("theme")) {
                 setTheme("dark")
             } else {
                 setTheme("light")
