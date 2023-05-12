@@ -19,6 +19,7 @@ class AdminSeeder extends Seeder
             'username' => 'AdminNhire',
             'email' => 'admin@nhiregroup.com',
             'role' => 'Admin',
+            'is_first_login' => 0
         ]);
     }
 }

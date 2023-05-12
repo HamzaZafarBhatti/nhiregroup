@@ -128,7 +128,8 @@
 
 
         $(".quick-light-dark").on("click", function() {
-            if ("light" == localStorage.getItem("theme")) {
+            let theme = {{ $user->darkmode }} === 0 ? "light" : "dark";
+            if ("light" === theme) {
                 setTheme("dark")
             } else {
                 setTheme("light")
