@@ -32,8 +32,8 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $item->title }}</td>
                                     <td>{{ $item->type }}</td>
-                                    <td>{{ date('h:i A', strtotime($item->start_time)) }}</td>
-                                    <td>{{ date('h:i A', strtotime($item->end_time)) }}</td>
+                                    <td>{{ $item->get_formatted_start_time }}</td>
+                                    <td>{{ $item->get_formatted_end_time }}</td>
                                     <td>
                                         <a href="{{ route('admin.timeslots.edit', $item->id) }}" type="button"
                                             class="btn btn-link btn-sm text-info" data-bs-toggle="tooltip"

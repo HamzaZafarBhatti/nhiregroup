@@ -27,6 +27,7 @@ class StoreRequest extends FormRequest
             'phone' => ['required', 'string', 'max:255'],
             'username' => ['required', 'string', 'max:255', 'unique:users,username'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
+            'timeslot_id' => ['required'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()]
         ];
     }

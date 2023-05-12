@@ -50,13 +50,16 @@
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">Timeslot</label>
-                            <select name="timeslot" id="timeslot"
-                                class="form-control @error('timeslot') is-invalid @enderror" required>
+                            <select name="timeslot_id" id="timeslot_id"
+                                class="form-control @error('timeslot_id') is-invalid @enderror" required>
                                 <option value="">Select Time Slot</option>
-                                <option value="morning">Morning</option>
-                                <option value="evening">Evening</option>
+                                @foreach ($timeslots as $item)
+                                    <option value="{{ $item->id }}">
+                                        {{ $item->get_label }}
+                                    </option>
+                                @endforeach
                             </select>
-                            @error('timeslot')
+                            @error('timeslot_id')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>

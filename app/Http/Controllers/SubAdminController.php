@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Subadmin\StoreRequest;
 use App\Http\Requests\Subadmin\UpdateRequest;
+use App\Models\Timeslot;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Rules;
 
@@ -17,7 +19,7 @@ class SubAdminController extends Controller
     public function index()
     {
         //
-        $subadmins = User::where('role', 'Sub-Admin')->get();
+        $subadmins = User::with('timeslot')->where('role', 'Sub-Admin')->get();
         return view('admin.subadmins.index', compact('subadmins'));
     }
 
@@ -27,7 +29,8 @@ class SubAdminController extends Controller
     public function create()
     {
         //
-        return view('admin.subadmins.create');
+        $timeslots = Timeslot::latest()->get();
+        return view('admin.subadmins.create', compact('timeslots'));
     }
 
     /**
@@ -40,7 +43,6 @@ class SubAdminController extends Controller
             $data = $request->validated();
             $data['role'] = 'Sub-Admin';
             $data['password'] = bcrypt($request->password);
-            // return $data;
             $user = User::create($data);
             $user->email_verified_at = now();
             $user->save();
@@ -66,7 +68,8 @@ class SubAdminController extends Controller
     {
         //
         $subadmin = User::find($id);
-        return view('admin.subadmins.edit', compact('subadmin'));
+        $timeslots = Timeslot::latest()->get();
+        return view('admin.subadmins.edit', compact('subadmin', 'timeslots'));
     }
 
     /**

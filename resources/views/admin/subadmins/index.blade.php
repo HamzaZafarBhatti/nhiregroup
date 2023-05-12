@@ -22,6 +22,7 @@
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Whatsapp</th>
+                                <th>Time Slot</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -32,6 +33,7 @@
                                     <td>{{ $item->name }}</td>
                                     <td>{{ $item->email }}</td>
                                     <td>{{ $item->phone ?? 'N/A' }}</td>
+                                    <td>{{ $item->timeslot->get_label  ?? 'N/A' }}</td>
                                     <td>
                                         <a href="{{ route('admin.subadmins.edit', $item->id) }}" type="button"
                                             class="btn btn-link btn-sm text-info" data-bs-toggle="tooltip"

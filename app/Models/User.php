@@ -42,6 +42,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'epin_id',
         'clear_points_at',
         'salary_dashboard_access',
+        'timeslot_id',
     ];
 
     /**
@@ -66,6 +67,11 @@ class User extends Authenticatable implements MustVerifyEmail
     public function settings()
     {
         return $this->hasMany(SettingUser::class);
+    }
+
+    public function timeslot()
+    {
+        return $this->belongsTo(Timeslot::class);
     }
 
     public function parent()
