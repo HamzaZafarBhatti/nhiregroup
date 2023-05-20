@@ -25,6 +25,11 @@
             color: #fff;
         }
 
+        html[data-theme="dark"] .swal2-radio,
+        html[data-theme="dark"] .swal2-select {
+            background: inherit;
+        }
+
         .scale_up:hover {
             animation: scale_up .25s linear forwards;
         }

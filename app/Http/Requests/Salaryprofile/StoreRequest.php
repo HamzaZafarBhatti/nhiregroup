@@ -24,6 +24,7 @@ class StoreRequest extends FormRequest
         return [
             //
             'subadmin_id' => 'required',
+            'is_paid' => 'required',
         ];
     }
 }

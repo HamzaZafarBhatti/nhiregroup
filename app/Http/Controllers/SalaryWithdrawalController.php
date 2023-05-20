@@ -53,27 +53,39 @@ class SalaryWithdrawalController extends Controller
         return view('admin.salary_withdraw_requests.rejected', compact('withdraw_requests'));
     }
 
-    public function accept($id)
+    public function accept(Request $request)
     {
         try {
-            $withdraw_request = SalaryWithdrawal::find($id);
+            $withdraw_request = SalaryWithdrawal::find($request->id);
             $withdraw_request->update(['status' => 1]);
-            return back()->with('success', 'Request accepted!');
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Request Accepted!',
+            ]);
         } catch (\Throwable $th) {
             Log::error('Salary Withdrawal Request Accept Error: ' . $th->getMessage());
-            return back()->with('error', 'Something went wrong');
+            return response()->json([
+                'status' => 'danger',
+                'message' => 'Something went wrong!',
+            ]);
         }
     }
 
-    public function reject($id)
+    public function reject(Request $request)
     {
         try {
-            $withdraw_request = SalaryWithdrawal::find($id);
+            $withdraw_request = SalaryWithdrawal::find($request->id);
             $withdraw_request->update(['status' => 2]);
-            return back()->with('success', 'Request rejected!');
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Request Rejected!',
+            ]);
         } catch (\Throwable $th) {
             Log::error('Salary Withdrawal Request Reject Error: ' . $th->getMessage());
-            return back()->with('error', 'Something went wrong');
+            return response()->json([
+                'status' => 'danger',
+                'message' => 'Something went wrong!',
+            ]);
         }
     }
 }

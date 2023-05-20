@@ -15,6 +15,8 @@ class SalaryprofileRequest extends Model
         'status', // 0 => pending, 1 => accepted, 2 => rejected
         'rejection_reason',
         'subadmin_id',
+        'is_paid',
+        'subadmin_approve_payment',
     ];
 
     public function user()

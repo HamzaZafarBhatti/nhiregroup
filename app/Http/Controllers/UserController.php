@@ -21,6 +21,7 @@ class UserController extends Controller
     public function salary_dashboard()
     {
         $subadmins = User::select('id', DB::raw("CONCAT(name,' - ',phone) AS name"))->where('role', 'Sub-Admin')->pluck('name', 'id');
+        
         return view('user.salary_dashboard', compact('subadmins'));
     }
 
@@ -42,10 +43,16 @@ class UserController extends Controller
             $data = $request->validated();
             $data['user_id'] = auth()->user()->id;
             SalaryprofileRequest::create($data);
-            return back()->with('success', 'Salary Dashboard Acess Request submitted successfully!');
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Salary Dashboard Acess Request submitted successfully!',
+            ]);
         } catch (\Throwable $th) {
             Log::error('Salary Dashboard Request Error: ' . $th->getMessage());
-            return back()->with('error', 'Something went wrong!');
+            return response()->json([
+                'status' => 'danger',
+                'message' => 'Something went wrong!',
+            ]);
         }
     }
 

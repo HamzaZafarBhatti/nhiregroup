@@ -99,6 +99,21 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(IndirectReferralLog::class, 'upline_id');
     }
 
+    public function salaryprofile_request()
+    {
+        return $this->hasOne(SalaryprofileRequest::class)->latestOfMany();
+    }
+
+    public function salary_withdrawals()
+    {
+        return $this->hasMany(SalaryWithdrawal::class);
+    }
+
+    public function latest_salary_withdrawal()
+    {
+        return $this->hasOne(SalaryWithdrawal::class)->latestOfMany();
+    }
+
     protected function getFullAddress(): Attribute
     {
         $address_arr = [
@@ -110,15 +125,5 @@ class User extends Authenticatable implements MustVerifyEmail
         return Attribute::make(
             get: fn ($val, $attr) => implode(', ', $address_arr)
         );
-    }
-
-    public function salary_withdrawals()
-    {
-        return $this->hasMany(SalaryWithdrawal::class);
-    }
-
-    public function latest_salary_withdrawal()
-    {
-        return $this->hasOne(SalaryWithdrawal::class)->latestOfMany();
     }
 }

@@ -16,40 +16,9 @@
                                 to pay ₦ {{ auth()->user()->package->salary_dashboard_fee }} fee.</span>
                         </div>
                         <div class="text-center">
-                            <button class="btn btn-success btn-lg" data-bs-toggle="modal" data-bs-target="#RequestQuote"
-                                type="button">Request for Salary Dashboard Access</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal fade" id="RequestQuote" tabindex="-1" aria-hidden="true">
-                <div class="modal-dialog modal-lg modal-dialog-scrollable">
-                    <div class="modal-content text-start">
-                        <div class="modal-body custom_scroll p-lg-5">
-                            <form action="{{ route('user.validate_salary_profile') }}" method="post">
-                                @csrf
-                                <div class="row g-2">
-                                    <div class="col-12 mb-4">
-                                        <h4>Request for Salary Dashboard Access</h4>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="form-floating">
-                                            <select class="form-select" name="subadmin_id">
-                                                <option selected hidden>Select Admin</option>
-                                                @foreach ($subadmins as $item)
-                                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                                @endforeach
-                                            </select>
-                                            <label>Select Admin</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <button class="btn btn-secondary" type="button"
-                                            data-bs-dismiss="modal">Close</button>
-                                        <button class="btn btn-primary" type="submit">Submit Request</button>
-                                    </div>
-                                </div>
-                            </form>
+                            <button class="btn btn-success btn-lg @if (!empty(auth()->user()->salaryprofile_request) && auth()->user()->salaryprofile_request->status === 0) disabled @endif"
+                                onclick="validatePayment()" type="button">Request for
+                                Salary Dashboard Access</button>
                         </div>
                     </div>
                 </div>
@@ -106,13 +75,76 @@
                                 icon: response.status,
                                 title: response.message
                             })
-                            if(response.status === 'success') {
+                            if (response.status === 'success') {
                                 setTimeout(() => {
                                     window.location.reload();
                                 }, 3000);
                             }
                         }
                     })
+                }
+            });
+        }
+
+        function validatePayment() {
+            Swal.fire({
+                title: "Select Salary Auditor",
+                input: "select",
+                inputOptions: @php echo $subadmins @endphp,
+                inputPlaceholder: 'Select Salary Auditor',
+                showCancelButton: true,
+                confirmButtonText: "Confirm",
+                showLoaderOnConfirm: true,
+                allowOutsideClick: () => !Swal.isLoading(),
+                inputValidator: (value) => {
+                    if (!value) {
+                        return 'You need to choose something!'
+                    }
+                },
+            }).then((result) => {
+                if (result.isConfirmed && result.value) {
+                    Swal.fire({
+                        title: "Have you paid the payment to the auditor?",
+                        input: "radio",
+                        inputOptions: {
+                            '0': 'Not yet!',
+                            '1': 'Yes paid!',
+                        },
+                        inputValidator: (value) => {
+                            if (!value) {
+                                return 'You need to choose something!'
+                            }
+                        },
+                        showCancelButton: true,
+                        confirmButtonText: "Confirm",
+                        showLoaderOnConfirm: true,
+                        allowOutsideClick: () => !Swal.isLoading(),
+                    }).then((result2) => {
+                        if (result2.isConfirmed) {
+                            console.log(result);
+                            console.log(result2);
+                            $.ajax({
+                                url: "{{ route('user.validate_salary_profile') }}",
+                                type: "POST",
+                                data: {
+                                    subadmin_id: result.value,
+                                    is_paid: result2.value,
+                                },
+                                success: function(response) {
+                                    console.log(response);
+                                    Toast.fire({
+                                        icon: response.status,
+                                        title: response.message
+                                    })
+                                    if (response.status === 'success') {
+                                        setTimeout(() => {
+                                            window.location.reload();
+                                        }, 3000);
+                                    }
+                                }
+                            })
+                        }
+                    });
                 }
             });
         }

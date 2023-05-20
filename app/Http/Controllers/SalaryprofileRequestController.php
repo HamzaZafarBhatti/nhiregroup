@@ -54,34 +54,46 @@ class SalaryprofileRequestController extends Controller
         return view('admin.profile_requests.rejected', compact('profile_requests'));
     }
 
-    public function accept($id)
+    public function accept(Request $request)
     {
         DB::beginTransaction();
         try {
-            $profile_request = SalaryprofileRequest::with('user')->find($id);
-            $profile_request->update(['status' => 1]);
+            $profile_request = SalaryprofileRequest::with('user')->find($request->id);
+            $profile_request->update(['status' => 1, 'subadmin_approve_payment' => 1]);
             $profile_request->user->update(['salary_dashboard_access' => 1]);
             DB::commit();
-            return back()->with('success', 'Request accepted!');
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Request Accepted!',
+            ]);
         } catch (\Throwable $th) {
             DB::rollBack();
             Log::error('Salary Dashboard Request Accept Error: ' . $th->getMessage());
-            return back()->with('error', 'Something went wrong');
+            return response()->json([
+                'status' => 'danger',
+                'message' => 'Something went wrong!',
+            ]);
         }
     }
 
-    public function reject($id)
+    public function reject(Request $request)
     {
         DB::beginTransaction();
         try {
-            $profile_request = SalaryprofileRequest::with('user')->find($id);
-            $profile_request->update(['status' => 2]);
+            $profile_request = SalaryprofileRequest::with('user')->find($request->id);
+            $profile_request->update(['status' => 2, 'rejection_reason' => $request->rejection_reason]);
             DB::commit();
-            return back()->with('success', 'Request rejected!');
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Request Rejected!',
+            ]);
         } catch (\Throwable $th) {
             DB::rollBack();
             Log::error('Salary Dashboard Request Reject Error: ' . $th->getMessage());
-            return back()->with('error', 'Something went wrong');
+            return response()->json([
+                'status' => 'danger',
+                'message' => 'Something went wrong!',
+            ]);
         }
     }
 }
