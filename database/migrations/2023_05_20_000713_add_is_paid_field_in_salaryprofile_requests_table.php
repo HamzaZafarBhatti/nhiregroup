@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::table('salaryprofile_requests', function (Blueprint $table) {
             //
-            $table->boolean('is_paid');
-            $table->boolean('subadmin_approve_payment');
+            $table->boolean('is_paid')->default(0);
+            $table->boolean('subadmin_approve_payment')->default(0);
         });
     }
-    
+
     /**
      * Reverse the migrations.
      */
