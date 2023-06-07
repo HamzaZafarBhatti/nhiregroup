@@ -21,6 +21,7 @@ class Package extends Model
         'min_points_to_cashout',
         'points',
         'salary_dashboard_fee',
+        'expiry_time',
     ];
 
     public function scopeActive($query)

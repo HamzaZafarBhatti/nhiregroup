@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Epin;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class FrontendController extends Controller
 {
@@ -53,7 +55,7 @@ class FrontendController extends Controller
         return view('front.workshopservices');
     }
 
-  public function howitworks()
+    public function howitworks()
     {
         return view('front.howitworks');
     }
@@ -63,9 +65,19 @@ class FrontendController extends Controller
         return view('front.whatweoffer');
     }
 
- public function jobpermit()
+    public function jobpermit()
     {
         return view('front.jobpermit');
+    }
+
+    public function jobpermit_validate(Request $request)
+    {
+        // return $request->code;
+        $code = Epin::where('serial', $request->code)->first();
+        if (empty($code)) {
+            return back()->with('warning', 'Job Permit Code not found!');
+        }
+        return view('front.jobpermit', compact('code'));
     }
 
     public function faq()
@@ -73,7 +85,7 @@ class FrontendController extends Controller
         return view('front.faq');
     }
 
-   public function agents()
+    public function agents()
     {
         return view('front.agents');
     }

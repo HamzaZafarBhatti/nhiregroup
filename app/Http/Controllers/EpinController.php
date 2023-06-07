@@ -50,7 +50,8 @@ class EpinController extends Controller
                     'serial' => $package->epin_prefix . '-' . substr(str_shuffle($chars), 0, $package->epin_length - strlen($package->epin_prefix) - 1),
                     'package_id' => $request->package_id,
                     'created_at' => $now,
-                    'updated_at' => $now
+                    'updated_at' => $now,
+                    'generated_by' => auth()->user()->id
                 ];
             }
             Epin::insert($data);

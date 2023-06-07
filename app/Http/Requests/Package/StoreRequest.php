@@ -32,6 +32,9 @@ class StoreRequest extends FormRequest
             'epin_prefix' => 'required',
             'epin_length' => 'required|integer',
             'min_points_to_cashout' => 'required|integer',
+            'salary_dashboard_fee' => 'required|integer',
+            'points' => 'required',
+            'expiry_time' => 'required|integer',
         ];
     }
 }

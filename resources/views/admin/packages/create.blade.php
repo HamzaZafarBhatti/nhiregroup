@@ -97,25 +97,43 @@
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">E-Pin Length</label>
-                            <input type="number" class="form-control @error('epin_length') is-invalid @enderror" step="1"
-                                value="{{ old('epin_length') }}" name="epin_length" required />
+                            <input type="number" class="form-control @error('epin_length') is-invalid @enderror"
+                                step="1" value="{{ old('epin_length') }}" name="epin_length" required />
                             @error('epin_length')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">Minimum Points Required to Cashout</label>
-                            <input type="number" class="form-control @error('min_points_to_cashout') is-invalid @enderror" step=".01"
-                                value="{{ old('min_points_to_cashout') }}" name="min_points_to_cashout" required />
+                            <input type="number" class="form-control @error('min_points_to_cashout') is-invalid @enderror"
+                                step=".01" value="{{ old('min_points_to_cashout') }}" name="min_points_to_cashout"
+                                required />
                             @error('min_points_to_cashout')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="col-md-6">
+                            <label class="form-label">Point on Referral</label>
+                            <input type="number" step=".1" class="form-control @error('points') is-invalid @enderror"
+                                value="{{ old('points') }}" name="points" required />
+                            @error('points')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="col-md-6">
                             <label class="form-label">Salary Dashboard Access Fee</label>
-                            <input type="number" class="form-control @error('salary_dashboard_fee') is-invalid @enderror"
+                            <input type="number"
+                                class="form-control @error('salary_dashboard_fee') is-invalid @enderror"
                                 value="{{ old('salary_dashboard_fee') }}" name="salary_dashboard_fee" required />
                             @error('salary_dashboard_fee')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Expire in (months)</label>
+                            <input type="number" class="form-control @error('expiry_time') is-invalid @enderror"
+                                value="{{ old('expiry_time') }}" name="expiry_time" required />
+                            @error('expiry_time')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>

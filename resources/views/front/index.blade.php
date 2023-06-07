@@ -24,7 +24,8 @@
                         <div class="pm-presentation-post-hover-container">
                             <!--<p class="pm-presentation-post-hover-title">protected posts</p>-->
                             <p class="pm-presentation-post-hover-excerpt">
-Become one of our employees in our ever-expanding platform. You'll be receiving your salary regularly, every month and time.
+                                Become one of our employees in our ever-expanding platform. You'll be receiving your salary
+                                regularly, every month and time.
                             </p>
                             <a href="https://nhiregroup.com/jobs">Jobs/ Open Positions »</a>
                         </div>
@@ -44,7 +45,8 @@ Become one of our employees in our ever-expanding platform. You'll be receiving 
                         </div>
                         <div class="pm-presentation-post-hover-container" style="left: 290px;">
                             <!--<p class="pm-presentation-post-hover-title">protected posts</p>-->
-                            <p class="pm-presentation-post-hover-excerpt">We're geared up to carve out a place of WORK for you, amidst our different ways of earning. Get HIRED with us Today!
+                            <p class="pm-presentation-post-hover-excerpt">We're geared up to carve out a place of WORK for
+                                you, amidst our different ways of earning. Get HIRED with us Today!
                             </p>
                             <a href="https://nhiregroup.com/aboutus">Learn More »</a>
                         </div>
@@ -65,7 +67,8 @@ Become one of our employees in our ever-expanding platform. You'll be receiving 
                         </div>
                         <div class="pm-presentation-post-hover-container">
                             <!--<p class="pm-presentation-post-hover-title">protected posts</p>-->
-                            <p class="pm-presentation-post-hover-excerpt">We welcome all your general inquiries and would ensure your support issues are quickly with us at NHIRE!
+                            <p class="pm-presentation-post-hover-excerpt">We welcome all your general inquiries and would
+                                ensure your support issues are quickly with us at NHIRE!
                             </p>
                             <a href="https://nhiregroup.com/contactus">Contact Us »</a>
                         </div>
@@ -91,7 +94,9 @@ Become one of our employees in our ever-expanding platform. You'll be receiving 
 
                         <div class="pm-presentation-post-hover-container">
                             <!--<p class="pm-presentation-post-hover-title">protected posts</p>-->
-                            <p class="pm-presentation-post-hover-excerpt">We are geared up to carve out a place of WORK for you, to enable you to leverage opportunities presented by top-tier companies globally with us. Get HIRED Today!
+                            <p class="pm-presentation-post-hover-excerpt">We are geared up to carve out a place of WORK for
+                                you, to enable you to leverage opportunities presented by top-tier companies globally with
+                                us. Get HIRED Today!
                             </p>
                             <a href="https://nhiregroup.com/user/register">GET HIRED! »</a>
                         </div>
@@ -223,7 +228,8 @@ Become one of our employees in our ever-expanding platform. You'll be receiving 
                 <div class="col-sm-3"></div>
             </div>
             <div>
-                <a href="https://nhiregroup.com/user/register" class="btn btn-danger btn-lg btn-block btn-hire" type="button">
+                <a href="https://nhiregroup.com/user/register" class="btn btn-danger btn-lg btn-block btn-hire"
+                    type="button">
                     CLICK HERE TO GET HIRED!
                 </a>
             </div>
@@ -242,8 +248,8 @@ Become one of our employees in our ever-expanding platform. You'll be receiving 
                                 <div class="pm-parnters-post-url">
                                     <a href="http://nhiregroup.com/#">Olist</a>
                                 </div>
-                                <img src="https://nhiregroup.com/assets/front/images/clients/olist233.jpeg" class="img-responsive"
-                                    alt="Accenture">
+                                <img src="https://nhiregroup.com/assets/front/images/clients/olist233.jpeg"
+                                    class="img-responsive" alt="Accenture">
                             </div>
                         </li>
                         <li>
@@ -251,8 +257,8 @@ Become one of our employees in our ever-expanding platform. You'll be receiving 
                                 <div class="pm-parnters-post-url">
                                     <a href="http://nhiregroup.com/#">Aliexpress</a>
                                 </div>
-                                <img src="https://nhiregroup.com/assets/front/images/clients/aliexpress.jpeg" class="img-responsive"
-                                    alt="action">
+                                <img src="https://nhiregroup.com/assets/front/images/clients/aliexpress.jpeg"
+                                    class="img-responsive" alt="action">
                             </div>
                         </li>
                         <li>
@@ -261,8 +267,8 @@ Become one of our employees in our ever-expanding platform. You'll be receiving 
                                     <a href="http://nhiregroup.com/#">Jarir</a>
                                 </div>
 
-                                <img src="https://nhiregroup.com/assets/front/images/clients/jarir.jpeg" class="img-responsive"
-                                    alt="Apigee">
+                                <img src="https://nhiregroup.com/assets/front/images/clients/jarir.jpeg"
+                                    class="img-responsive" alt="Apigee">
                             </div>
                         </li>
                         <li>
@@ -271,8 +277,8 @@ Become one of our employees in our ever-expanding platform. You'll be receiving 
                                     <a href="http://nhiregroup.com/#">Amazon</a>
                                 </div>
 
-                                <img src="https://nhiregroup.com/assets/front/images/clients/amazon.jpeg" class="img-responsive"
-                                    alt="tdbank">
+                                <img src="https://nhiregroup.com/assets/front/images/clients/amazon.jpeg"
+                                    class="img-responsive" alt="tdbank">
                             </div>
                         </li>
                         <li>
@@ -280,8 +286,8 @@ Become one of our employees in our ever-expanding platform. You'll be receiving 
                                 <div class="pm-parnters-post-url">
                                     <a href="http://nhiregroup.com/#">Alibaba</a>
                                 </div>
-                                <img src="https://nhiregroup.com/assets/front/images/clients/alibaba.jpeg" class="img-responsive"
-                                    alt="deloitte">
+                                <img src="https://nhiregroup.com/assets/front/images/clients/alibaba.jpeg"
+                                    class="img-responsive" alt="deloitte">
                             </div>
                         </li>
                         <li>
@@ -289,8 +295,8 @@ Become one of our employees in our ever-expanding platform. You'll be receiving 
                                 <div class="pm-parnters-post-url">
                                     <a href="http://nhiregroup.com/#">Jumia</a>
                                 </div>
-                                <img src="https://nhiregroup.com/assets/front/images/clients/jumia.jpeg" class="img-responsive"
-                                    alt="fedex">
+                                <img src="https://nhiregroup.com/assets/front/images/clients/jumia.jpeg"
+                                    class="img-responsive" alt="fedex">
                             </div>
                         </li>
                     </ul>

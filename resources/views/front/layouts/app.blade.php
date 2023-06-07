@@ -25,6 +25,14 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/front/new/css/animate.css') }}" />
     <link href="{{ asset('assets/front/new/css/forms.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/front/new/css/css') }}" rel="stylesheet" type="text/css" />
+    <style>
+        .text-uppercase {
+            text-transform: uppercase;
+        }
+        .text-underline {
+            text-decoration: underline;
+        }
+    </style>
     @yield('styles')
 </head>
 

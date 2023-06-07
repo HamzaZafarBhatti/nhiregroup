@@ -114,16 +114,33 @@
                             @enderror
                         </div>
                         <div class="col-md-6">
+                            <label class="form-label">Point on Referral</label>
+                            <input type="number" step=".1" class="form-control @error('points') is-invalid @enderror"
+                                value="{{ $package->points }}" name="points" required />
+                            @error('points')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="col-md-6">
                             <label class="form-label">Salary Dashboard Access Fee</label>
-                            <input type="number" class="form-control @error('salary_dashboard_fee') is-invalid @enderror"
+                            <input type="number"
+                                class="form-control @error('salary_dashboard_fee') is-invalid @enderror"
                                 value="{{ $package->salary_dashboard_fee }}" name="salary_dashboard_fee" required />
                             @error('salary_dashboard_fee')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Expire in (months)</label>
+                            <input type="number" class="form-control @error('expiry_time') is-invalid @enderror"
+                                value="{{ $package->expiry_time }}" name="expiry_time" required />
+                            @error('expiry_time')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
                         <div class="col-12">
                             <button class="btn btn-primary" type="submit">
-                                Edit Package
+                                Update Package
                             </button>
                         </div>
                     </form>

@@ -39,6 +39,7 @@ Route::name('front.')->controller(FrontendController::class)->group(function () 
     Route::get('/workshopservices', 'workshopservices')->name('workshopservices');
     Route::get('/training', 'training')->name('training');
     Route::get('/jobpermit', 'jobpermit')->name('jobpermit');
+    Route::post('/jobpermit', 'jobpermit_validate');
     Route::get('/jobs', 'jobs')->name('jobs');
     Route::get('/howitworks', 'howitworks')->name('howitworks');
     Route::get('/agents', 'agents')->name('agents');

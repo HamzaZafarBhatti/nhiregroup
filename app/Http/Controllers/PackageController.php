@@ -38,7 +38,7 @@ class PackageController extends Controller
     {
         //
         try {
-            Package::create($request->except('_token'));
+            Package::create($request->validated());
             return redirect()->route('admin.packages.index')->with('success', 'Package added successfully!');
         } catch (\Throwable $th) {
             Log::error('Package Store Error: ' . $th->getMessage());
@@ -70,7 +70,7 @@ class PackageController extends Controller
     {
         //
         try {
-            $package->update($request->except('_token', '_method'));
+            $package->update($request->validated());
             return redirect()->route('admin.packages.index')->with('success', 'Package updated successfully!');
         } catch (\Throwable $th) {
             Log::error('Package Update Error: ' . $th->getMessage());
