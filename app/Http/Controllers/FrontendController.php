@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Blog;
 use App\Models\Epin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -52,7 +53,14 @@ class FrontendController extends Controller
 
     public function workshopservices()
     {
-        return view('front.workshopservices');
+        $blogs = Blog::active()->latest()->get();
+        return view('front.workshopservices', compact('blogs'));
+    }
+
+    public function workshopservice($slug)
+    {
+        $blog = Blog::where('slug', $slug)->first();
+        return view('front.workshopservice', compact('blog'));
     }
 
     public function howitworks()

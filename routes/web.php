@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\EmployerController;
 use App\Http\Controllers\EpinController;
 use App\Http\Controllers\FrontendController;
@@ -37,6 +38,7 @@ Route::name('front.')->controller(FrontendController::class)->group(function () 
     Route::get('/aboutus', 'aboutus')->name('aboutus');
     Route::get('/services', 'services')->name('services');
     Route::get('/workshopservices', 'workshopservices')->name('workshopservices');
+    Route::get('/workshopservice/{slug}', 'workshopservice')->name('workshopservice');
     Route::get('/training', 'training')->name('training');
     Route::get('/jobpermit', 'jobpermit')->name('jobpermit');
     Route::post('/jobpermit', 'jobpermit_validate');
@@ -79,7 +81,7 @@ Route::middleware(['auth', /* 'verified', */ 'user'])->name('user.')->prefix('us
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::middleware(['auth', /* 'verified', */ 'admin'])->name('admin.')->prefix('admin')->group(function () {
+Route::middleware(['auth', 'admin'])->name('admin.')->prefix('admin')->group(function () {
     Route::get('/', [AdminController::class, 'dashboard'])->name('dashboard');
     Route::get('/dashboard', [AdminController::class, 'dashboard']);
     Route::controller(SettingController::class)->prefix('settings')->name('settings.')->group(function () {
@@ -108,6 +110,7 @@ Route::middleware(['auth', /* 'verified', */ 'admin'])->name('admin.')->prefix('
         Route::post('/accept', 'accept')->name('accept');
         Route::post('/reject', 'reject')->name('reject');
     });
+    Route::resource('blogs', BlogController::class);
     Route::resource('packages', PackageController::class);
     Route::resource('subadmins', SubAdminController::class);
     Route::resource('timeslots', TimeslotController::class);
