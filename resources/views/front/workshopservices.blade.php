@@ -29,6 +29,11 @@
             font-weight: bold;
             text-align: center;
         }
+
+        body.swal2-shown>[aria-hidden="true"] {
+            transition: 0.1s filter;
+            filter: blur(10px);
+        }
     </style>
 @endsection
 
@@ -42,29 +47,64 @@
                         <h6>WORKSHOP SERVICES</h6>
                     </div>
                 </div>
-                <div class="row">
-                    @foreach ($blogs as $item)
-                        <div class="col-12 col-sm-6 col-md-4">
-                            <div class="panel">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title">{{ $item->title }}</h3>
-                                </div>
-                                <div class="panel-body">
-                                    <div class="img-container">
-                                        <img src="{{ $item->get_image }}" alt="{{ $item->title }}">
-                                    </div>
-                                    <div class="blog-details">
-                                        <p>{!! Str::limit(strip_tags($item->description), 100) !!}</p>
-                                    </div>
-                                    <a href="{{ route('front.workshopservice', $item->slug) }}" class="text-primary"
-                                        target="_blank">Read More >></a>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
+                <div class="row read-more">
+                    @include('front.components.workshopservices_readmore_partial')
                 </div>
             </div>
 
         </div>
     </div>
+@endsection
+
+@section('scripts')
+    @guest
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+            $(document).ready(function() {
+                Swal.fire({
+                    title: 'You are not logged in!',
+                    text: 'Do you want to read about the services?',
+                    allowOutsideClick: false,
+                    input: 'text',
+                    inputLabel: 'Please enter your JOB PERMIT CODE',
+                    inputValidator: (value) => {
+                        if (!value) {
+                            return 'JOB PERMIT CODE is required!'
+                        }
+                    },
+                    confirmButtonText: 'Confirm',
+                    showLoaderOnConfirm: true,
+                    preConfirm: (value) => {
+                        return new Promise(function(resolve, reject) {
+                            $.ajax({
+                                url: "{{ route('front.validate_code') }}",
+                                method: 'get',
+                                data: {
+                                    code: value
+                                },
+                                success: function(res) {
+                                    Swal.hideLoading()
+                                    $('.error').remove();
+                                    console.log(res.success)
+                                    $('.read-more').html(res.html_text)
+                                    if (res.success) {
+                                        resolve();
+                                    } else {
+                                        let popup = Swal.getHtmlContainer()
+                                        console.log(popup)
+                                        $(popup).append(
+                                            '<p class="text-danger text-center error">The JOB PERMIT CODE does not match!</p>'
+                                        );
+                                        reject('Invalid code')
+                                    }
+                                }
+                            })
+                        }).catch(err => {
+                            return false
+                        })
+                    }
+                })
+            })
+        </script>
+    @endguest
 @endsection

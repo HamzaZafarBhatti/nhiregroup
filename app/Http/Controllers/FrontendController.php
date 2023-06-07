@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Blog;
 use App\Models\Epin;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 
 class FrontendController extends Controller
@@ -53,7 +55,9 @@ class FrontendController extends Controller
 
     public function workshopservices()
     {
+        session()->forget('job_permit');
         $blogs = Blog::active()->latest()->get();
+
         return view('front.workshopservices', compact('blogs'));
     }
 
@@ -61,6 +65,24 @@ class FrontendController extends Controller
     {
         $blog = Blog::where('slug', $slug)->first();
         return view('front.workshopservice', compact('blog'));
+    }
+
+    public function validate_code(Request $request)
+    {
+        session()->forget('job_permit');
+        $res = Epin::where('serial', $request->code)->first();
+        if (!empty($res->used_by)) {
+            $blogs = Blog::active()->latest()->get();
+            session(['job_permit' => true]);
+            return response([
+                'success' => true,
+                'html_text' => view('front.components.workshopservices_readmore_partial', compact('blogs'))->render()
+            ]);
+        }
+        session(['job_permit' => false]);
+        return response([
+            'success' => false
+        ]);
     }
 
     public function howitworks()

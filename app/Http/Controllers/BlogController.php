@@ -99,5 +99,10 @@ class BlogController extends Controller
     public function destroy(Blog $blog)
     {
         //
+        if (!empty($blog->image) && file_exists($blog->getImagePath() . $blog->image)) {
+            unlink($blog->getImagePath() . $blog->image);
+        }
+        $blog->delete();
+        return to_route('admin.blogs.index')->with('success', 'Blog is deleted!');
     }
 }

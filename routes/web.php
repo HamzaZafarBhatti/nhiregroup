@@ -39,6 +39,7 @@ Route::name('front.')->controller(FrontendController::class)->group(function () 
     Route::get('/services', 'services')->name('services');
     Route::get('/workshopservices', 'workshopservices')->name('workshopservices');
     Route::get('/workshopservice/{slug}', 'workshopservice')->name('workshopservice');
+    Route::get('/validate_code', 'validate_code')->name('validate_code');
     Route::get('/training', 'training')->name('training');
     Route::get('/jobpermit', 'jobpermit')->name('jobpermit');
     Route::post('/jobpermit', 'jobpermit_validate');

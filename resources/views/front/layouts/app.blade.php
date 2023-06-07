@@ -29,6 +29,7 @@
         .text-uppercase {
             text-transform: uppercase;
         }
+
         .text-underline {
             text-decoration: underline;
         }
@@ -71,6 +72,7 @@
 
     <p id="back-top" class="visible-lg visible-md visible-sm" style="bottom: -70px;"> </p>
 
+    @yield('scripts')
 </body>
 
 </html>

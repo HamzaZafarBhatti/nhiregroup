@@ -89,6 +89,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->belongsTo(Package::class);
     }
 
+    public function epin()
+    {
+        return $this->belongsTo(Epin::class);
+    }
+
     public function direct_refferals()
     {
         return $this->hasMany(DirectReferralLog::class, 'upline_id');

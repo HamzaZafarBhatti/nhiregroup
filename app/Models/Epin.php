@@ -27,4 +27,9 @@ class Epin extends Model
             'name' => 'N/A'
         ]);
     }
+
+    public function used_by()
+    {
+        return $this->hasOne(User::class);
+    }
 }
