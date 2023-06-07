@@ -64,7 +64,7 @@
                         <a href="{{ route('front.services') }}">Services</a>
                     </li>
                     <li>
-                        <a href="{{ route('front.faq') }}">Technologies</a>
+                        <a href="{{ route('front.microsoftmsb') }}">Technologies</a>
                     </li>
                     <li>
                         <a href="{{ route('front.clientspage') }}">Clients</a>
@@ -76,6 +76,15 @@
                         <a href="{{ route('front.contactus') }}">contact us</a>
                     </li>
                 </ul>
+                <select id="tinynav1" class="tinynav tinynav1">
+                    <option value="GO">MENU</option>
+                    <option value="aboutus.html">About Us</option>
+                    <option value="services.html">Services</option>
+                    <option value="microsoftmsb.html">Technologies</option>
+                    <option value="clientspage.html">Clients</option>
+                    <option value="testimonials.html">Testimonials</option>
+                    <option value="contactus.html">contact us</option>
+                </select>
             </div>
         </div>
     </div>

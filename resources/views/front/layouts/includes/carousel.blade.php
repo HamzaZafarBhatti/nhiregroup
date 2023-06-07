@@ -17,9 +17,7 @@
                                 <div class="pm-testimonial-text-box">
                                     <h3 class="pm-services-panel-title">Vision</h3>
                                     <p>
-                                        "To be the customer's first choice by providing
-                                        comprehensive services based on excellence and
-                                        continuous improvement."
+                                        "NHIRE's vision is to become the leading agency in Nigeria that connects wholesale brands and top-tier e-commerce platforms. We aim to provide solutions that make e-commerce accessible to all, helping businesses of all sizes to succeed in the digital age."
                                     </p>
                                 </div>
                             </div>
@@ -39,9 +37,7 @@
                                 <div class="pm-testimonial-text-box">
                                     <h3 class="pm-services-panel-title">Mission</h3>
                                     <p>
-                                        "To provide quality solutions that meets the
-                                        committed inherent needs of both clients and our
-                                        candidates with proven results."
+                                        "NHIRE's mission is to provide a seamless and efficient platform that connects wholesale brands and top-tier e-commerce platforms. We aim to enhance patronage by streamlining processes, accelerating ads and offering personnel training and recruitment services."
                                     </p>
                                 </div>
                             </div>

@@ -5,7 +5,7 @@
         <div class="container">
             <div class="row">
                 <div class="pm-footer-social-info-container">
-                    <h6>HADOOP</h6>
+                    <h6>TERMS OF SERVICE</h6>
                 </div>
                 <div class="col-md-12 aboutus">
                     <h3>Pre-Requisites</h3>

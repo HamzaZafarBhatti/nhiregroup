@@ -7,7 +7,7 @@
                 <div class="col-md-12 aboutus">
                     <div class="pm-footer-social-info-container">
 
-                        <h6>T &amp; D (Training &amp; Development) Services</h6>
+                        <h6>AUTHENTICATE JOB PERMIT</h6>
                     </div>
                     <p>Our Trainers are our most important asset and we invest considerable resources to provide ongoing
                         training that builds and extends professional, technical and management skills in all areas. We do,

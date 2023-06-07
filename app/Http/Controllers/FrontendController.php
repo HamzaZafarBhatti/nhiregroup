@@ -28,9 +28,9 @@ class FrontendController extends Controller
         return view('front.training');
     }
 
-    public function ojt()
+    public function jobs()
     {
-        return view('front.ojt');
+        return view('front.jobs');
     }
 
     public function softskills()
@@ -43,34 +43,59 @@ class FrontendController extends Controller
         return view('front.person');
     }
 
-    public function staffing_services()
+    public function staffandservices()
     {
-        return view('front.staffing_services');
+        return view('front.staffandservices');
     }
 
-    public function tdservices()
+    public function workshopservices()
     {
-        return view('front.tdservices');
+        return view('front.workshopservices');
     }
 
-    public function rpo_services()
+  public function howitworks()
     {
-        return view('front.rpo_services');
+        return view('front.howitworks');
     }
 
-    public function microsoftmsb()
+    public function whatweoffer()
     {
-        return view('front.microsoftmsb');
+        return view('front.whatweoffer');
     }
 
-    public function sapsoft()
+ public function jobpermit()
     {
-        return view('front.sapsoft');
+        return view('front.jobpermit');
     }
 
-    public function technologies()
+    public function faq()
     {
-        return view('front.technologies');
+        return view('front.faq');
+    }
+
+   public function agents()
+    {
+        return view('front.agents');
+    }
+
+    public function topearners()
+    {
+        return view('front.topearners');
+    }
+
+    public function privacy()
+    {
+        return view('front.privacy');
+    }
+
+    public function terms()
+    {
+        return view('front.terms');
+    }
+
+    public function disclaimer()
+    {
+        return view('front.disclaimer');
     }
 
     public function clientspage()
