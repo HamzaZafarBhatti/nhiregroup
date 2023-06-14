@@ -28,6 +28,7 @@ class SettingController extends Controller
         try {
             $data = $request->except('_token', 'site_keywords');
             $data['site_keywords'] = implode(', ', Arr::pluck(json_decode($request->site_keywords), 'value'));
+            cache()->forget('settings');
             $setting->update($data);
             return redirect()->route('admin.settings.edit')->with('success', 'Settings updated successfully!');
         } catch (\Throwable $th) {
@@ -59,6 +60,7 @@ class SettingController extends Controller
                     unlink($setting->getFaviconPath() . $setting->site_favicon);
                 }
             }
+            cache()->forget('settings');
             $setting->update($data);
             return redirect()->route('admin.settings.edit')->with('success', 'Logo updated successfully!');
         } catch (\Throwable $th) {

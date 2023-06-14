@@ -76,6 +76,8 @@ Route::middleware(['auth', /* 'verified', */ 'user'])->name('user.')->prefix('us
         Route::get('/referrals/indirect', 'referrals_indirect')->name('referrals.indirect');
         Route::post('/validate-salary-profile', 'validate_salary_profile')->name('validate_salary_profile');
         Route::post('/salary-withdraw-request', 'salary_withdraw_request')->name('withdraw.request');
+        Route::get('/employers', 'employer_list')->name('employers.index');
+        Route::get('/get-employers', 'get_employer_list')->name('employers.list');
     });
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -115,6 +117,7 @@ Route::middleware(['auth', 'admin'])->name('admin.')->prefix('admin')->group(fun
     Route::resource('packages', PackageController::class);
     Route::resource('subadmins', SubAdminController::class);
     Route::resource('timeslots', TimeslotController::class);
+    Route::resource('employers', EmployerController::class)->except('show');
     Route::resource('epins', EpinController::class)->except('create', 'edit', 'show', 'update');
 });
 

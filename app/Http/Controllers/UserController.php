@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Salaryprofile\StoreRequest;
+use App\Models\Employer;
+use App\Models\Package;
 use App\Models\SalaryprofileRequest;
 use App\Models\SalaryWithdrawal;
 use App\Models\User;
@@ -21,7 +23,7 @@ class UserController extends Controller
     public function salary_dashboard()
     {
         $subadmins = User::select('id', DB::raw("CONCAT(name,' - ',phone) AS name"))->where('role', 'Sub-Admin')->pluck('name', 'id');
-        
+
         return view('user.salary_dashboard', compact('subadmins'));
     }
 
@@ -91,5 +93,37 @@ class UserController extends Controller
     {
         $referrals = auth()->user()->indirect_refferals;
         return view('user.referrals.indirect', compact('referrals'));
+    }
+
+    public function employer_list()
+    {
+        $packages = Package::active()->pluck('name', 'id');
+        return view('user.employers.index', compact('packages'));
+    }
+
+    public function get_employer_list(Request $request)
+    {
+        $employers = Employer::active();
+        if (auth()->user()->package_id === 2) {
+            $employers = $employers->where('package_id', $request->package_id);
+        }
+        if (auth()->user()->package_id === 1) {
+            $employers = $employers->where('package_id', auth()->user()->package_id)->limit(3);
+        }
+        $employers = $employers->latest('id')->get();
+        $list = array();
+        foreach ($employers as $item) {
+            $list[] = [
+                'logo' => '<img src="' . $item->get_image . '" alt="' . $item->name . '" class="avatar xl rounded-5">',
+                'name' => '<h5 class="text-uppercase d-flex flex-column gap-2">' . $item->name . '<small>Job Payout: ' . $item->get_earning_amount . '</small></h5>',
+                'action' => '<a href="#" class="btn btn-success" type="button">Start Job</a>',
+            ];
+        }
+        return response([
+            'data' => $list,
+        ]);
+        // return response([
+        //     'html_text' => view('user.employers.partial_table', compact('employers'))->render(),
+        // ]);
     }
 }

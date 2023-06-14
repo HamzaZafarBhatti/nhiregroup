@@ -57,6 +57,21 @@
                         </ul>
                     </li>
                     <li class="collapsed">
+                        <a class="m-link @if (Route::is('admin.employers.*')) active @endif" data-bs-toggle="collapse"
+                            data-bs-target="#employers" href="#">
+                            @include('layouts.includes.sidebar_icon_home')
+                            <span class="ms-2">Employers</span>
+                            <span class="arrow fa fa-angle-right ms-auto text-end"></span>
+                        </a>
+                        <!-- Menu: Sub menu ul -->
+                        <ul class="sub-menu collapse @if (Route::is('admin.employers.*')) show @endif" id="employers">
+                            <li><a class="ms-link @if (Route::is('admin.employers.index')) active @endif"
+                                    href="{{ route('admin.employers.index') }}">List Employers</a></li>
+                            <li><a class="ms-link @if (Route::is('admin.employers.create')) active @endif"
+                                    href="{{ route('admin.employers.create') }}">Add Employer</a></li>
+                        </ul>
+                    </li>
+                    <li class="collapsed">
                         <a class="m-link @if (Route::is('admin.blogs.*')) active @endif" data-bs-toggle="collapse"
                             data-bs-target="#blogs" href="#">
                             @include('layouts.includes.sidebar_icon_home')
@@ -175,6 +190,13 @@
                             <li><a class="ms-link @if (Route::is('user.referrals.indirect')) active @endif"
                                     href="{{ route('user.referrals.indirect') }}">Indirect Referrals</a></li>
                         </ul>
+                    </li>
+                    <li>
+                        <a class="m-link @if (Route::is('user.employers.index')) active @endif"
+                            href="{{ route('user.employers.index') }}">
+                            @include('layouts.includes.sidebar_icon_home')
+                            <span class="ms-2">Office</span>
+                        </a>
                     </li>
                 @endif
             </ul>

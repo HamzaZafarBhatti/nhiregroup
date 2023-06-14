@@ -25,9 +25,12 @@ class AppServiceProvider extends ServiceProvider
         //
         Schema::defaultStringLength(191);
         View::composer('*', function ($view) {
-            $settings = Setting::first();
             $user = auth()->user();
-            $view->with('settings', $settings);
+            if (!cache()->has('settings')) {
+                $settings = Setting::first();
+                cache()->put('settings', $settings);
+            }
+            $view->with('settings', cache()->get('settings'));
             $view->with('user', $user);
             // if (Auth::check()) {
             //     $user = User::with('settings')->find(Auth::user()->id);
