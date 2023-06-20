@@ -72,6 +72,28 @@
 
     <p id="back-top" class="visible-lg visible-md visible-sm" style="bottom: -70px;"> </p>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        @if (session()->has('success'))
+            Swal.fire({
+                icon: 'success',
+                title: "{{ session('success') }}"
+            })
+        @endif
+        @if (session()->has('error'))
+            Swal.fire({
+                icon: 'danger',
+                title: "{{ session('error') }}"
+            })
+        @endif
+        @if (session()->has('warning'))
+            Swal.fire({
+                icon: 'warning',
+                title: "{{ session('warning') }}"
+            })
+        @endif
+    </script>
+
     @yield('scripts')
 </body>
 

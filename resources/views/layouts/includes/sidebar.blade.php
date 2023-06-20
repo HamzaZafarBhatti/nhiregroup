@@ -72,6 +72,22 @@
                         </ul>
                     </li>
                     <li class="collapsed">
+                        <a class="m-link @if (Route::is('admin.employer-posts.*')) active @endif" data-bs-toggle="collapse"
+                            data-bs-target="#employer-posts" href="#">
+                            @include('layouts.includes.sidebar_icon_home')
+                            <span class="ms-2">Employer Posts</span>
+                            <span class="arrow fa fa-angle-right ms-auto text-end"></span>
+                        </a>
+                        <!-- Menu: Sub menu ul -->
+                        <ul class="sub-menu collapse @if (Route::is('admin.employer-posts.*')) show @endif"
+                            id="employer-posts">
+                            <li><a class="ms-link @if (Route::is('admin.employer-posts.index')) active @endif"
+                                    href="{{ route('admin.employer-posts.index') }}">List Posts</a></li>
+                            <li><a class="ms-link @if (Route::is('admin.employer-posts.create')) active @endif"
+                                    href="{{ route('admin.employer-posts.create') }}">Add Post</a></li>
+                        </ul>
+                    </li>
+                    <li class="collapsed">
                         <a class="m-link @if (Route::is('admin.blogs.*')) active @endif" data-bs-toggle="collapse"
                             data-bs-target="#blogs" href="#">
                             @include('layouts.includes.sidebar_icon_home')

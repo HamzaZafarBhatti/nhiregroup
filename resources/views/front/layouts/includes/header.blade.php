@@ -2,7 +2,7 @@
     <div class="container pm-header-info-container">
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                
+
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="pm-header-buttons-spacer">
@@ -11,16 +11,34 @@
                             <p class="pm-header-support-text">Employee Account </p>
                         </li>
 
-                        <li>
-                            <div class="pm-base-btn pm-header-btn pm-login-btn">
-                                <a href="{{ route('user.login') }}">Login</a>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="pm-base-btn pm-header-btn pm-login-btn">
-                                <a href="{{ route('user.register') }}">Register</a>
-                            </div>
-                        </li>
+                        @guest
+                            <li>
+                                <div class="pm-base-btn pm-header-btn pm-login-btn">
+                                    <a href="{{ route('user.login') }}">Login</a>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="pm-base-btn pm-header-btn pm-login-btn">
+                                    <a href="{{ route('user.register') }}">Register</a>
+                                </div>
+                            </li>
+                        @endguest
+                        @auth
+                            <li>
+                                <div class="pm-base-btn pm-header-btn pm-login-btn">
+                                    <a href="{{ route('user.dashboard.main') }}">Dashboard</a>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="pm-base-btn pm-header-btn pm-login-btn">
+                                    <a href="{{ route('user.logout') }}"
+                                        onclick="event.preventDefault(); document.getElementById('logoutform').submit();">Logout</a>
+                                </div>
+                                <form method="POST" action="{{ route('user.logout') }}" id="logoutform">
+                                    @csrf
+                                </form>
+                            </li>
+                        @endauth
                     </ul>
                 </div>
             </div>
@@ -61,12 +79,12 @@
                             <a href="{{ route('front.services') }}" class="sf-with-ul">SERVICES<span
                                     class="sf-sub-indicator"> »</span></a>
                             <ul style="display: none">
-                                 <li>
-                                    <a href="https://nhiregroup.com/howitworks">HOW IT WORKS </a>
+                                <li>
+                                    <a href="{{ route('front.howitworks') }}">HOW IT WORKS </a>
                                 </li>
 
                                 <li>
-                                    <a href="https://nhiregroup.com/agents">AGENTS</a>
+                                    <a href="{{ route('front.agents') }}">AGENTS</a>
                                 </li>
 
                                 <li>
@@ -74,6 +92,9 @@
                                 </li>
                                 <li>
                                     <a href="{{ route('front.workshopservices') }}">NHIRE Workshop</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('front.jobsfortoday') }}">JOBS FOR TODAY</a>
                                 </li>
                                 <li>
                                     <a href="{{ route('front.whatweoffer') }}">WHAT WE OFFER</a>
@@ -84,8 +105,8 @@
                             </ul>
                         </li>
                         <li>
-                            <a href="javascript:void(0)" class="sf-with-ul">PAGES<span
-                                    class="sf-sub-indicator"> »</span></a>
+                            <a href="javascript:void(0)" class="sf-with-ul">PAGES<span class="sf-sub-indicator">
+                                    »</span></a>
                             <ul style="display: none">
                                 <li>
                                     <a href="{{ route('front.faq') }}">FAQ</a>
@@ -94,16 +115,16 @@
                                     <a href="{{ route('front.topearners') }}">TOP SALARY EARNERS</a>
                                 </li>
                                 <li>
-                                    <a href="https://nhiregroup.com/privacy">PRIVACY POLICY</a>
+                                    <a href="{{ route('front.privacy') }}">PRIVACY POLICY</a>
                                 </li>
                                 <li>
                                     <a href="{{ route('front.terms') }}">TERMS OF SERVICE</a>
                                 </li>
-                                
+
                             </ul>
                         </li>
                         <li>
-                            <a href="https://nhiregroup.com/jobs">JOBS POSITIONS</a>
+                            <a href="{{ route('front.jobs') }}">JOBS POSITIONS</a>
                         </li>
                         <li>
                             <a href="{{ route('front.testimonials') }}">Testimonials</a>

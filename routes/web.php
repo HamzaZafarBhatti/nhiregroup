@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\EmployerController;
+use App\Http\Controllers\EmployerPostController;
 use App\Http\Controllers\EpinController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\PackageController;
@@ -35,31 +36,33 @@ Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'i
 
 Route::name('front.')->controller(FrontendController::class)->group(function () {
     Route::get('/', 'index')->name('index');
-    Route::get('/aboutus', 'aboutus')->name('aboutus');
+    Route::get('/about-us', 'aboutus')->name('aboutus');
     Route::get('/services', 'services')->name('services');
-    Route::get('/workshopservices', 'workshopservices')->name('workshopservices');
-    Route::get('/workshopservice/{slug}', 'workshopservice')->name('workshopservice');
-    Route::get('/validate_code', 'validate_code')->name('validate_code');
+    Route::get('/workshop-services', 'workshopservices')->name('workshopservices');
+    Route::get('/workshop-services/{slug}', 'workshopservice')->name('workshopservice');
+    Route::get('/validate-code', 'validate_code')->name('validate_code');
     Route::get('/training', 'training')->name('training');
-    Route::get('/jobpermit', 'jobpermit')->name('jobpermit');
-    Route::post('/jobpermit', 'jobpermit_validate');
+    Route::get('/job-permit', 'jobpermit')->name('jobpermit');
+    Route::post('/job-permit', 'jobpermit_validate');
     Route::get('/jobs', 'jobs')->name('jobs');
-    Route::get('/howitworks', 'howitworks')->name('howitworks');
+    Route::get('/how-it-works', 'howitworks')->name('howitworks');
     Route::get('/agents', 'agents')->name('agents');
-    Route::get('/softskills', 'softskills')->name('softskills');
+    Route::get('/soft-skills', 'softskills')->name('softskills');
     Route::get('/person', 'person')->name('person');
-    Route::get('/staffandservices', 'staffandservices')->name('staffandservices');
-    Route::get('/whatweoffer', 'whatweoffer')->name('whatweoffer');
+    Route::get('/staff-and-services', 'staffandservices')->name('staffandservices');
+    Route::get('/what-we-offer', 'whatweoffer')->name('whatweoffer');
+    Route::get('/jobs-for-today', 'jobsfortoday')->name('jobsfortoday');
+    Route::get('/jobs-for-today/{slug}', 'jobfortoday')->name('jobfortoday');
     Route::get('/faq', 'faq')->name('faq');
-    Route::get('/topearners', 'topearners')->name('topearners');
+    Route::get('/top-earners', 'topearners')->name('topearners');
     Route::get('/privacy', 'privacy')->name('privacy');
     Route::get('/terms', 'terms')->name('terms');
     Route::get('/disclaimer', 'disclaimer')->name('disclaimer');
-    Route::get('/clientspage', 'clientspage')->name('clientspage');
+    Route::get('/clients-page', 'clientspage')->name('clientspage');
     Route::get('/testimonials', 'testimonials')->name('testimonials');
-    Route::get('/contactus', 'contactus')->name('contactus');
+    Route::get('/contact-us', 'contactus')->name('contactus');
     Route::get('/aggumentation', 'aggumentation')->name('aggumentation');
-    Route::get('/weoffer', 'weoffer')->name('weoffer');
+    Route::get('/we-offer', 'weoffer')->name('weoffer');
 });
 
 Route::controller(SettingController::class)->prefix('settings')->name('settings.')->group(function () {
@@ -78,6 +81,7 @@ Route::middleware(['auth', /* 'verified', */ 'user'])->name('user.')->prefix('us
         Route::post('/salary-withdraw-request', 'salary_withdraw_request')->name('withdraw.request');
         Route::get('/employers', 'employer_list')->name('employers.index');
         Route::get('/get-employers', 'get_employer_list')->name('employers.list');
+        Route::get('/workflow-income-page', 'workflow_income')->name('workflow_income');
     });
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -113,11 +117,12 @@ Route::middleware(['auth', 'admin'])->name('admin.')->prefix('admin')->group(fun
         Route::post('/accept', 'accept')->name('accept');
         Route::post('/reject', 'reject')->name('reject');
     });
-    Route::resource('blogs', BlogController::class);
-    Route::resource('packages', PackageController::class);
-    Route::resource('subadmins', SubAdminController::class);
-    Route::resource('timeslots', TimeslotController::class);
+    Route::resource('blogs', BlogController::class)->except('show');
+    Route::resource('packages', PackageController::class)->except('show');
+    Route::resource('subadmins', SubAdminController::class)->except('show');
+    Route::resource('timeslots', TimeslotController::class)->except('show');
     Route::resource('employers', EmployerController::class)->except('show');
+    Route::resource('employer-posts', EmployerPostController::class)->except('show');
     Route::resource('epins', EpinController::class)->except('create', 'edit', 'show', 'update');
 });
 

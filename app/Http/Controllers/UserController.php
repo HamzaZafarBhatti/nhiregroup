@@ -122,8 +122,11 @@ class UserController extends Controller
         return response([
             'data' => $list,
         ]);
-        // return response([
-        //     'html_text' => view('user.employers.partial_table', compact('employers'))->render(),
-        // ]);
+    }
+
+    public function workflow_income()
+    {
+        $incomes = Package::active()->pluck('name', 'id');
+        return view('user.employers.workflow_income', compact('packages'));
     }
 }

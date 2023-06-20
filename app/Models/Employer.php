@@ -36,6 +36,16 @@ class Employer extends Model
         return $this->belongsTo(Package::class);
     }
 
+    public function jobs()
+    {
+        return $this->hasMany(EmployerPost::class);
+    }
+
+    public function latest_job()
+    {
+        return $this->hasOne(EmployerPost::class)->latestOfMany();
+    }
+
     protected function getStatus(): Attribute
     {
         return Attribute::make(

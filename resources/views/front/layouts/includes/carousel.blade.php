@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <ul class="pm-testimonials-carousel" id="pm-testimonials-carousel-owl" style="opacity: 1; display: block">
+                {{-- <ul class="pm-testimonials-carousel" id="pm-testimonials-carousel-owl" style="opacity: 1; display: block">
                     <li>
                         <div class="col-lg-5 col-md-5 col-sm-5 pm-center">
                             <img src="{{ asset('assets/front/new/images/01_profile.png') }}" class="img-responsive"
@@ -43,7 +43,7 @@
                             </div>
                         </div>
                     </li>
-                </ul>
+                </ul> --}}
             </div>
         </div>
     </div>

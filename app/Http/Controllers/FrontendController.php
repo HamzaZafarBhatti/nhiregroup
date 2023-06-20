@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
+use App\Models\Employer;
+use App\Models\EmployerPost;
 use App\Models\Epin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -163,5 +165,35 @@ class FrontendController extends Controller
     public function weoffer()
     {
         return view('front.weoffer');
+    }
+
+    public function jobsfortoday()
+    {
+        $jobs = array();
+        if (auth()->user()) {
+            $employers = Employer::with('latest_job')->active();
+            // if (auth()->user()->package_id === 2) {
+            //     $employers = $employers->where('package_id', $request->package_id);
+            // }
+            if (auth()->user()->package_id === 1) {
+                $employers = $employers->where('package_id', auth()->user()->package_id)->limit(3);
+            }
+            $employers = $employers->latest('id')->get();
+            foreach ($employers as $item) {
+                if (!empty($item->latest_job)) {
+                    $jobs[] = $item;
+                }
+            }
+        }
+        return view('front.jobsfortoday', compact('jobs'));
+    }
+
+    public function jobfortoday($slug)
+    {
+        if (!Auth::check()) {
+            return back()->with('warning', 'You are not authenticated!');
+        }
+        $blog = EmployerPost::where('slug', $slug)->first();
+        return view('front.jobfortoday', compact('blog'));
     }
 }
