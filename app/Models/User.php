@@ -43,6 +43,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'clear_points_at',
         'salary_dashboard_access',
         'timeslot_id',
+        'nhire_wallet',
     ];
 
     /**

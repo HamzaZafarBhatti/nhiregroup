@@ -41,8 +41,33 @@
             </div>
 
             <div class="text-center">
-                <a href="#" type="button" class="btn btn-success">BOOST ADS AND EARN</a>
+                <button {{-- href="{{ route('user.earn_workflow_income', $blog->id) }}" --}} data-post_id="{{ $blog->id }}" type="button"
+                    class="btn btn-success earn_btn">BOOST ADS AND EARN</button>
             </div>
         </div>
     </div>
+@endsection
+
+@section('scripts')
+    <script>
+        $(document).ready(function() {
+            $('.earn_btn').click(function() {
+                const postId = $(this).data('post_id');
+                console.log(postId);
+                $.ajax({
+                    url: "{{ route('user.earn_workflow_income') }}",
+                    data: {
+                        post_id: postId,
+                    },
+                    success: function(response) {
+                        console.log(response);
+                        Swal.fire({
+                            icon: response.success,
+                            title: response.message
+                        })
+                    }
+                })
+            })
+        })
+    </script>
 @endsection

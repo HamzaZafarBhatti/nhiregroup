@@ -214,6 +214,13 @@
                             <span class="ms-2">Office</span>
                         </a>
                     </li>
+                    <li>
+                        <a class="m-link @if (Route::is('user.workflow_income')) active @endif"
+                            href="{{ route('user.workflow_income') }}">
+                            @include('layouts.includes.sidebar_icon_home')
+                            <span class="ms-2">Workflow Income Log</span>
+                        </a>
+                    </li>
                 @endif
             </ul>
         </div>
