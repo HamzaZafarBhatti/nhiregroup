@@ -8,6 +8,10 @@
         td {
             vertical-align: middle;
         }
+
+        .dataTables_wrapper {
+            overflow: auto;
+        }
     </style>
 @endsection
 
@@ -53,7 +57,7 @@
     <script>
         $(document).ready(function() {
             var datatable = $('.myDataTable').addClass('nowrap').DataTable({
-                responsive: true,
+                // responsive: true,
                 searching: true,
                 processing: true,
                 paging: true,
