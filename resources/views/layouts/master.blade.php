@@ -72,6 +72,7 @@
     <script src="{{ asset('assets/js/theme.js') }}"></script>
     <!-- Plugin Js -->
     <script src="{{ asset('assets/js/bundle/sweetalert2.bundle.js') }}"></script>
+    <script src="{{ asset('assets/js/bundle/owlcarousel.bundle.js') }}"></script>
     <script>
         $.ajaxSetup({
             headers: {

@@ -8,6 +8,10 @@
         td {
             vertical-align: middle;
         }
+
+        .dataTables_wrapper {
+            overflow: auto;
+        }
     </style>
 @endsection
 
@@ -29,6 +33,7 @@
                                 <th>Image</th>
                                 <th>Employer</th>
                                 <th>Earning</th>
+                                <th>Date/Time</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -43,10 +48,14 @@
                                     {{ $item->employer->name }}
                                 </td>
                                 <td>{{ $item->get_amount }}</td>
+                                <td>{{ $item->get_time }}</td>
                                 <td>
-                                    <a href="{{ route('user.transfer_workflow_income_to_nhire_wallet', $item->id) }}"
-                                        class="btn btn-success @if ($item->cashed_out) disabled @endif"
-                                        type="button">Transfer to NHIRE MAIN WALLET</a>
+                                    @if ($item->cashed_out)
+                                        Completed
+                                    @else
+                                        <a href="{{ route('user.transfer_workflow_income_to_nhire_wallet', $item->id) }}"
+                                            class="btn btn-success" type="button">Transfer to NHIRE MAIN WALLET</a>
+                                    @endif
                                 </td>
                             @endforeach
                         </tbody>
@@ -62,7 +71,7 @@
     <script>
         $(document).ready(function() {
             $('.myDataTable').addClass('nowrap').dataTable({
-                responsive: true,
+                // responsive: true,
                 searching: true,
                 paging: true,
                 ordering: true,

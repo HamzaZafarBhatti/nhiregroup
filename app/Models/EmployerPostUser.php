@@ -33,6 +33,13 @@ class EmployerPostUser extends Model
         return $this->belongsTo(EmployerPost::class, 'employer_post_id');
     }
 
+    protected function getTime(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($val, $attr) => date('h:i A - M d, Y', strtotime($this->created_at))
+        );
+    }
+
     protected function getAmount(): Attribute
     {
         return Attribute::make(
