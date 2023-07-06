@@ -35,6 +35,7 @@ class UpdateRequest extends FormRequest
             'salary_dashboard_fee' => 'required|integer',
             'points' => 'required',
             'expiry_time' => 'required|integer',
+            'payslip_tax' => 'required',
         ];
     }
 }

@@ -11,10 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
+        Schema::table('packages', function (Blueprint $table) {
             //
-            $table->float('nhire_wallet', 12, 2)->default(0);
-            $table->float('earning_wallet', 12, 2)->default(0);
+            $table->float('payslip_tax')->default(0);
         });
     }
 
@@ -23,10 +22,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('users', function (Blueprint $table) {
+        Schema::table('packages', function (Blueprint $table) {
             //
-            $table->dropColumn('nhire_wallet');
-            $table->dropColumn('earning_wallet');
+            $table->dropColumn('payslip_tax');
         });
     }
 };

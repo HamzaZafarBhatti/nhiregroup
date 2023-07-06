@@ -44,6 +44,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'salary_dashboard_access',
         'timeslot_id',
         'nhire_wallet',
+        'earning_wallet',
     ];
 
     /**
@@ -118,6 +119,44 @@ class User extends Authenticatable implements MustVerifyEmail
     public function latest_salary_withdrawal()
     {
         return $this->hasOne(SalaryWithdrawal::class)->latestOfMany();
+    }
+
+    public function works()
+    {
+        return $this->hasMany(EmployerPostUser::class);
+    }
+
+    public function cashed_out_works()
+    {
+        return $this->hasMany(EmployerPostUser::class)->where('cashed_out', 1);
+    }
+
+    protected function getDirectRefBonus(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($val, $attr) => '₦' . $this->ref_bonus
+        );
+    }
+
+    protected function getIndirectRefBonus(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($val, $attr) => '₦' . $this->indirect_ref_bonus
+        );
+    }
+
+    protected function getNhireWallet(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($val, $attr) => '₦' . $this->nhire_wallet
+        );
+    }
+
+    protected function getTotalIncome(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($val, $attr) => '₦' . ($this->nhire_wallet + $this->indirect_ref_bonus + $this->ref_bonus)
+        );
     }
 
     protected function getFullAddress(): Attribute

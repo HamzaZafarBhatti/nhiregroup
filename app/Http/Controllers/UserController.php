@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Enum\PayslipStatusEnum;
 use App\Http\Requests\Salaryprofile\StoreRequest;
 use App\Models\Employer;
 use App\Models\EmployerPost;
 use App\Models\EmployerPostUser;
 use App\Models\Package;
+use App\Models\Payslip;
 use App\Models\SalaryprofileRequest;
 use App\Models\SalaryWithdrawal;
 use App\Models\User;
@@ -15,6 +17,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\View\View;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -198,5 +201,54 @@ class UserController extends Controller
             Log::error('Transfer Error: ' . $th->getMessage());
             return back()->with('error', 'Something went wrong!');
         }
+    }
+
+    public function generate_pay_slip()
+    {
+        $user = auth()->user();
+        $data = [
+            'direct_referral_earnings' => $user->ref_bonus,
+            'indirect_referral_earnings' => $user->indirect_ref_bonus,
+            'payslip_tax' => $user->package->payslip_tax,
+        ];
+        $expected_earning = $data['direct_referral_earnings'] + $data['indirect_referral_earnings'];
+        if ($data['payslip_tax'] > 0) {
+            $expected_earning = $expected_earning - ($expected_earning * $data['payslip_tax'] / 100);
+        }
+        $data['expected_earning'] = $expected_earning;
+
+        return view('user.payslip.generate', $data);
+    }
+
+    public function transfer_referral_payout()
+    {
+        $older_payslip = Payslip::where('user_id', auth()->user()->id)->where('status', PayslipStatusEnum::PENDING)->first();
+        if (!empty($older_payslip)) {
+            return back()->with('warning', 'Your request for transfer of payout is waiting for approval!');
+        }
+        $user = auth()->user();
+        $data = [
+            'user_id' => $user->id,
+            'reference' => '#' . Str::random(30),
+            'direct_earning' => $user->ref_bonus,
+            'indirect_earning' => $user->indirect_ref_bonus,
+            'tax' => $user->package->payslip_tax,
+        ];
+        $expected_earning = $data['direct_earning'] + $data['indirect_earning'];
+        if ($data['tax'] > 0) {
+            $expected_earning = $expected_earning - ($expected_earning * $data['tax'] / 100);
+        }
+        $data['expected_earning'] = $expected_earning;
+
+        Payslip::create($data);
+
+        return back()->with('success', 'Your request for transfer of payout is created!');
+    }
+
+    public function payslips()
+    {
+        $payslips = Payslip::where('user_id', auth()->user()->id)->get();
+
+        return view('user.payslip.index', compact('payslips'));
     }
 }

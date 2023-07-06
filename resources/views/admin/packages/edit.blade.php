@@ -138,6 +138,15 @@
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Payslip Tax</label>
+                            <input type="number" step=".1"
+                                class="form-control @error('payslip_tax') is-invalid @enderror"
+                                value="{{ $package->payslip_tax }}" name="payslip_tax" required />
+                            @error('payslip_tax')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
                         <div class="col-12">
                             <button class="btn btn-primary" type="submit">
                                 Update Package

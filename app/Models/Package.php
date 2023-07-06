@@ -22,6 +22,7 @@ class Package extends Model
         'points',
         'salary_dashboard_fee',
         'expiry_time',
+        'payslip_tax',
     ];
 
     public function scopeActive($query)

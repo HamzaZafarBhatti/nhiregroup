@@ -6,17 +6,18 @@
     <div class="row g-3">
         <div class="col-md-6">
             <h3>NHIRE Dashboard</h3>
-            <h2>Welcome, {{ auth()->user()->name }}</h2>
+            <h2>Welcome, {{ $user->name }}</h2>
         </div>
         <div class="col-lg-6">
             <div class="card overflow-hidden">
                 <div class="card-body">
                     <div class="text-center text-lg-start text-uppercase">
                         <h5>Total Sum (Cumulatively)</h5>
-                        <h5>N 2131312</h5>
+                        <h5>{{ $user->get_total_income }}</h5>
                     </div>
                     <div class="mb-3">
-                        <a href="#" class="btn btn-primary w-100 btn-lg">Generate Payslip</a>
+                        <a href="{{ route('user.generate_pay_slip') }}" class="btn btn-primary w-100 btn-lg">Generate
+                            Payslip</a>
                     </div>
                     <div>
                         <div class="owl-carousel owl-theme" id="trending_bids">
@@ -24,17 +25,17 @@
                                 <div class="card-body">
                                     <div class="d-flex align-items-center justify-content-between text-uppercase">
                                         <h4 class="card-title">Coach 1</h4>
-                                        <h4 class="card-title">{{ auth()->user()->package->name }}
+                                        <h4 class="card-title">{{ $user->package->name }}
                                         </h4>
                                     </div>
                                     <div class="d-flex justify-content-between mb-3">
                                         <div class="text-start">
                                             <h5>Earnings (DIRECT)</h5>
-                                            <h5 class="mt-2 fw-bolder">N123123</h5>
+                                            <h5 class="mt-2 fw-bolder">{{ $user->get_direct_ref_bonus }}</h5>
                                         </div>
                                         <div class="text-end">
                                             <h5>No. of Referrals</h5>
-                                            <h5 class="mt-2 fw-bolder">62</h5>
+                                            <h5 class="mt-2 fw-bolder">{{ $user->direct_refferals->count() }}</h5>
                                         </div>
                                     </div>
                                     <h6 class="text-center">The more you work, the more you earn</h6>
@@ -44,17 +45,17 @@
                                 <div class="card-body">
                                     <div class="d-flex align-items-center justify-content-between">
                                         <h4 class="card-title">Coach 2</h4>
-                                        <h4 class="card-title">{{ auth()->user()->package->name }}
+                                        <h4 class="card-title">{{ $user->package->name }}
                                         </h4>
                                     </div>
                                     <div class="d-flex justify-content-between mb-3">
                                         <div class="text-start">
                                             <h5>Earnings (INDIRECT)</h5>
-                                            <h5 class="mt-2 fw-bolder">N123123</h5>
+                                            <h5 class="mt-2 fw-bolder">{{ $user->get_indirect_ref_bonus }}</h5>
                                         </div>
                                         <div class="text-end">
                                             <h5>No. of Referrals</h5>
-                                            <h5 class="mt-2 fw-bolder">62</h5>
+                                            <h5 class="mt-2 fw-bolder">{{ $user->indirect_refferals->count() }}</h5>
                                         </div>
                                     </div>
                                     <h6 class="text-center">The larger the team, the more you earn</h6>
@@ -64,17 +65,17 @@
                                 <div class="card-body">
                                     <div class="d-flex align-items-center justify-content-between">
                                         <h4 class="card-title">N-Worker</h4>
-                                        <h4 class="card-title">{{ auth()->user()->package->name }}
+                                        <h4 class="card-title">{{ $user->package->name }}
                                         </h4>
                                     </div>
                                     <div class="d-flex justify-content-between mb-3">
                                         <div class="text-start">
                                             <h5>Earnings</h5>
-                                            <h5 class="mt-2 fw-bolder">N123123</h5>
+                                            <h5 class="mt-2 fw-bolder">{{ $user->get_nhire_wallet }}</h5>
                                         </div>
                                         <div class="text-end">
                                             <h5>No. of Works</h5>
-                                            <h5 class="mt-2 fw-bolder">62</h5>
+                                            <h5 class="mt-2 fw-bolder">{{ $user->cashed_out_works->count() }}</h5>
                                         </div>
                                     </div>
                                     <h6 class="text-center">No earning limitations as an NHIRE worker</h6>
@@ -137,7 +138,7 @@
                         <path class="fill-muted" d="M9.998 5.083 10 5a2 2 0 1 0-3.132 1.65 5.982 5.982 0 0 1 3.13-1.567z" />
                     </svg>
                     <div class="mb-2 text-uppercase">Referral Bonus</div>
-                    <div><span class="h4">₦{{ $user->ref_bonus }}</span></div>
+                    <div><span class="h4">{{ $user->get_direct_ref_bonus }}</span></div>
                 </div>
             </div>
         </div>
@@ -164,7 +165,7 @@
                             d="M9.998 5.083 10 5a2 2 0 1 0-3.132 1.65 5.982 5.982 0 0 1 3.13-1.567z" />
                     </svg>
                     <div class="mb-2 text-uppercase">Indirect Referral Bonus</div>
-                    <div><span class="h4">₦{{ $user->indirect_ref_bonus }}</span></div>
+                    <div><span class="h4">{{ $user->get_indirect_ref_bonus }}</span></div>
                 </div>
             </div>
         </div>

@@ -174,6 +174,26 @@
                                     href="{{ route('admin.salary_withdrawal_requests.rejected') }}">Rejected</a></li>
                         </ul>
                     </li>
+                    <li class="collapsed">
+                        <a class="m-link @if (Route::is('admin.payslips_requests.*')) active @endif" data-bs-toggle="collapse"
+                            data-bs-target="#payslips_requests" href="#">
+                            @include('layouts.includes.sidebar_icon_home')
+                            <span class="ms-2">Payslip Requests</span>
+                            <span class="arrow fa fa-angle-right ms-auto text-end"></span>
+                        </a>
+                        <!-- Menu: Sub menu ul -->
+                        <ul class="sub-menu collapse @if (Route::is('admin.payslips_requests.*')) show @endif"
+                            id="payslips_requests">
+                            <li><a class="ms-link @if (Route::is('admin.payslips_requests.index')) active @endif"
+                                    href="{{ route('admin.payslips_requests.index') }}">All</a></li>
+                            <li><a class="ms-link @if (Route::is('admin.payslips_requests.pending')) active @endif"
+                                    href="{{ route('admin.payslips_requests.pending') }}">Pending</a></li>
+                            <li><a class="ms-link @if (Route::is('admin.payslips_requests.accepted')) active @endif"
+                                    href="{{ route('admin.payslips_requests.accepted') }}">Accepted</a></li>
+                            <li><a class="ms-link @if (Route::is('admin.payslips_requests.rejected')) active @endif"
+                                    href="{{ route('admin.payslips_requests.rejected') }}">Rejected</a></li>
+                        </ul>
+                    </li>
                 @endif
                 @if ($user->role === 'Admin')
                     <li>
@@ -219,6 +239,13 @@
                             href="{{ route('user.workflow_income') }}">
                             @include('layouts.includes.sidebar_icon_home')
                             <span class="ms-2">Workflow Income Log</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="m-link @if (Route::is('user.payslips')) active @endif"
+                            href="{{ route('user.payslips') }}">
+                            @include('layouts.includes.sidebar_icon_home')
+                            <span class="ms-2">Payslips</span>
                         </a>
                     </li>
                 @endif

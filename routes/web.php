@@ -7,6 +7,7 @@ use App\Http\Controllers\EmployerPostController;
 use App\Http\Controllers\EpinController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\PackageController;
+use App\Http\Controllers\PayslipController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SalaryprofileRequestController;
 use App\Http\Controllers\SalaryWithdrawalController;
@@ -84,6 +85,9 @@ Route::middleware(['auth', /* 'verified', */ 'user'])->name('user.')->prefix('us
         Route::get('/workflow-income-page', 'workflow_income')->name('workflow_income');
         Route::get('/earn-workflow-income', 'earn_workflow_income')->name('earn_workflow_income');
         Route::get('/workflow-income-to-nhire-wallet/{id}', 'transfer_workflow_income_to_nhire_wallet')->name('transfer_workflow_income_to_nhire_wallet');
+        Route::get('/generate-pay-slip', 'generate_pay_slip')->name('generate_pay_slip');
+        Route::get('/transfer-referral-payout', 'transfer_referral_payout')->name('transfer_referral_payout');
+        Route::get('/payslips', 'payslips')->name('payslips');
     });
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -112,6 +116,14 @@ Route::middleware(['auth', 'admin'])->name('admin.')->prefix('admin')->group(fun
         Route::post('/reject', 'reject')->name('reject');
     });
     Route::controller(SalaryWithdrawalController::class)->prefix('salary-withdrawal-requests')->name('salary_withdrawal_requests.')->group(function () {
+        Route::get('/index', 'index')->name('index');
+        Route::get('/pending', 'pending')->name('pending');
+        Route::get('/accepted', 'accepted')->name('accepted');
+        Route::get('/rejected', 'rejected')->name('rejected');
+        Route::post('/accept', 'accept')->name('accept');
+        Route::post('/reject', 'reject')->name('reject');
+    });
+    Route::controller(PayslipController::class)->prefix('payslips-requests')->name('payslips_requests.')->group(function () {
         Route::get('/index', 'index')->name('index');
         Route::get('/pending', 'pending')->name('pending');
         Route::get('/accepted', 'accepted')->name('accepted');
