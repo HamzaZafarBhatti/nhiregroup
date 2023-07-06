@@ -124,7 +124,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-3 col-md-6 col-sm-6">
+        {{-- <div class="col-lg-3 col-md-6 col-sm-6">
             <div class="card overflow-hidden">
                 <div class="card-body">
                     <svg class="position-absolute top-0 end-0 mt-4 me-3" xmlns="http://www.w3.org/2000/svg" width="26"
@@ -176,7 +176,7 @@
                     <div><span class="h4">{{ $user->indirect_refferals->count() }}</span> </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div> <!-- .row end -->
 @endsection
 
