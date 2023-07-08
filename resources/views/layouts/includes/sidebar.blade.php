@@ -174,7 +174,7 @@
                                     href="{{ route('admin.salary_withdrawal_requests.rejected') }}">Rejected</a></li>
                         </ul>
                     </li>
-                    <li class="collapsed">
+                    {{-- <li class="collapsed">
                         <a class="m-link @if (Route::is('admin.payslips_requests.*')) active @endif" data-bs-toggle="collapse"
                             data-bs-target="#payslips_requests" href="#">
                             @include('layouts.includes.sidebar_icon_home')
@@ -193,7 +193,7 @@
                             <li><a class="ms-link @if (Route::is('admin.payslips_requests.rejected')) active @endif"
                                     href="{{ route('admin.payslips_requests.rejected') }}">Rejected</a></li>
                         </ul>
-                    </li>
+                    </li> --}}
                 @endif
                 @if ($user->role === 'Admin')
                     <li>
@@ -201,6 +201,13 @@
                             href="{{ route('admin.epins.index') }}">
                             @include('layouts.includes.sidebar_icon_home')
                             <span class="ms-2">E-Pins</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="m-link @if (Route::is('admin.banks.index')) active @endif"
+                            href="{{ route('admin.banks.index') }}">
+                            @include('layouts.includes.sidebar_icon_home')
+                            <span class="ms-2">Banks</span>
                         </a>
                     </li>
                     <li>
@@ -246,6 +253,13 @@
                             href="{{ route('user.payslips') }}">
                             @include('layouts.includes.sidebar_icon_home')
                             <span class="ms-2">Payslips</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="m-link @if (Route::is('user.wallet.whithdrawal')) active @endif"
+                            href="{{ route('user.wallet.whithdrawal') }}">
+                            @include('layouts.includes.sidebar_icon_home')
+                            <span class="ms-2">Wallet Withdrawal</span>
                         </a>
                     </li>
                 @endif

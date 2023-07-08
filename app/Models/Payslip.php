@@ -55,7 +55,7 @@ class Payslip extends Model
                         return 'Pending';
                         break;
                     case '1':
-                        return 'Accepted';
+                        return 'Completed';
                         break;
                     case '2':
                         return 'Rejected';

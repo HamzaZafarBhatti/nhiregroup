@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\BankController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\EmployerController;
 use App\Http\Controllers\EmployerPostController;
@@ -88,6 +89,9 @@ Route::middleware(['auth', /* 'verified', */ 'user'])->name('user.')->prefix('us
         Route::get('/generate-pay-slip', 'generate_pay_slip')->name('generate_pay_slip');
         Route::get('/transfer-referral-payout', 'transfer_referral_payout')->name('transfer_referral_payout');
         Route::get('/payslips', 'payslips')->name('payslips');
+        Route::prefix('wallet')->name('wallet.')->group(function () {
+            Route::get('whithdrawal', 'withdrawal')->name('withdrawal');
+        });
     });
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -138,6 +142,7 @@ Route::middleware(['auth', 'admin'])->name('admin.')->prefix('admin')->group(fun
     Route::resource('employers', EmployerController::class)->except('show');
     Route::resource('employer-posts', EmployerPostController::class)->except('show');
     Route::resource('epins', EpinController::class)->except('create', 'edit', 'show', 'update');
+    Route::resource('banks', BankController::class)->except('create', 'show');
 });
 
 require __DIR__ . '/auth.php';
