@@ -17,8 +17,8 @@ return new class extends Migration
             $table->enum('wallet_type', ['nhire', 'earning']);
             $table->enum('withdraw_to', ['bank', 'usdt']);
             $table->integer('amount');
-            $table->foreignId('bank_user_id');
-            $table->foreignId('usdt_wallet_id');
+            $table->foreignId('bank_user_id')->nullable();
+            $table->foreignId('usdt_wallet_id')->nullable();
             $table->enum('status', ['0', '1', '2'])->default('0');
             $table->timestamps();
         });

@@ -152,10 +152,17 @@ class User extends Authenticatable implements MustVerifyEmail
         );
     }
 
+    protected function getEarningWallet(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($val, $attr) => '₦' . $this->earning_wallet
+        );
+    }
+
     protected function getTotalIncome(): Attribute
     {
         return Attribute::make(
-            get: fn ($val, $attr) => '₦' . ($this->nhire_wallet + $this->indirect_ref_bonus + $this->ref_bonus)
+            get: fn ($val, $attr) => '₦' . ($this->nhire_wallet + $this->earning_wallet)
         );
     }
 

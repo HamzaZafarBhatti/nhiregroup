@@ -18,6 +18,7 @@ use App\Http\Controllers\TimeslotController;
 use App\Http\Controllers\UserBankController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserUsdtWalletController;
+use App\Http\Controllers\UserWithdrawController;
 use App\Http\Controllers\VendorController;
 use Illuminate\Support\Facades\Route;
 
@@ -100,6 +101,13 @@ Route::middleware(['auth', /* 'verified', */ 'user'])->name('user.')->prefix('us
         Route::get('/', 'index')->name('index');
         Route::post('/', 'store')->name('store');
         Route::post('/{id}', 'update')->name('update');
+    });
+
+    Route::controller(UserWithdrawController::class)->name('withdraws.')->prefix('withdraws')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/request', 'request')->name('request');
+        Route::post('/', 'store')->name('store');
+        // Route::post('/{id}', 'update')->name('update');
     });
 
     Route::resource('banks', UserBankController::class)->except('show');
