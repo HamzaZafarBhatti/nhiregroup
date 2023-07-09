@@ -266,7 +266,7 @@
                         <a class="m-link @if (Route::is('user.banks.*')) active @endif" data-bs-toggle="collapse"
                             data-bs-target="#banks" href="#">
                             @include('layouts.includes.sidebar_icon_home')
-                            <span class="ms-2">My Bank Details</span>
+                            <span class="ms-2">Bank Details</span>
                             <span class="arrow fa fa-angle-right ms-auto text-end"></span>
                         </a>
                         <!-- Menu: Sub menu ul -->
@@ -276,6 +276,13 @@
                             <li><a class="ms-link @if (Route::is('user.banks.create')) active @endif"
                                     href="{{ route('user.banks.create') }}">Add Bank Details</a></li>
                         </ul>
+                    </li>
+                    <li>
+                        <a class="m-link @if (Route::is('user.usdt_wallet.index')) active @endif"
+                            href="{{ route('user.usdt_wallet.index') }}">
+                            @include('layouts.includes.sidebar_icon_home')
+                            <span class="ms-2">USDT Wallet</span>
+                        </a>
                     </li>
                 @endif
             </ul>
