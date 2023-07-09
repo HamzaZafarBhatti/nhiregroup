@@ -93,9 +93,6 @@ Route::middleware(['auth', /* 'verified', */ 'user'])->name('user.')->prefix('us
         Route::get('/generate-pay-slip', 'generate_pay_slip')->name('generate_pay_slip');
         Route::get('/transfer-referral-payout', 'transfer_referral_payout')->name('transfer_referral_payout');
         Route::get('/payslips', 'payslips')->name('payslips');
-        Route::prefix('wallet')->name('wallet.')->group(function () {
-            Route::get('whithdrawal', 'withdrawal')->name('withdrawal');
-        });
     });
 
     Route::controller(UserUsdtWalletController::class)->name('usdt_wallet.')->prefix('usdt_wallet')->group(function () {
