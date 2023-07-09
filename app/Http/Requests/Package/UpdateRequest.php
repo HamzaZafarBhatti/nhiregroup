@@ -35,6 +35,8 @@ class UpdateRequest extends FormRequest
             'salary_dashboard_fee' => 'required|integer',
             'points' => 'required',
             'expiry_time' => 'required|integer',
+            'min_withdraw_nhire' => 'required|integer',
+            'min_withdraw_earning' => 'required|integer',
             'payslip_tax' => 'required',
         ];
     }

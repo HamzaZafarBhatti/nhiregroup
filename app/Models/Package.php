@@ -23,6 +23,8 @@ class Package extends Model
         'salary_dashboard_fee',
         'expiry_time',
         'payslip_tax',
+        'min_withdraw_nhire',
+        'min_withdraw_earning',
     ];
 
     public function scopeActive($query)

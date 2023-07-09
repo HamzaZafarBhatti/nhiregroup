@@ -146,6 +146,23 @@
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Minimum Amount Withdraw (NHIRE WALLET)</label>
+                            <input type="number" class="form-control @error('min_withdraw_nhire') is-invalid @enderror"
+                                value="{{ old('min_withdraw_nhire') }}" name="min_withdraw_nhire" required />
+                            @error('min_withdraw_nhire')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Minimum Amount Withdraw (EARNING WALLET)</label>
+                            <input type="number"
+                                class="form-control @error('min_withdraw_earning') is-invalid @enderror"
+                                value="{{ old('min_withdraw_earning') }}" name="min_withdraw_earning" required />
+                            @error('min_withdraw_earning')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
                         <div class="col-12">
                             <button class="btn btn-primary" type="submit">
                                 Add Package
