@@ -262,9 +262,4 @@ class UserController extends Controller
 
         return view('user.payslip.index', compact('payslips'));
     }
-
-    public function withdrawal()
-    {
-        return view('user.payslip.index', compact('payslips'));
-    }
 }
