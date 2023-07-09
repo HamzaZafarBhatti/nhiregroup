@@ -15,6 +15,7 @@ use App\Http\Controllers\SalaryWithdrawalController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SubAdminController;
 use App\Http\Controllers\TimeslotController;
+use App\Http\Controllers\UserBankController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VendorController;
 use Illuminate\Support\Facades\Route;
@@ -93,6 +94,9 @@ Route::middleware(['auth', /* 'verified', */ 'user'])->name('user.')->prefix('us
             Route::get('whithdrawal', 'withdrawal')->name('withdrawal');
         });
     });
+
+    Route::resource('banks', UserBankController::class)->except('show');
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

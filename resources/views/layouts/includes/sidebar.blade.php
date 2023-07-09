@@ -255,12 +255,27 @@
                             <span class="ms-2">Payslips</span>
                         </a>
                     </li>
-                    <li>
+                    {{-- <li>
                         <a class="m-link @if (Route::is('user.wallet.whithdrawal')) active @endif"
                             href="{{ route('user.wallet.whithdrawal') }}">
                             @include('layouts.includes.sidebar_icon_home')
                             <span class="ms-2">Wallet Withdrawal</span>
                         </a>
+                    </li> --}}
+                    <li class="collapsed">
+                        <a class="m-link @if (Route::is('user.banks.*')) active @endif" data-bs-toggle="collapse"
+                            data-bs-target="#banks" href="#">
+                            @include('layouts.includes.sidebar_icon_home')
+                            <span class="ms-2">My Bank Details</span>
+                            <span class="arrow fa fa-angle-right ms-auto text-end"></span>
+                        </a>
+                        <!-- Menu: Sub menu ul -->
+                        <ul class="sub-menu collapse @if (Route::is('user.banks.*')) show @endif" id="banks">
+                            <li><a class="ms-link @if (Route::is('user.banks.index')) active @endif"
+                                    href="{{ route('user.banks.index') }}">Bank Detail List</a></li>
+                            <li><a class="ms-link @if (Route::is('user.banks.create')) active @endif"
+                                    href="{{ route('user.banks.create') }}">Add Bank Details</a></li>
+                        </ul>
                     </li>
                 @endif
             </ul>
