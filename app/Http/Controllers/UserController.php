@@ -230,7 +230,7 @@ class UserController extends Controller
             'direct_earning' => $user->ref_bonus,
             'indirect_earning' => $user->indirect_ref_bonus,
             'tax' => $user->package->payslip_tax,
-            'status' => PayslipStatusEnum::ACCEPTED,
+            'status' => '1',
         ];
         $expected_earning = $data['direct_earning'] + $data['indirect_earning'];
         if ($data['tax'] > 0) {
