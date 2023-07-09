@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Pending Requests')
+@section('title', 'All Requests')
 
 @section('styles')
     <link rel="stylesheet" href="{{ asset('assets/cssbundle/dataTables.min.css') }}" />
@@ -11,7 +11,7 @@
         <div class="col-md-12 mt-4">
             <div class="card">
                 <div class="card-header">
-                    <h6 class="card-title mb-0">Pending Requests</h6>
+                    <h6 class="card-title mb-0">All Requests</h6>
                 </div>
                 <div class="card-body">
                     <table id="myTable" class="table display dataTable table-hover" style="width: 100%">
@@ -19,31 +19,47 @@
                             <tr>
                                 <th>Sr. #</th>
                                 <th>User</th>
-                                <th>Direct Earning</th>
-                                <th>Indirect Earning</th>
-                                <th>Tax</th>
-                                <th>Expected Earning</th>
+                                <th>Debited From</th>
+                                <th>Credited To</th>
+                                <th>Amount</th>
+                                <th>Status</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($payslips as $item)
+                            @foreach ($withdraws as $item)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $item->user->username }}</td>
-                                    <td>{{ $item->get_direct_earning }}</td>
-                                    <td>{{ $item->get_indirect_earning }}</td>
-                                    <td>{{ $item->tax }}%</td>
-                                    <td>{{ $item->get_expected_earning }}</td>
+                                    <td>{{ $item->wallet_type->getLabel() }}</td>
                                     <td>
-                                        <button onclick="accept({{ $item->id }})" type="button"
-                                            class="btn btn-link text-info" data-bs-toggle="tooltip" data-bs-placement="top"
-                                            aria-label="Accept" data-bs-original-title="Accept"><i
-                                                class="fa fa-thumbs-up"></i></button>
-                                        <button onclick="reject({{ $item->id }})" type="button"
-                                            class="btn btn-link text-danger" data-bs-toggle="tooltip"
-                                            data-bs-placement="top" aria-label="Reject" data-bs-original-title="Reject"><i
-                                                class="fa fa-thumbs-down"></i></button>
+                                        {{ $item->withdraw_to->getLabel() }} -
+                                        @if ($item->withdraw_to === App\Enum\WithdrawToEnum::USDT)
+                                            <b>
+                                                {{ $item->usdt_wallet->wallet_address }}
+                                            </b>
+                                        @endif
+                                        @if ($item->withdraw_to === App\Enum\WithdrawToEnum::BANK)
+                                            <b>
+                                                {{ $item->bank_user->get_bank_details }}
+                                            </b>
+                                        @endif
+                                    </td>
+                                    <td>{{ $item->get_amount }}</td>
+                                    <td>
+                                        {!! $item->get_status !!}
+                                    </td>
+                                    <td>
+                                        @if ($item->status->value == '0')
+                                            <button onclick="accept({{ $item->id }})" type="button"
+                                                class="btn btn-link text-info" data-bs-toggle="tooltip"
+                                                data-bs-placement="top" aria-label="Accept"
+                                                data-bs-original-title="Accept"><i class="fa fa-thumbs-up"></i></button>
+                                            <button onclick="reject({{ $item->id }})" type="button"
+                                                class="btn btn-link text-danger" data-bs-toggle="tooltip"
+                                                data-bs-placement="top" aria-label="Reject"
+                                                data-bs-original-title="Reject"><i class="fa fa-thumbs-down"></i></button>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach
@@ -68,7 +84,7 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
-                        url: "{{ route('admin.payslips_requests.accept') }}",
+                        url: "{{ route('admin.withdraws.accept') }}",
                         type: "post",
                         data: {
                             id: id
@@ -93,6 +109,13 @@
         function reject(id) {
             Swal.fire({
                 title: "Reject Request",
+                // input: "text",
+                // inputLabel: 'Rejection Reason',
+                // inputValidator: (value) => {
+                //     if (!value) {
+                //         return 'You need to enter rejection reason!'
+                //     }
+                // },
                 showCancelButton: true,
                 confirmButtonText: "Reject",
                 confirmButtonColor: '#dc3545',
@@ -101,7 +124,7 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
-                        url: "{{ route('admin.payslips_requests.reject') }}",
+                        url: "{{ route('admin.withdraws.reject') }}",
                         type: "post",
                         data: {
                             id: id

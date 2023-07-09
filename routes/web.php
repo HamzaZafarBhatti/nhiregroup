@@ -20,6 +20,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserUsdtWalletController;
 use App\Http\Controllers\UserWithdrawController;
 use App\Http\Controllers\VendorController;
+use App\Http\Controllers\WithdrawController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -146,7 +147,7 @@ Route::middleware(['auth', 'admin'])->name('admin.')->prefix('admin')->group(fun
         Route::post('/accept', 'accept')->name('accept');
         Route::post('/reject', 'reject')->name('reject');
     });
-    Route::controller(PayslipController::class)->prefix('payslips-requests')->name('payslips_requests.')->group(function () {
+    Route::controller(WithdrawController::class)->prefix('withdraws')->name('withdraws.')->group(function () {
         Route::get('/index', 'index')->name('index');
         Route::get('/pending', 'pending')->name('pending');
         Route::get('/accepted', 'accepted')->name('accepted');

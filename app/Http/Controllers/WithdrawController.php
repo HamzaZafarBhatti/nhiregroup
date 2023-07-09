@@ -2,64 +2,107 @@
 
 namespace App\Http\Controllers;
 
+use App\Enum\WithdrawStatusEnum;
+use App\Enum\WithdrawWalletTypeEnum;
+use App\Models\User;
 use App\Models\Withdraw;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class WithdrawController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $withdraws = Withdraw::query();
+        // if (auth()->user()->role === 'Sub-Admin') {
+        //     $withdraws = $withdraws->where('subadmin_id', auth()->user()->id);
+        // }
+        $withdraws = $withdraws->orderBy('status', 'asc')->latest('id')->get();
+        // return $withdraws;
+        return view('admin.withdraws.index', compact('withdraws'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function pending()
     {
-        //
+        $withdraws = Withdraw::where('status', WithdrawStatusEnum::PENDING);
+        // if (auth()->user()->role === 'Sub-Admin') {
+        //     $withdraws = $withdraws->where('subadmin_id', auth()->user()->id);
+        // }
+        $withdraws = $withdraws->latest('id')->get();
+        // return $withdraws;
+        return view('admin.withdraws.pending', compact('withdraws'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function accepted()
     {
-        //
+        $withdraws = Withdraw::where('status', WithdrawStatusEnum::ACCEPTED);
+        // if (auth()->user()->role === 'Sub-Admin') {
+        //     $withdraws = $withdraws->where('subadmin_id', auth()->user()->id);
+        // }
+        $withdraws = $withdraws->latest('id')->get();
+        // return $withdraws;
+        return view('admin.withdraws.accepted', compact('withdraws'));
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Withdraw $withdraw)
+    public function rejected()
     {
-        //
+        $withdraws = Withdraw::where('status', WithdrawStatusEnum::REJECTED);
+        // if (auth()->user()->role === 'Sub-Admin') {
+        //     $withdraws = $withdraws->where('subadmin_id', auth()->user()->id);
+        // }
+        $withdraws = $withdraws->latest('id')->get();
+        // return $withdraws;
+        return view('admin.withdraws.rejected', compact('withdraws'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Withdraw $withdraw)
+    public function accept(Request $request)
     {
-        //
+        $withdraw = Withdraw::findOrFail($request->id);
+        $user = User::findOrFail($withdraw->user_id);
+        DB::beginTransaction();
+        try {
+            $withdraw->update(['status' => WithdrawStatusEnum::ACCEPTED]);
+            if ($withdraw->wallet_type === WithdrawWalletTypeEnum::EARNING) {
+                $user->update([
+                    'earning_wallet' => $user->earning_wallet - $withdraw->amount,
+                ]);
+            }
+            if ($withdraw->wallet_type === WithdrawWalletTypeEnum::NHIRE) {
+                $user->update([
+                    'nhire_wallet' => $user->nhire_wallet - $withdraw->amount,
+                ]);
+            }
+            DB::commit();
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Request Accepted!',
+            ]);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            Log::error('Withdraw Accept Error: ' . $th->getMessage());
+            return response()->json([
+                'status' => 'danger',
+                'message' => 'Something went wrong!',
+            ]);
+        }
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Withdraw $withdraw)
+    public function reject(Request $request)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Withdraw $withdraw)
-    {
-        //
+        try {
+            $withdraw = Withdraw::find($request->id);
+            $withdraw->update(['status' => WithdrawStatusEnum::REJECTED]);
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Request Rejected!',
+            ]);
+        } catch (\Throwable $th) {
+            Log::error('Withdraw Reject Error: ' . $th->getMessage());
+            return response()->json([
+                'status' => 'danger',
+                'message' => 'Something went wrong!',
+            ]);
+        }
     }
 }

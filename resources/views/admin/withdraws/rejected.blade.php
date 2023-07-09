@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Accepted Requests')
+@section('title', 'Rejected Requests')
 
 @section('styles')
     <link rel="stylesheet" href="{{ asset('assets/cssbundle/dataTables.min.css') }}" />
@@ -11,7 +11,7 @@
         <div class="col-md-12 mt-4">
             <div class="card">
                 <div class="card-header">
-                    <h6 class="card-title mb-0">Accepted Requests</h6>
+                    <h6 class="card-title mb-0">Rejected Requests</h6>
                 </div>
                 <div class="card-body">
                     <table id="myTable" class="table display dataTable table-hover" style="width: 100%">
@@ -19,21 +19,31 @@
                             <tr>
                                 <th>Sr. #</th>
                                 <th>User</th>
-                                <th>Direct Earning</th>
-                                <th>Indirect Earning</th>
-                                <th>Tax</th>
-                                <th>Expected Earning</th>
+                                <th>Debited From</th>
+                                <th>Credited To</th>
+                                <th>Amount</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($payslips as $item)
+                            @foreach ($withdraws as $item)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $item->user->username }}</td>
-                                    <td>{{ $item->get_direct_earning }}</td>
-                                    <td>{{ $item->get_indirect_earning }}</td>
-                                    <td>{{ $item->tax }}%</td>
-                                    <td>{{ $item->get_expected_earning }}</td>
+                                    <td>{{ $item->wallet_type->getLabel() }}</td>
+                                    <td>
+                                        {{ $item->withdraw_to->getLabel() }} -
+                                        @if ($item->withdraw_to === App\Enum\WithdrawToEnum::USDT)
+                                            <b>
+                                                {{ $item->usdt_wallet->wallet_address }}
+                                            </b>
+                                        @endif
+                                        @if ($item->withdraw_to === App\Enum\WithdrawToEnum::BANK)
+                                            <b>
+                                                {{ $item->bank_user->get_bank_details }}
+                                            </b>
+                                        @endif
+                                    </td>
+                                    <td>{{ $item->get_amount }}</td>
                                 </tr>
                             @endforeach
                         </tbody>

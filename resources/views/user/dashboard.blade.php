@@ -5,8 +5,10 @@
 @section('content')
     <div class="row g-3">
         <div class="col-md-6">
-            <h3>NHIRE Dashboard</h3>
-            <h2>Welcome, {{ $user->name }}</h2>
+            <h4>NHIRE Dashboard</h4>
+            <h5>Welcome, {{ $user->name }}</h5>
+            <h3>NHIRE Wallet: {{ $user->get_nhire_wallet }}</h3>
+            <h3>Earning Wallet: {{ $user->get_earning_wallet }}</h3>
         </div>
         <div class="col-lg-6">
             <div class="card overflow-hidden">

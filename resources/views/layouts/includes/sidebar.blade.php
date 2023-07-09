@@ -174,26 +174,25 @@
                                     href="{{ route('admin.salary_withdrawal_requests.rejected') }}">Rejected</a></li>
                         </ul>
                     </li>
-                    {{-- <li class="collapsed">
-                        <a class="m-link @if (Route::is('admin.payslips_requests.*')) active @endif" data-bs-toggle="collapse"
-                            data-bs-target="#payslips_requests" href="#">
+                    <li class="collapsed">
+                        <a class="m-link @if (Route::is('admin.withdraws.*')) active @endif" data-bs-toggle="collapse"
+                            data-bs-target="#withdraws" href="#">
                             @include('layouts.includes.sidebar_icon_home')
-                            <span class="ms-2">Payslip Requests</span>
+                            <span class="ms-2">Withdraw Requests</span>
                             <span class="arrow fa fa-angle-right ms-auto text-end"></span>
                         </a>
                         <!-- Menu: Sub menu ul -->
-                        <ul class="sub-menu collapse @if (Route::is('admin.payslips_requests.*')) show @endif"
-                            id="payslips_requests">
-                            <li><a class="ms-link @if (Route::is('admin.payslips_requests.index')) active @endif"
-                                    href="{{ route('admin.payslips_requests.index') }}">All</a></li>
-                            <li><a class="ms-link @if (Route::is('admin.payslips_requests.pending')) active @endif"
-                                    href="{{ route('admin.payslips_requests.pending') }}">Pending</a></li>
-                            <li><a class="ms-link @if (Route::is('admin.payslips_requests.accepted')) active @endif"
-                                    href="{{ route('admin.payslips_requests.accepted') }}">Accepted</a></li>
-                            <li><a class="ms-link @if (Route::is('admin.payslips_requests.rejected')) active @endif"
-                                    href="{{ route('admin.payslips_requests.rejected') }}">Rejected</a></li>
+                        <ul class="sub-menu collapse @if (Route::is('admin.withdraws.*')) show @endif" id="withdraws">
+                            <li><a class="ms-link @if (Route::is('admin.withdraws.index')) active @endif"
+                                    href="{{ route('admin.withdraws.index') }}">All</a></li>
+                            <li><a class="ms-link @if (Route::is('admin.withdraws.pending')) active @endif"
+                                    href="{{ route('admin.withdraws.pending') }}">Pending</a></li>
+                            <li><a class="ms-link @if (Route::is('admin.withdraws.accepted')) active @endif"
+                                    href="{{ route('admin.withdraws.accepted') }}">Accepted</a></li>
+                            <li><a class="ms-link @if (Route::is('admin.withdraws.rejected')) active @endif"
+                                    href="{{ route('admin.withdraws.rejected') }}">Rejected</a></li>
                         </ul>
-                    </li> --}}
+                    </li>
                 @endif
                 @if ($user->role === 'Admin')
                     <li>
