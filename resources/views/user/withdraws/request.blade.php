@@ -71,9 +71,9 @@
                         </div>
                         <div class="col-md-6 d-none" id="usdt">
                             <label class="form-label">USDT Wallet</label>
-                            <input type="hidden" value="{{ $usdt_wallet->id }}" name="usdt_wallet_id" />
+                            <input type="hidden" value="{{ $usdt_wallet->id ?? null }}" name="usdt_wallet_id" />
                             <input type="text" class="form-control @error('usdt_wallet_id') is-invalid @enderror"
-                                value="{{ $usdt_wallet->wallet_address }}" readonly />
+                                value="{{ $usdt_wallet->wallet_address ?? null }}" readonly />
                             @error('usdt_wallet_id')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
