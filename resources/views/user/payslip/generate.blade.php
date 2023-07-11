@@ -16,7 +16,7 @@
                             <tbody>
                                 <tr>
                                     <td>
-                                        <h4 class="mb-0">Earnings (Direct):</h4>
+                                        <h4 class="mb-0">NHIRE Wallet:</h4>
                                     </td>
                                     <td>
                                         <h4 class="mb-0 fw-bold">₦{{ $nhire_wallet }}</h4>
