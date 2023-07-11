@@ -247,13 +247,13 @@
                             <span class="ms-2">Workflow Income Log</span>
                         </a>
                     </li>
-                    <li>
+                    {{-- <li>
                         <a class="m-link @if (Route::is('user.payslips')) active @endif"
                             href="{{ route('user.payslips') }}">
                             @include('layouts.includes.sidebar_icon_home')
                             <span class="ms-2">Payslips</span>
                         </a>
-                    </li>
+                    </li> --}}
                     <li class="collapsed">
                         <a class="m-link @if (Route::is('user.withdraws.*')) active @endif" data-bs-toggle="collapse"
                             data-bs-target="#withdraws" href="#">
@@ -265,8 +265,8 @@
                         <ul class="sub-menu collapse @if (Route::is('user.withdraws.*')) show @endif" id="withdraws">
                             <li><a class="ms-link @if (Route::is('user.withdraws.index')) active @endif"
                                     href="{{ route('user.withdraws.index') }}">Withdraw List</a></li>
-                            <li><a class="ms-link @if (Route::is('user.withdraws.request')) active @endif"
-                                    href="{{ route('user.withdraws.request') }}">Request Withdraw</a></li>
+                            <li><a class="ms-link @if (Route::is('user.generate_pay_slip')) active @endif"
+                                    href="{{ route('user.generate_pay_slip') }}">Generate Slip</a></li>
                         </ul>
                     </li>
                     <li class="collapsed">

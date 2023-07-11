@@ -43,9 +43,11 @@ class UserWithdrawController extends Controller
 
         $user = auth()->user();
 
+        $amount_with_tax = $data['amount'] + ($data['amount'] * $user->package->payslip_tax);
+
         if ($data['wallet_type'] === (WithdrawWalletTypeEnum::EARNING)->value) {
-            if ($data['amount'] > $user->earning_wallet) {
-                return back()->with('warning', 'You have requested more amount!');
+            if ($amount_with_tax > $user->earning_wallet) {
+                return back()->with('warning', 'You have requested more amount than your wallet!');
             }
             if ($data['amount'] < $user->package->min_withdraw_earning) {
                 return back()->with('warning', 'Requested amount is less than limit!');
@@ -53,8 +55,8 @@ class UserWithdrawController extends Controller
         }
 
         if ($data['wallet_type'] === (WithdrawWalletTypeEnum::NHIRE)->value) {
-            if ($data['amount'] > $user->nhire_wallet) {
-                return back()->with('warning', 'You have requested more amount!');
+            if ($amount_with_tax > $user->nhire_wallet) {
+                return back()->with('warning', 'You have requested more amount than your wallet!');
             }
             if ($data['amount'] < $user->package->min_withdraw_nhire) {
                 return back()->with('warning', 'Requested amount is less than limit!');

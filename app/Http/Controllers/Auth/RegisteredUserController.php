@@ -88,6 +88,7 @@ class RegisteredUserController extends Controller
                         ]);
                         $upline->update([
                             'ref_bonus' => $upline->ref_bonus + $downline_package->direct_ref_bonus,
+                            'earning_wallet' => $upline->earning_wallet + $downline_package->direct_ref_bonus,
                             'points' => $upline->points + $downline_package->points
                         ]);
                         if (!empty($upline->parent) && $upline->parent->pacakge->grade === 10) {
@@ -96,7 +97,10 @@ class RegisteredUserController extends Controller
                                 'downline_id' => $user->id,
                                 'amount' => $downline_package->indirect_ref_bonus,
                             ]);
-                            $upline->parent->update(['indirect_ref_bonus' => $upline->parent->indirect_ref_bonus + $downline_package->indirect_ref_bonus]);
+                            $upline->parent->update([
+                                'indirect_ref_bonus' => $upline->parent->indirect_ref_bonus + $downline_package->indirect_ref_bonus,
+                                'earning_wallet' => $upline->parent->earning_wallet + $downline_package->indirect_ref_bonus
+                            ]);
                         }
                     }
                     break;
@@ -108,6 +112,7 @@ class RegisteredUserController extends Controller
                     ]);
                     $upline->update([
                         'ref_bonus' => $upline->ref_bonus + $downline_package->direct_ref_bonus,
+                        'earning_wallet' => $upline->earning_wallet + $downline_package->direct_ref_bonus,
                         'points' => $upline->points + $downline_package->points
                     ]);
                     if (!empty($upline->parent)) {
@@ -116,7 +121,10 @@ class RegisteredUserController extends Controller
                             'downline_id' => $user->id,
                             'amount' => $downline_package->indirect_ref_bonus,
                         ]);
-                        $upline->parent->update(['indirect_ref_bonus' => $upline->parent->indirect_ref_bonus + $downline_package->indirect_ref_bonus]);
+                        $upline->parent->update([
+                            'indirect_ref_bonus' => $upline->parent->indirect_ref_bonus + $downline_package->indirect_ref_bonus,
+                            'earning_wallet' => $upline->parent->earning_wallet + $downline_package->indirect_ref_bonus
+                        ]);
                     }
                     break;
                 default:

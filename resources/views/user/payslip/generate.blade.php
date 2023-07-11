@@ -19,15 +19,15 @@
                                         <h4 class="mb-0">Earnings (Direct):</h4>
                                     </td>
                                     <td>
-                                        <h4 class="mb-0 fw-bold">₦{{ $direct_referral_earnings }}</h4>
+                                        <h4 class="mb-0 fw-bold">₦{{ $nhire_wallet }}</h4>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <h4 class="mb-0">Earnings (Indirect):</h4>
+                                        <h4 class="mb-0">Earning Wallet:</h4>
                                     </td>
                                     <td>
-                                        <h4 class="mb-0 fw-bold">₦{{ $indirect_referral_earnings }}</h4>
+                                        <h4 class="mb-0 fw-bold">₦{{ $earning_wallet }}</h4>
                                     </td>
                                 </tr>
                                 <tr>
@@ -50,8 +50,8 @@
                         </table>
                     </div>
                     <div class="text-center">
-                        <a href="{{ route('user.transfer_referral_payout') }}" type="btn"
-                            class="btn btn-success btn-lg">Transfer Payout to Wallet</a>
+                        <a href="{{ route('user.withdraws.request') }}" type="btn"
+                            class="btn btn-success btn-lg">Transfer Salary to Bank</a>
                     </div>
                 </div>
             </div>

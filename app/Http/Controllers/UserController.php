@@ -208,11 +208,11 @@ class UserController extends Controller
     {
         $user = auth()->user();
         $data = [
-            'direct_referral_earnings' => $user->ref_bonus,
-            'indirect_referral_earnings' => $user->indirect_ref_bonus,
+            'nhire_wallet' => $user->nhire_wallet,
+            'earning_wallet' => $user->earning_wallet,
             'payslip_tax' => $user->package->payslip_tax,
         ];
-        $expected_earning = $data['direct_referral_earnings'] + $data['indirect_referral_earnings'];
+        $expected_earning = $data['nhire_wallet'] + $data['earning_wallet'];
         if ($data['payslip_tax'] > 0) {
             $expected_earning = $expected_earning - ($expected_earning * $data['payslip_tax'] / 100);
         }
@@ -221,45 +221,45 @@ class UserController extends Controller
         return view('user.payslip.generate', $data);
     }
 
-    public function transfer_referral_payout()
-    {
-        $user = auth()->user();
-        $data = [
-            'user_id' => $user->id,
-            'reference' => '#' . Str::random(30),
-            'direct_earning' => $user->ref_bonus,
-            'indirect_earning' => $user->indirect_ref_bonus,
-            'tax' => $user->package->payslip_tax,
-            'status' => '1',
-        ];
-        $expected_earning = $data['direct_earning'] + $data['indirect_earning'];
-        if ($data['tax'] > 0) {
-            $expected_earning = $expected_earning - ($expected_earning * $data['tax'] / 100);
-        }
-        $data['expected_earning'] = $expected_earning;
+    // public function transfer_referral_payout()
+    // {
+    //     $user = auth()->user();
+    //     $data = [
+    //         'user_id' => $user->id,
+    //         'reference' => '#' . Str::random(30),
+    //         'direct_earning' => $user->ref_bonus,
+    //         'indirect_earning' => $user->indirect_ref_bonus,
+    //         'tax' => $user->package->payslip_tax,
+    //         'status' => '1',
+    //     ];
+    //     $expected_earning = $data['direct_earning'] + $data['indirect_earning'];
+    //     if ($data['tax'] > 0) {
+    //         $expected_earning = $expected_earning - ($expected_earning * $data['tax'] / 100);
+    //     }
+    //     $data['expected_earning'] = $expected_earning;
 
-        DB::beginTransaction();
-        try {
-            Payslip::create($data);
+    //     DB::beginTransaction();
+    //     try {
+    //         Payslip::create($data);
 
-            $user->update([
-                'ref_bonus' => $user->ref_bonus - $data['direct_earning'],
-                'indirect_ref_bonus' => $user->indirect_ref_bonus - $data['indirect_earning'],
-                'earning_wallet' => $user->earning_wallet + $data['expected_earning'],
-            ]);
-            DB::commit();
-            return back()->with('success', 'Transfer of payout is successful!');
-        } catch (Throwable $th) {
-            Log::error($th->getMessage());
-            DB::rollBack();
-            return back()->with('error', 'Something went wrong!');
-        }
-    }
+    //         $user->update([
+    //             'ref_bonus' => $user->ref_bonus - $data['direct_earning'],
+    //             'indirect_ref_bonus' => $user->indirect_ref_bonus - $data['indirect_earning'],
+    //             'earning_wallet' => $user->earning_wallet + $data['expected_earning'],
+    //         ]);
+    //         DB::commit();
+    //         return back()->with('success', 'Transfer of payout is successful!');
+    //     } catch (Throwable $th) {
+    //         Log::error($th->getMessage());
+    //         DB::rollBack();
+    //         return back()->with('error', 'Something went wrong!');
+    //     }
+    // }
 
-    public function payslips()
-    {
-        $payslips = Payslip::where('user_id', auth()->user()->id)->get();
+    // public function payslips()
+    // {
+    //     $payslips = Payslip::where('user_id', auth()->user()->id)->get();
 
-        return view('user.payslip.index', compact('payslips'));
-    }
+    //     return view('user.payslip.index', compact('payslips'));
+    // }
 }

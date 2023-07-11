@@ -2,6 +2,19 @@
 
 @section('title', 'My Dashboard')
 
+@section('styles')
+    <style>
+        .green-gradient {
+            background: linear-gradient(112.9deg, rgb(112, 255, 151) 6.2%, rgb(70, 195, 255) 99.7%);
+        }
+
+        [data-theme=dark] .green-gradient,
+        [data-theme=dark] .green-gradient .card-title {
+            color: var(--color-100) !important;
+        }
+    </style>
+@endsection
+
 @section('content')
     <div class="row g-3">
         <div class="col-md-6">
@@ -14,7 +27,7 @@
             <div class="card overflow-hidden">
                 <div class="card-body">
                     <div class="text-center text-lg-start text-uppercase">
-                        <h5>Total Sum (Cumulatively)</h5>
+                        <h5>Total Salary Balance</h5>
                         <h5>{{ $user->get_total_income }}</h5>
                     </div>
                     <div class="mb-3">
@@ -23,7 +36,7 @@
                     </div>
                     <div>
                         <div class="owl-carousel owl-theme" id="trending_bids">
-                            <div class="item card overflow-hidden">
+                            <div class="item card overflow-hidden green-gradient">
                                 <div class="card-body">
                                     <div class="d-flex align-items-center justify-content-between text-uppercase">
                                         <h4 class="card-title">Coach 1</h4>
@@ -32,18 +45,18 @@
                                     </div>
                                     <div class="d-flex justify-content-between mb-3">
                                         <div class="text-start">
-                                            <h5>Earnings (DIRECT)</h5>
+                                            <h5>Earnings</h5>
                                             <h5 class="mt-2 fw-bolder">{{ $user->get_direct_ref_bonus }}</h5>
                                         </div>
                                         <div class="text-end">
-                                            <h5>No. of Referrals</h5>
+                                            <h5>No. of Trainees</h5>
                                             <h5 class="mt-2 fw-bolder">{{ $user->direct_refferals->count() }}</h5>
                                         </div>
                                     </div>
                                     <h6 class="text-center">The more you work, the more you earn</h6>
                                 </div>
                             </div>
-                            <div class="item card overflow-hidden">
+                            <div class="item card overflow-hidden green-gradient">
                                 <div class="card-body">
                                     <div class="d-flex align-items-center justify-content-between">
                                         <h4 class="card-title">Coach 2</h4>
@@ -52,18 +65,18 @@
                                     </div>
                                     <div class="d-flex justify-content-between mb-3">
                                         <div class="text-start">
-                                            <h5>Earnings (INDIRECT)</h5>
+                                            <h5>Earnings</h5>
                                             <h5 class="mt-2 fw-bolder">{{ $user->get_indirect_ref_bonus }}</h5>
                                         </div>
                                         <div class="text-end">
-                                            <h5>No. of Referrals</h5>
+                                            <h5>No. of Trainees</h5>
                                             <h5 class="mt-2 fw-bolder">{{ $user->indirect_refferals->count() }}</h5>
                                         </div>
                                     </div>
                                     <h6 class="text-center">The larger the team, the more you earn</h6>
                                 </div>
                             </div>
-                            <div class="item card overflow-hidden">
+                            <div class="item card overflow-hidden green-gradient">
                                 <div class="card-body">
                                     <div class="d-flex align-items-center justify-content-between">
                                         <h4 class="card-title">N-Worker</h4>
@@ -126,59 +139,6 @@
                 </div>
             </div>
         </div>
-        {{-- <div class="col-lg-3 col-md-6 col-sm-6">
-            <div class="card overflow-hidden">
-                <div class="card-body">
-                    <svg class="position-absolute top-0 end-0 mt-4 me-3" xmlns="http://www.w3.org/2000/svg" width="26"
-                        fill="currentColor" viewBox="0 0 16 16">
-                        <path class="fill-primary" fill-rule="evenodd"
-                            d="M11 15a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm5-4a5 5 0 1 1-10 0 5 5 0 0 1 10 0z" />
-                        <path class="fill-primary"
-                            d="M9.438 11.944c.047.596.518 1.06 1.363 1.116v.44h.375v-.443c.875-.061 1.386-.529 1.386-1.207 0-.618-.39-.936-1.09-1.1l-.296-.07v-1.2c.376.043.614.248.671.532h.658c-.047-.575-.54-1.024-1.329-1.073V8.5h-.375v.45c-.747.073-1.255.522-1.255 1.158 0 .562.378.92 1.007 1.066l.248.061v1.272c-.384-.058-.639-.27-.696-.563h-.668zm1.36-1.354c-.369-.085-.569-.26-.569-.522 0-.294.216-.514.572-.578v1.1h-.003zm.432.746c.449.104.655.272.655.569 0 .339-.257.571-.709.614v-1.195l.054.012z" />
-                        <path class="fill-muted"
-                            d="M1 0a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h4.083c.058-.344.145-.678.258-1H3a2 2 0 0 0-2-2V3a2 2 0 0 0 2-2h10a2 2 0 0 0 2 2v3.528c.38.34.717.728 1 1.154V1a1 1 0 0 0-1-1H1z" />
-                        <path class="fill-muted" d="M9.998 5.083 10 5a2 2 0 1 0-3.132 1.65 5.982 5.982 0 0 1 3.13-1.567z" />
-                    </svg>
-                    <div class="mb-2 text-uppercase">Referral Bonus</div>
-                    <div><span class="h4">{{ $user->get_direct_ref_bonus }}</span></div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6 col-sm-6">
-            <div class="card overflow-hidden">
-                <div class="card-body">
-                    <div class="mb-2 text-uppercase">Direct Referrals</div>
-                    <div><span class="h4">{{ $user->direct_refferals->count() }}</span> </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6 col-sm-6">
-            <div class="card overflow-hidden">
-                <div class="card-body">
-                    <svg class="position-absolute top-0 end-0 mt-4 me-3" xmlns="http://www.w3.org/2000/svg"
-                        width="26" fill="currentColor" viewBox="0 0 16 16">
-                        <path class="fill-primary" fill-rule="evenodd"
-                            d="M11 15a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm5-4a5 5 0 1 1-10 0 5 5 0 0 1 10 0z" />
-                        <path class="fill-primary"
-                            d="M9.438 11.944c.047.596.518 1.06 1.363 1.116v.44h.375v-.443c.875-.061 1.386-.529 1.386-1.207 0-.618-.39-.936-1.09-1.1l-.296-.07v-1.2c.376.043.614.248.671.532h.658c-.047-.575-.54-1.024-1.329-1.073V8.5h-.375v.45c-.747.073-1.255.522-1.255 1.158 0 .562.378.92 1.007 1.066l.248.061v1.272c-.384-.058-.639-.27-.696-.563h-.668zm1.36-1.354c-.369-.085-.569-.26-.569-.522 0-.294.216-.514.572-.578v1.1h-.003zm.432.746c.449.104.655.272.655.569 0 .339-.257.571-.709.614v-1.195l.054.012z" />
-                        <path class="fill-muted"
-                            d="M1 0a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h4.083c.058-.344.145-.678.258-1H3a2 2 0 0 0-2-2V3a2 2 0 0 0 2-2h10a2 2 0 0 0 2 2v3.528c.38.34.717.728 1 1.154V1a1 1 0 0 0-1-1H1z" />
-                        <path class="fill-muted"
-                            d="M9.998 5.083 10 5a2 2 0 1 0-3.132 1.65 5.982 5.982 0 0 1 3.13-1.567z" />
-                    </svg>
-                    <div class="mb-2 text-uppercase">Indirect Referral Bonus</div>
-                    <div><span class="h4">{{ $user->get_indirect_ref_bonus }}</span></div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6 col-sm-6">
-            <div class="card overflow-hidden">
-                <div class="card-body">
-                    <div class="mb-2 text-uppercase">Indirect Referrals</div>
-                    <div><span class="h4">{{ $user->indirect_refferals->count() }}</span> </div>
-                </div>
-            </div>
-        </div> --}}
     </div> <!-- .row end -->
 @endsection
 

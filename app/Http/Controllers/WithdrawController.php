@@ -63,14 +63,17 @@ class WithdrawController extends Controller
         DB::beginTransaction();
         try {
             $withdraw->update(['status' => WithdrawStatusEnum::ACCEPTED]);
+
+            $amount_with_tax = $withdraw->amount + ($withdraw->amount * $user->package->payslip_tax);
+            
             if ($withdraw->wallet_type === WithdrawWalletTypeEnum::EARNING) {
                 $user->update([
-                    'earning_wallet' => $user->earning_wallet - $withdraw->amount,
+                    'earning_wallet' => $user->earning_wallet - $amount_with_tax,
                 ]);
             }
             if ($withdraw->wallet_type === WithdrawWalletTypeEnum::NHIRE) {
                 $user->update([
-                    'nhire_wallet' => $user->nhire_wallet - $withdraw->amount,
+                    'nhire_wallet' => $user->nhire_wallet - $amount_with_tax,
                 ]);
             }
             DB::commit();
