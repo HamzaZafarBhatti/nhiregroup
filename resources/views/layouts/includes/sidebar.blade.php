@@ -222,15 +222,15 @@
                         <a class="m-link @if (Route::is('user.referrals.*')) active @endif" data-bs-toggle="collapse"
                             data-bs-target="#referrals" href="#">
                             @include('layouts.includes.sidebar_icon_home')
-                            <span class="ms-2">My Referrals</span>
+                            <span class="ms-2">My Trainees</span>
                             <span class="arrow fa fa-angle-right ms-auto text-end"></span>
                         </a>
                         <!-- Menu: Sub menu ul -->
                         <ul class="sub-menu collapse @if (Route::is('user.referrals.*')) show @endif" id="referrals">
                             <li><a class="ms-link @if (Route::is('user.referrals.direct')) active @endif"
-                                    href="{{ route('user.referrals.direct') }}">Direct Referrals</a></li>
+                                    href="{{ route('user.referrals.direct') }}">Direct Trainees</a></li>
                             <li><a class="ms-link @if (Route::is('user.referrals.indirect')) active @endif"
-                                    href="{{ route('user.referrals.indirect') }}">Indirect Referrals</a></li>
+                                    href="{{ route('user.referrals.indirect') }}">Indirect Trainees</a></li>
                         </ul>
                     </li>
                     <li>
@@ -244,7 +244,7 @@
                         <a class="m-link @if (Route::is('user.workflow_income')) active @endif"
                             href="{{ route('user.workflow_income') }}">
                             @include('layouts.includes.sidebar_icon_home')
-                            <span class="ms-2">Workflow Income Log</span>
+                            <span class="ms-2">Jobs Income Log</span>
                         </a>
                     </li>
                     {{-- <li>
@@ -258,7 +258,7 @@
                         <a class="m-link @if (Route::is('user.withdraws.*')) active @endif" data-bs-toggle="collapse"
                             data-bs-target="#withdraws" href="#">
                             @include('layouts.includes.sidebar_icon_home')
-                            <span class="ms-2">Wallet Withdrawal</span>
+                            <span class="ms-2">Access Salary</span>
                             <span class="arrow fa fa-angle-right ms-auto text-end"></span>
                         </a>
                         <!-- Menu: Sub menu ul -->
