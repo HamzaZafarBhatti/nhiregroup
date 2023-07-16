@@ -157,7 +157,7 @@ class UserController extends Controller
         if (!empty($earning)) {
             return response([
                 'success' => 'warning',
-                'message' => 'You have already earned from the job!'
+                'message' => 'You have already done this job!'
             ]);
         }
 
