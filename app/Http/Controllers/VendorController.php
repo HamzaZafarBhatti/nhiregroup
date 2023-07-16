@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Vendor\StoreRequest;
+use App\Http\Requests\Vendor\UpdateRequest;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -31,9 +33,19 @@ class VendorController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request): RedirectResponse
+    public function store(StoreRequest $request): RedirectResponse
     {
         //
+        $data = $request->validated();
+        $data['name'] = $request->first_name . ' ' . $request->last_name;
+        $data['username'] = $request->first_name;
+        $data['password'] = bcrypt('password');
+        $data['role'] = 'Vendor';
+        $data['email_verified_at'] = now();
+
+        User::create($data);
+
+        return to_route('admin.vendors.index')->with('success', 'Vendor is created!');
     }
 
     /**
@@ -50,14 +62,24 @@ class VendorController extends Controller
     public function edit(string $id): View
     {
         //
+        $vendor = User::findOrFail($id);
+        return view('admin.vendors.edit', compact('vendor'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id): RedirectResponse
+    public function update(UpdateRequest $request, string $id): RedirectResponse
     {
         //
+        $user = User::findOrFail($id);
+        $data = $request->validated();
+        $data['name'] = $request->first_name . ' ' . $request->last_name;
+        $data['username'] = $request->first_name;
+
+        $user->update($data);
+
+        return to_route('admin.vendors.index')->with('success', 'Vendor is updated!');
     }
 
     /**
@@ -66,5 +88,10 @@ class VendorController extends Controller
     public function destroy(string $id): RedirectResponse
     {
         //
+        $user = User::findOrFail($id);
+
+        $user->delete();
+
+        return to_route('admin.vendors.index')->with('success', 'Vendor is deleted!');
     }
 }

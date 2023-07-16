@@ -18,10 +18,8 @@
                         <thead>
                             <tr>
                                 <th>Sr. #</th>
-                                <th>Avatar</th>
                                 <th>Name</th>
                                 <th>Email</th>
-                                <th>Address</th>
                                 <th>Phone</th>
                                 <th>Actions</th>
                             </tr>
@@ -30,28 +28,19 @@
                             @foreach ($vendors as $item)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>
-                                        @if (!empty($item->avatar))
-                                            <img src="{{ asset('assets/avatar/' . $item->avatar) }}"
-                                                alt="{{ $item->name }}">
-                                        @else
-                                            -
-                                        @endif
-                                    </td>
                                     <td>{{ $item->name }}</td>
                                     <td>{{ $item->email }}</td>
-                                    <td>{{ $item->full_address }}</td>
                                     <td>{{ $item->phone }}</td>
                                     <td>
-                                        <a href="{{ route('admin.packages.edit', $item->id) }}" type="button"
+                                        <a href="{{ route('admin.vendors.edit', $item->id) }}" type="button"
                                             class="btn btn-link text-info" data-bs-toggle="tooltip" data-bs-placement="top"
                                             aria-label="Edit" data-bs-original-title="Edit"><i class="fa fa-pencil"></i></a>
-                                        <a href="{{ route('admin.packages.destroy', $item->id) }}" type="button"
+                                        <a href="{{ route('admin.vendors.destroy', $item->id) }}" type="button"
                                             onclick="event.preventDefault(); document.getElementById('formDelete{{ $item->id }}').submit();"
                                             class="btn btn-link text-danger" data-bs-toggle="tooltip"
                                             data-bs-placement="top" aria-label="Delete" data-bs-original-title="Delete"><i
                                                 class="fa fa-trash"></i></a>
-                                        <form action="{{ route('admin.packages.destroy', $item->id) }}" method="post"
+                                        <form action="{{ route('admin.vendors.destroy', $item->id) }}" method="post"
                                             id="formDelete{{ $item->id }}" style="display: none">
                                             @csrf
                                             @method('delete')

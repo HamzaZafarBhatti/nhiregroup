@@ -154,6 +154,7 @@ Route::middleware(['auth', 'admin'])->name('admin.')->prefix('admin')->group(fun
         Route::post('/accept', 'accept')->name('accept');
         Route::post('/reject', 'reject')->name('reject');
     });
+    Route::resource('vendors', VendorController::class)->except('show');
     Route::resource('blogs', BlogController::class)->except('show');
     Route::resource('packages', PackageController::class)->except('show');
     Route::resource('subadmins', SubAdminController::class)->except('show');

@@ -6,6 +6,7 @@ use App\Models\Blog;
 use App\Models\Employer;
 use App\Models\EmployerPost;
 use App\Models\Epin;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -119,7 +120,9 @@ class FrontendController extends Controller
 
     public function agents()
     {
-        return view('front.agents');
+        
+        $vendors = User::where('role', 'Vendor')->latest('id')->get();
+        return view('front.agents', compact('vendors'));
     }
 
     public function topearners()

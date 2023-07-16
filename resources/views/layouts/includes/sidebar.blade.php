@@ -72,6 +72,21 @@
                         </ul>
                     </li>
                     <li class="collapsed">
+                        <a class="m-link @if (Route::is('admin.vendors.*')) active @endif" data-bs-toggle="collapse"
+                            data-bs-target="#vendors" href="#">
+                            @include('layouts.includes.sidebar_icon_home')
+                            <span class="ms-2">Vendors</span>
+                            <span class="arrow fa fa-angle-right ms-auto text-end"></span>
+                        </a>
+                        <!-- Menu: Sub menu ul -->
+                        <ul class="sub-menu collapse @if (Route::is('admin.vendors.*')) show @endif" id="vendors">
+                            <li><a class="ms-link @if (Route::is('admin.vendors.index')) active @endif"
+                                    href="{{ route('admin.vendors.index') }}">List Vendors</a></li>
+                            <li><a class="ms-link @if (Route::is('admin.vendors.create')) active @endif"
+                                    href="{{ route('admin.vendors.create') }}">Add Vendor</a></li>
+                        </ul>
+                    </li>
+                    <li class="collapsed">
                         <a class="m-link @if (Route::is('admin.employer-posts.*')) active @endif" data-bs-toggle="collapse"
                             data-bs-target="#employer-posts" href="#">
                             @include('layouts.includes.sidebar_icon_home')
