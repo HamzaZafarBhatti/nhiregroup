@@ -69,9 +69,9 @@
                         <div class="col-12">
                             <div class="form-floating">
                                 <input type="text" name="epin"
-                                    class="form-control @error('epin') is-invalid @enderror" placeholder="E-Pin"
+                                    class="form-control @error('epin') is-invalid @enderror" placeholder="Jobpass"
                                     value="{{ old('epin') }}" required>
-                                <label>E-Pin</label>
+                                <label>Jobpass</label>
                                 @error('epin')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror

@@ -42,6 +42,13 @@
             color: var(--gold) !important;
         }
 
+        .swal2-title {
+            font-size: 1.5rem !important;
+        }
+        .swal2-popup.swal2-toast .swal2-title {
+            font-size: 1rem !important;
+        }
+
         @keyframes scale_up {
             from {
                 transform: scale(1);

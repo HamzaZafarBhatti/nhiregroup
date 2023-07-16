@@ -33,6 +33,8 @@
         .text-underline {
             text-decoration: underline;
         }
+
+        
     </style>
     @yield('styles')
 </head>
