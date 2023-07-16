@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
 
-    Route::prefix('admin')->name('admin.')->group(function () {
+    Route::prefix('nhiregrouptechadministration')->name('admin.')->group(function () {
         Route::get('login', [AuthenticatedSessionController::class, 'admincreate'])->name('login');
         Route::post('login', [AuthenticatedSessionController::class, 'adminstore'])->name('do_login');
     });
@@ -31,7 +31,7 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::prefix('admin')->name('admin.')->group(function () {
+    Route::prefix('nhiregrouptechadministration')->name('admin.')->group(function () {
         Route::post('logout', [AuthenticatedSessionController::class, 'admindestroy'])->name('logout');
         Route::put('password', [PasswordController::class, 'admin_update'])->name('password.update');
     });
