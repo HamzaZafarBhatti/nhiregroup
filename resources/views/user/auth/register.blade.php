@@ -81,9 +81,9 @@
                             <div class="col-12">
                                 <div class="form-floating">
                                     <input type="text" name="referral"
-                                        class="form-control @error('referral') is-invalid @enderror" placeholder="Referral"
+                                        class="form-control @error('referral') is-invalid @enderror" placeholder="Coach"
                                         value="{{ $referral }}" id="referral" readonly required>
-                                    <label>Referral</label>
+                                    <label>Coach</label>
                                     @error('referral')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
