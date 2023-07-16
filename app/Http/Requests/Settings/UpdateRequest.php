@@ -29,7 +29,9 @@ class UpdateRequest extends FormRequest
             'email' => 'required|email',
             'address' => 'required|string',
             'phone' => 'required|string',
-            'email_notification' => 'required|boolean'
+            'email_notification' => 'required|boolean',
+            'nhire_withdraw_on' => 'required|boolean',
+            'earning_withdraw_on' => 'required|boolean',
         ];
     }
 }

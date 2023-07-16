@@ -14,7 +14,11 @@
                     <form class="row g-1 rounded-3 p-lg-5 p-4 @if (count($errors) > 0) was-validated @endif"
                         action="{{ route('user.do_login') }}" method="post" novalidate>
                         @csrf
-                       <h3 style="text-align: center;"><strong><img style="display: block; margin-left: auto; margin-right: auto;" src="https://nhiregroup.com/assets/front/new/images/2A138CA0-83883.png" alt="" width="224" height="106" /><span style="color: #008000;">Account Login</span></strong></h3>
+                        <h3 style="text-align: center;"><strong><img
+                                    style="display: block; margin-left: auto; margin-right: auto;"
+                                    src="{{ asset('assets/front/new/images/2A138CA0-83883.png') }}" alt=""
+                                    width="224" height="106" /><span style="color: #008000;">Account
+                                    Login</span></strong></h3>
                         <div class="col-12">
                             <div class="form-floating">
                                 <input type="email" name="email" class="form-control" placeholder="name@example.com"
@@ -46,7 +50,8 @@
                                 IN</button>
                         </div>
                         <div class="col-12 text-center mt-4">
-                            <span class="text-muted">Don't have an account yet? <a href="{{ route('user.register') }}">Sign up Account
+                            <span class="text-muted">Don't have an account yet? <a href="{{ route('user.register') }}">Sign
+                                    up Account
                                     here</a></span>
                         </div>
                     </form>

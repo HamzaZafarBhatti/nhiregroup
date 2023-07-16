@@ -20,6 +20,10 @@
     <!-- Jquery Core Js -->
     <script src="{{ asset('assets/js/plugins.js') }}"></script>
     <style>
+        * {
+            --gold: #FFD700;
+        }
+
         html[data-theme="dark"] .swal2-popup {
             background: #272828;
             color: #fff;
@@ -32,6 +36,10 @@
 
         .scale_up:hover {
             animation: scale_up .25s linear forwards;
+        }
+
+        .text-gold {
+            color: var(--gold) !important;
         }
 
         @keyframes scale_up {
@@ -111,11 +119,12 @@
 
         @if ($user->is_first_login)
             Swal.fire({
-                icon: 'info',
+                icon: 'success',
                 allowOutsideClick: false,
-                title: "Welcome to Nhire Group",
-                text: "Thank you for registering yourself on this platform.",
-                confirmButtonText: "Continue using Nhire"
+                title: "CONGRATULATIONS!",
+                text: "You've been successfully enrolled for NHIRE jobs.",
+                confirmButtonText: "Access Office",
+                confirmButtonColor: "#4dca88"
             }).then((result) => {
                 if (result.isConfirmed) {
                     updateIsFirstLogin();

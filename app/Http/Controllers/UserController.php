@@ -169,7 +169,7 @@ class UserController extends Controller
 
         return response([
             'success' => 'success',
-            'message' => 'Congratulations! You have earned ' . $res->get_earning_amount . ' from the job!'
+            'message' => 'Congratulations! You have earned ' . $res->get_amount . ' from the job!'
         ]);
     }
 
@@ -207,6 +207,9 @@ class UserController extends Controller
     public function generate_pay_slip()
     {
         $user = auth()->user();
+        if (!$user->salary_dashboard_access) {
+            return back()->with('warning', 'Generate Pay Slip is locked. Please To access it, you have to pay ₦ ' . $user->package->salary_dashboard_fee . ' fee.');
+        }
         $data = [
             'nhire_wallet' => $user->nhire_wallet,
             'earning_wallet' => $user->earning_wallet,

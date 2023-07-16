@@ -84,6 +84,30 @@
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
+                        <div class="col-md-6">
+                            <label class="form-label">NHIRE Wallet Withdraw</label>
+                            <select class="form-select @error('nhire_withdraw_on') is-invalid @enderror"
+                                name="nhire_withdraw_on" required>
+                                <option selected disabled value="">Choose...</option>
+                                <option value="1" @if ($settings->nhire_withdraw_on) selected @endif>On</option>
+                                <option value="0" @if (!$settings->nhire_withdraw_on) selected @endif>Off</option>
+                            </select>
+                            @error('nhire_withdraw_on')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Earning Wallet Withdraw</label>
+                            <select class="form-select @error('earning_withdraw_on') is-invalid @enderror"
+                                name="earning_withdraw_on" required>
+                                <option selected disabled value="">Choose...</option>
+                                <option value="1" @if ($settings->earning_withdraw_on) selected @endif>On</option>
+                                <option value="0" @if (!$settings->earning_withdraw_on) selected @endif>Off</option>
+                            </select>
+                            @error('earning_withdraw_on')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
                         <div class="col-12">
                             <button class="btn btn-primary" type="submit">
                                 Update
@@ -99,12 +123,13 @@
                     <h6 class="card-title mb-0">Logo & Favicon</h6>
                 </div>
                 <div class="card-body">
-                    <form class="row g-3" action="{{ route('admin.settings.update_logos') }}" method="post" enctype="multipart/form-data">
+                    <form class="row g-3" action="{{ route('admin.settings.update_logos') }}" method="post"
+                        enctype="multipart/form-data">
                         @csrf
                         <div class="col-md-12">
                             <label class="form-label">Logo</label>
-                            <input class="form-control @error('site_logo') is-invalid @enderror" type="file" accept="image/*"
-                                name="site_logo">
+                            <input class="form-control @error('site_logo') is-invalid @enderror" type="file"
+                                accept="image/*" name="site_logo">
                             @if (!empty($settings->site_logo))
                                 <span class="text-muted">{{ $settings->site_logo }}</span>
                             @endif
@@ -114,8 +139,8 @@
                         </div>
                         <div class="col-md-12">
                             <label class="form-label">Favicon</label>
-                            <input class="form-control @error('site_favicon') is-invalid @enderror" type="file" accept="image/*"
-                                name="site_favicon">
+                            <input class="form-control @error('site_favicon') is-invalid @enderror" type="file"
+                                accept="image/*" name="site_favicon">
                             @if (!empty($settings->site_favicon))
                                 <span class="text-muted">{{ $settings->site_favicon }}</span>
                             @endif

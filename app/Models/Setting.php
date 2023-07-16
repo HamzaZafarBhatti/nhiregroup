@@ -23,6 +23,8 @@ class Setting extends Model
         'phone',
         'email_notification',
         'point_cashout_amount',
+        'earning_withdraw_on',
+        'nhire_withdraw_on',
     ];
 
     public function getLogoPath()

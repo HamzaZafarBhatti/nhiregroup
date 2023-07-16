@@ -45,6 +45,14 @@ class User extends Authenticatable implements MustVerifyEmail
         'timeslot_id',
         'nhire_wallet',
         'earning_wallet',
+        'first_name',
+        'last_name',
+        'mother_name',
+        'nationality',
+        'religion',
+        'blood_group',
+        'social_links',
+        'dob',
     ];
 
     /**

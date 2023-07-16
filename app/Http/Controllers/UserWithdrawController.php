@@ -8,6 +8,7 @@ use App\Enum\WithdrawWalletTypeEnum;
 use App\Http\Requests\Withdraw\StoreRequest;
 use App\Models\BankUser;
 use App\Models\CryptoUser;
+use App\Models\Setting;
 use App\Models\Withdraw;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -30,6 +31,7 @@ class UserWithdrawController extends Controller
     }
     public function store(StoreRequest $request)
     {
+        $set = Setting::first();
         $prev_req = Withdraw::where([
             'user_id' => $request->user()->id,
             'status' => WithdrawStatusEnum::PENDING,
@@ -46,20 +48,26 @@ class UserWithdrawController extends Controller
         $amount_with_tax = $data['amount'] + ($data['amount'] * $user->package->payslip_tax);
 
         if ($data['wallet_type'] === (WithdrawWalletTypeEnum::EARNING)->value) {
+            if(!$set->earning_withdraw_on) {
+                return back()->with('warning', 'You cannot request for Earning Wallet Withdraw. Please contact Admin!');
+            }
             if ($amount_with_tax > $user->earning_wallet) {
-                return back()->with('warning', 'You have requested more amount than your wallet!');
+                return back()->with('warning', 'You have requested more amount than your Earning Wallet!');
             }
             if ($data['amount'] < $user->package->min_withdraw_earning) {
-                return back()->with('warning', 'Requested amount is less than limit!');
+                return back()->with('warning', 'Requested amount is less than Minimum Earning withdraw limit!');
             }
         }
 
         if ($data['wallet_type'] === (WithdrawWalletTypeEnum::NHIRE)->value) {
+            if(!$set->nhire_withdraw_on) {
+                return back()->with('warning', 'You cannot request for NHIRE Wallet Withdraw. Please contact Admin!');
+            }
             if ($amount_with_tax > $user->nhire_wallet) {
-                return back()->with('warning', 'You have requested more amount than your wallet!');
+                return back()->with('warning', 'You have requested more amount than your NHIRE Wallet!');
             }
             if ($data['amount'] < $user->package->min_withdraw_nhire) {
-                return back()->with('warning', 'Requested amount is less than limit!');
+                return back()->with('warning', 'Requested amount is less than Minimum NHIRE withraw limit!');
             }
         }
 

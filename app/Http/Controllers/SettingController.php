@@ -15,7 +15,7 @@ use Image;
 
 class SettingController extends Controller
 {
-    public function edit(Setting $setting): View
+    public function edit(): View
     {
         //
         return view('admin.settings.edit');

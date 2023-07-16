@@ -5,7 +5,7 @@
 @section('styles')
     <style>
         .green-gradient {
-            background: linear-gradient(112.9deg, rgb(112, 255, 151) 6.2%, rgb(70, 195, 255) 99.7%);
+            background: linear-gradient(90deg, rgba(31,171,80,1) 0%, rgba(152,176,9,1) 52%, rgba(255,215,0,1) 100%);
         }
 
         [data-theme=dark] .green-gradient,
@@ -31,7 +31,8 @@
                         <h5>{{ $user->get_total_income }}</h5>
                     </div>
                     <div class="mb-3">
-                        <a href="{{ route('user.generate_pay_slip') }}" class="btn btn-primary w-100 btn-lg">Generate
+                        <a href="{{ route('user.generate_pay_slip') }}"
+                            class="btn btn-success w-100 btn-lg text-gold">Generate
                             Payslip</a>
                     </div>
                     <div>
@@ -58,7 +59,7 @@
                             </div>
                             <div class="item card overflow-hidden green-gradient">
                                 <div class="card-body">
-                                    <div class="d-flex align-items-center justify-content-between">
+                                    <div class="d-flex align-items-center justify-content-between text-uppercase">
                                         <h4 class="card-title">Coach 2</h4>
                                         <h4 class="card-title">{{ $user->package->name }}
                                         </h4>
@@ -78,7 +79,7 @@
                             </div>
                             <div class="item card overflow-hidden green-gradient">
                                 <div class="card-body">
-                                    <div class="d-flex align-items-center justify-content-between">
+                                    <div class="d-flex align-items-center justify-content-between text-uppercase">
                                         <h4 class="card-title">N-Worker</h4>
                                         <h4 class="card-title">{{ $user->package->name }}
                                         </h4>

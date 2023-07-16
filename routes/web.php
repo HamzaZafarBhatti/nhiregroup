@@ -108,11 +108,13 @@ Route::middleware(['auth', /* 'verified', */ 'user'])->name('user.')->prefix('us
         // Route::post('/{id}', 'update')->name('update');
     });
 
-    Route::resource('banks', UserBankController::class)->except('show');
+    Route::controller(ProfileController::class)->prefix('profile')->name('profile.')->group(function () {
+        Route::get('/', 'edit')->name('edit');
+        Route::patch('/', 'update')->name('update');
+        Route::delete('/', 'destroy')->name('destroy');
+    });
 
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::resource('banks', UserBankController::class)->except('show');
 });
 
 Route::middleware(['auth', 'admin'])->name('admin.')->prefix('admin')->group(function () {
