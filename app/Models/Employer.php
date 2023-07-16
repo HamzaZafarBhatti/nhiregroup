@@ -50,8 +50,8 @@ class Employer extends Model
     {
         return Attribute::make(
             get: fn ($val, $attr) => match ($this->is_active) {
-                1 => '<span class="badge bg-success">Active</span>',
-                0 => '<span class="badge bg-warning">Inactive</span>',
+                '1' => '<span class="badge bg-success">Active</span>',
+                '0' => '<span class="badge bg-warning">Inactive</span>',
             }
         );
     }
