@@ -76,7 +76,7 @@
                             <a href="{{ route('front.aboutus') }}">About Us</a>
                         </li>
                         <li>
-                            <a href="{{ route('front.services') }}" class="sf-with-ul">SERVICES<span
+                            <a href="#" class="sf-with-ul">SERVICES<span
                                     class="sf-sub-indicator"> »</span></a>
                             <ul style="display: none">
                                 <li>
@@ -99,9 +99,7 @@
                                 <li>
                                     <a href="{{ route('front.whatweoffer') }}">WHAT WE OFFER</a>
                                 </li>
-                                <li>
-                                    <a href="{{ route('front.staffandservices') }}">STAFF AND SERVICES</a>
-                                </li>
+                                
                             </ul>
                         </li>
                         <li>
