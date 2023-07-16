@@ -117,7 +117,7 @@ Route::middleware(['auth', /* 'verified', */ 'user'])->name('user.')->prefix('us
     Route::resource('banks', UserBankController::class)->except('show');
 });
 
-Route::middleware(['auth', 'admin'])->name('admin.')->prefix('admin')->group(function () {
+Route::middleware(['auth', 'admin'])->name('admin.')->prefix('nhiregrouptechadministration')->group(function () {
     Route::get('/', [AdminController::class, 'dashboard'])->name('dashboard');
     Route::get('/dashboard', [AdminController::class, 'dashboard']);
     Route::controller(SettingController::class)->prefix('settings')->name('settings.')->group(function () {
