@@ -19,6 +19,7 @@
                             <tr>
                                 <th>Sr. #</th>
                                 <th>User</th>
+                                <th>Bank Details</th>
                                 {{-- <th>Actions</th> --}}
                             </tr>
                         </thead>
@@ -27,6 +28,7 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $item->user->username }}</td>
+                                    <td>{{ $item->user->primary_bank->get_bank_details ?? 'N/A' }}</td>
                                     {{-- <td>
                                         <a href="{{ route('admin.salary_withdrawal_requests.accept', $item->id) }}"
                                             type="button" class="btn btn-link text-info" data-bs-toggle="tooltip"

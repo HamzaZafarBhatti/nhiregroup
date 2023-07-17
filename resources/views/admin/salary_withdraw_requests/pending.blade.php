@@ -19,6 +19,7 @@
                             <tr>
                                 <th>Sr. #</th>
                                 <th>User</th>
+                                <th>Bank Details</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -26,6 +27,7 @@
                             @foreach ($withdraw_requests as $item)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $item->user->primary_bank->get_bank_details ?? 'N/A' }}</td>
                                     <td>{{ $item->user->username }}</td>
                                     <td>
                                         <button onclick="accept({{ $item->id }})" type="button"

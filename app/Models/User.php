@@ -139,6 +139,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(EmployerPostUser::class)->where('cashed_out', 1);
     }
 
+    public function primary_bank()
+    {
+        return $this->hasOne(BankUser::class)->where('is_primary', 1);
+    }
+
     protected function getDirectRefBonus(): Attribute
     {
         return Attribute::make(

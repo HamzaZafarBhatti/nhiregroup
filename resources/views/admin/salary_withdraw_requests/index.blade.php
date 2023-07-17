@@ -19,6 +19,7 @@
                             <tr>
                                 <th>Sr. #</th>
                                 <th>User</th>
+                                <th>Bank Details</th>
                                 <th>Status</th>
                                 <th>Actions</th>
                             </tr>
@@ -28,6 +29,7 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $item->user->username }}</td>
+                                    <td>{{ $item->user->primary_bank->get_bank_details ?? 'N/A' }}</td>
                                     <td>{{ $item->get_status }}</td>
                                     <td>
                                         @if ($item->status === 0)
