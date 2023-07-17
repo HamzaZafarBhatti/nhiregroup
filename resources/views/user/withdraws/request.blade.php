@@ -79,7 +79,7 @@
                             @enderror
                         </div>
                         <div class="col-12">
-                            <button class="btn btn-primary" type="submit">
+                            <button class="btn btn-success" type="submit">
                                 Request Withdraw
                             </button>
                         </div>
