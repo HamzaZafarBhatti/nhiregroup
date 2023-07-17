@@ -21,7 +21,7 @@
     <script src="{{ asset('assets/js/plugins.js') }}"></script>
     <style>
         * {
-            --gold: #FFD700;
+            --gold: #D4AF37;
         }
 
         html[data-theme="dark"] .swal2-popup {
@@ -129,7 +129,7 @@
                 icon: 'success',
                 allowOutsideClick: false,
                 title: "CONGRATULATIONS!",
-                text: "You've been successfully enrolled for NHIRE jobs.",
+                html: "<span style='color: #D4AF37'><span>You've been successfully enrolled for NHIRE jobs.",
                 confirmButtonText: "Access Office",
                 confirmButtonColor: "#4dca88"
             }).then((result) => {
