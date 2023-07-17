@@ -82,6 +82,8 @@ class RegisteredUserController extends Controller
             if (!empty($parent_id)) {
                 $upline_package = Package::find($upline->package_id);
                 $downline_package = Package::find($user->package_id);
+                Log::info($upline->parent);
+                Log::info($upline->parent->pacakge);
                 switch ($downline_package->grade) {
                     case 10:
                         if ($upline_package->grade == 10) {
