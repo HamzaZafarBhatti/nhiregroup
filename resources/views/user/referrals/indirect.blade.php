@@ -21,6 +21,7 @@
                                 <th>ID</th>
                                 <th>Username</th>
                                 <th>Email</th>
+                                <th>Amount</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -29,6 +30,7 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td class="text-uppercase">{{ $item->downline->username }}</td>
                                     <td>{{ $item->downline->email }}</td>
+                                    <td>{{ $item->get_amount }}</td>
                                 </tr>
                             @endforeach
                         </tbody>
