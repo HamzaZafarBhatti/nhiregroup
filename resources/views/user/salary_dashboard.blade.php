@@ -53,38 +53,38 @@
 @section('scripts')
     <script>
         function requestWithdraw() {
-            // Swal.fire({
-            //     title: "Select Salary Auditor",
-            //     input: "select",
-            //     inputOptions: @php echo $subadmins @endphp,
-            //     inputPlaceholder: 'Select Salary Auditor',
-            //     showCancelButton: true,
-            //     confirmButtonText: "Confirm",
-            //     showLoaderOnConfirm: true,
-            //     allowOutsideClick: () => !Swal.isLoading(),
-            // }).then((result) => {
-            // if (result.isConfirmed && result.value) {
-            $.ajax({
-                url: "{{ route('user.withdraw.request') }}",
-                type: "POST",
-                data: {
-                    subadmin_id: result.value,
-                },
-                success: function(response) {
-                    console.log(response);
-                    Toast.fire({
-                        icon: response.status,
-                        title: response.message
+            Swal.fire({
+                title: "Select Salary Auditor",
+                input: "select",
+                inputOptions: @php echo $subadmins @endphp,
+                inputPlaceholder: 'Select Salary Auditor',
+                showCancelButton: true,
+                confirmButtonText: "Confirm",
+                showLoaderOnConfirm: true,
+                allowOutsideClick: () => !Swal.isLoading(),
+            }).then((result) => {
+                if (result.isConfirmed && result.value) {
+                    $.ajax({
+                        url: "{{ route('user.withdraw.request') }}",
+                        type: "POST",
+                        data: {
+                            subadmin_id: result.value,
+                        },
+                        success: function(response) {
+                            console.log(response);
+                            Toast.fire({
+                                icon: response.status,
+                                title: response.message
+                            })
+                            if (response.status === 'success') {
+                                setTimeout(() => {
+                                    window.location.reload();
+                                }, 3000);
+                            }
+                        }
                     })
-                    if (response.status === 'success') {
-                        setTimeout(() => {
-                            window.location.reload();
-                        }, 3000);
-                    }
                 }
-            })
-            //     }
-            // });
+            });
         }
 
         function validatePayment() {
