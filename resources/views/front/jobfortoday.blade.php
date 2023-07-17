@@ -93,8 +93,7 @@
                     console.log(response);
                     Swal.fire({
                         icon: response.success,
-                        title: response.title,
-                        text: response.text,
+                        title: response.message,
                         confirmButtonText: 'Access Office',
                     })
                 }
