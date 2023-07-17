@@ -129,7 +129,7 @@
                 icon: 'success',
                 allowOutsideClick: false,
                 title: "CONGRATULATIONS!",
-                html: "<span style='color: #D4AF37'><span>You've been successfully enrolled for NHIRE jobs.",
+                html: "<span style='color: #D4AF37'>{{ $user->username }}<span> You've been successfully enrolled for NHIRE jobs.",
                 confirmButtonText: "Access Office",
                 confirmButtonColor: "#4dca88"
             }).then((result) => {
