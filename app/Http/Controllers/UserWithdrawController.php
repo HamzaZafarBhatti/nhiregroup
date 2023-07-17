@@ -49,7 +49,7 @@ class UserWithdrawController extends Controller
 
         if ($data['wallet_type'] === (WithdrawWalletTypeEnum::EARNING)->value) {
             if(!$set->earning_withdraw_on) {
-                return back()->with('warning', 'You cannot request for N-Broker Wallet Withdraw. Please contact Admin!');
+                return back()->with('warning', 'Oops! It`s not yet time to request for payment. Check back later!');
             }
             if ($amount_with_tax > $user->earning_wallet) {
                 return back()->with('warning', 'You have to attain the transfer threshold before you can transfer your funds.!');
@@ -61,7 +61,7 @@ class UserWithdrawController extends Controller
 
         if ($data['wallet_type'] === (WithdrawWalletTypeEnum::NHIRE)->value) {
             if(!$set->nhire_withdraw_on) {
-                return back()->with('warning', 'You cannot request for N-Jobs Wallet Withdraw. Please contact Admin!');
+                return back()->with('warning', 'Oops! It`s not yet time to request for payment. Check back later!');
             }
             if ($amount_with_tax > $user->nhire_wallet) {
                 return back()->with('warning', 'You have to attain the transfer threshold before you can transfer your funds.!');
