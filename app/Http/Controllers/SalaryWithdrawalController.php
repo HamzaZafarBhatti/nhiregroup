@@ -62,7 +62,7 @@ class SalaryWithdrawalController extends Controller
         DB::beginTransaction();
         try {
             $withdraw_request->update(['status' => 1]);
-            $user->update(['points' => 0]);
+            $user->update(['points' => $user->points - 50]);
             DB::commit();
             return response()->json([
                 'status' => 'success',
