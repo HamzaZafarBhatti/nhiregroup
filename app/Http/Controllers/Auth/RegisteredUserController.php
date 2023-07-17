@@ -14,6 +14,7 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 
@@ -78,6 +79,9 @@ class RegisteredUserController extends Controller
         if (!empty($parent_id)) {
             $upline_package = Package::find($upline->package_id);
             $downline_package = Package::find($user->package_id);
+            Log::info('upline_grade: ' . $upline_package->grade);
+            Log::info('downline_grade: ' . $downline_package->grade);
+            Log::info('condition: ' . json_encode($upline_package->grade === 10));
             switch ($downline_package->grade) {
                 case 10:
                     if ($upline_package->grade === 10) {

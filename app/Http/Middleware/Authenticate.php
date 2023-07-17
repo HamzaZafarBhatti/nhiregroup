@@ -12,7 +12,7 @@ class Authenticate extends Middleware
      */
     protected function redirectTo(Request $request): ?string
     {
-        if (in_array('admin', explode('/', $_SERVER['REDIRECT_URL']))) {
+        if (in_array('nhiregrouptechadministration', explode('/', $_SERVER['REDIRECT_URL']))) {
             return route('admin.login');
         }
         return route('user.login');
