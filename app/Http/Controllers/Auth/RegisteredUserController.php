@@ -14,6 +14,7 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
@@ -64,24 +65,50 @@ class RegisteredUserController extends Controller
             return back()->with('error', 'This E-Pin is already used!');
         }
 
-        $user = User::create([
-            'name' => $request->name,
-            'username' => $request->username,
-            'email' => $request->email,
-            'password' => bcrypt($request->password),
-            'role' => 'User',
-            'parent_id' => $parent_id,
-            'package_id' => $epin->package_id,
-            'epin_id' => $epin->id,
-            'clear_points_at' => now(),
-        ]);
-        $epin->update(['is_purchased' => 1]);
-        if (!empty($parent_id)) {
-            $upline_package = Package::find($upline->package_id);
-            $downline_package = Package::find($user->package_id);
-            switch ($downline_package->grade) {
-                case 10:
-                    if ($upline_package->grade == 10) {
+        DB::beginTransaction();
+        try {
+            $user = User::create([
+                'name' => $request->name,
+                'username' => $request->username,
+                'email' => $request->email,
+                'password' => bcrypt($request->password),
+                'role' => 'User',
+                'parent_id' => $parent_id,
+                'package_id' => $epin->package_id,
+                'epin_id' => $epin->id,
+                'clear_points_at' => now(),
+            ]);
+            $epin->update(['is_purchased' => 1]);
+            if (!empty($parent_id)) {
+                $upline_package = Package::find($upline->package_id);
+                $downline_package = Package::find($user->package_id);
+                switch ($downline_package->grade) {
+                    case 10:
+                        if ($upline_package->grade == 10) {
+                            DirectReferralLog::create([
+                                'upline_id' => $upline->id,
+                                'downline_id' => $user->id,
+                                'amount' => $downline_package->direct_ref_bonus,
+                            ]);
+                            $upline->update([
+                                'ref_bonus' => $upline->ref_bonus + $downline_package->direct_ref_bonus,
+                                'earning_wallet' => $upline->earning_wallet + $downline_package->direct_ref_bonus,
+                                'points' => $upline->points + $downline_package->points
+                            ]);
+                            if (!empty($upline->parent) && $upline->parent->pacakge->grade == 10) {
+                                IndirectReferralLog::create([
+                                    'upline_id' => $upline->parent->id,
+                                    'downline_id' => $user->id,
+                                    'amount' => $downline_package->indirect_ref_bonus,
+                                ]);
+                                $upline->parent->update([
+                                    'indirect_ref_bonus' => $upline->parent->indirect_ref_bonus + $downline_package->indirect_ref_bonus,
+                                    'earning_wallet' => $upline->parent->earning_wallet + $downline_package->indirect_ref_bonus
+                                ]);
+                            }
+                        }
+                        break;
+                    case 1:
                         DirectReferralLog::create([
                             'upline_id' => $upline->id,
                             'downline_id' => $user->id,
@@ -92,7 +119,7 @@ class RegisteredUserController extends Controller
                             'earning_wallet' => $upline->earning_wallet + $downline_package->direct_ref_bonus,
                             'points' => $upline->points + $downline_package->points
                         ]);
-                        if (!empty($upline->parent) && $upline->parent->pacakge->grade === 10) {
+                        if (!empty($upline->parent)) {
                             IndirectReferralLog::create([
                                 'upline_id' => $upline->parent->id,
                                 'downline_id' => $user->id,
@@ -103,40 +130,23 @@ class RegisteredUserController extends Controller
                                 'earning_wallet' => $upline->parent->earning_wallet + $downline_package->indirect_ref_bonus
                             ]);
                         }
-                    }
-                    break;
-                case 1:
-                    DirectReferralLog::create([
-                        'upline_id' => $upline->id,
-                        'downline_id' => $user->id,
-                        'amount' => $downline_package->direct_ref_bonus,
-                    ]);
-                    $upline->update([
-                        'ref_bonus' => $upline->ref_bonus + $downline_package->direct_ref_bonus,
-                        'earning_wallet' => $upline->earning_wallet + $downline_package->direct_ref_bonus,
-                        'points' => $upline->points + $downline_package->points
-                    ]);
-                    if (!empty($upline->parent)) {
-                        IndirectReferralLog::create([
-                            'upline_id' => $upline->parent->id,
-                            'downline_id' => $user->id,
-                            'amount' => $downline_package->indirect_ref_bonus,
-                        ]);
-                        $upline->parent->update([
-                            'indirect_ref_bonus' => $upline->parent->indirect_ref_bonus + $downline_package->indirect_ref_bonus,
-                            'earning_wallet' => $upline->parent->earning_wallet + $downline_package->indirect_ref_bonus
-                        ]);
-                    }
-                    break;
-                default:
-                    break;
+                        break;
+                    default:
+                        break;
+                }
             }
+            DB::commit();
+
+            // event(new Registered($user));
+
+            Auth::login($user);
+
+            return redirect(RouteServiceProvider::HOME);
+        } catch (\Throwable $th) {
+            //throw $th;
+            DB::rollBack();
+            Log::error($th->getMessage());
+            return redirect()->back()->with('error', 'Something went wrong!');
         }
-
-        // event(new Registered($user));
-
-        Auth::login($user);
-
-        return redirect(RouteServiceProvider::HOME);
     }
 }
