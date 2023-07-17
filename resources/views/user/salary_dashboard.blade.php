@@ -12,8 +12,9 @@
                 <div class="card overflow-hidden">
                     <div class="card-body">
                         <div class="mb-5">
-                            <span class="h4 text-warning">You cannot access your 'Salary Dashboard'. To access it, you have
-                                to pay ₦ {{ auth()->user()->package->salary_dashboard_fee }} fee.</span>
+                            <span class="h4 text-gold">Access denied! Please contact one of our auditors on WhatsApp to
+                                validate your salary dashboard. Access fee is ₦
+                                {{ auth()->user()->package->salary_dashboard_fee }}.</span>
                         </div>
                         <div class="text-center">
                             <button class="btn btn-success btn-lg @if (!empty(auth()->user()->salaryprofile_request) && auth()->user()->salaryprofile_request->status === 0) disabled @endif"
