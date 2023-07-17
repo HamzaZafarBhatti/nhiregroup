@@ -45,8 +45,18 @@
         .swal2-title {
             font-size: 1.5rem !important;
         }
+
         .swal2-popup.swal2-toast .swal2-title {
             font-size: 1rem !important;
+        }
+
+        .btn-success {
+            background-color: var(--bs-btn-hover-bg);
+            border-color: var(--bs-btn-hover-border-color);
+            color: var(--gold) !important;
+        }
+        .btn:hover {
+            background-color: #145134;
         }
 
         @keyframes scale_up {

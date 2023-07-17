@@ -62,7 +62,7 @@ class RegisteredUserController extends Controller
             return back()->with('error', 'This Jobpass is invalid!');
         }
         if ($epin->is_purchased == 1) {
-            return back()->with('error', 'Jobpass already been applied and access granted!');
+            return back()->with('error', 'This Jobpass already been applied and access granted!');
         }
 
         DB::beginTransaction();
