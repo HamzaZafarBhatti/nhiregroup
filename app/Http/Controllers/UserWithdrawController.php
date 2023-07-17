@@ -49,25 +49,25 @@ class UserWithdrawController extends Controller
 
         if ($data['wallet_type'] === (WithdrawWalletTypeEnum::EARNING)->value) {
             if(!$set->earning_withdraw_on) {
-                return back()->with('warning', 'You cannot request for Earning Wallet Withdraw. Please contact Admin!');
+                return back()->with('warning', 'You cannot request for N-Broker Wallet Withdraw. Please contact Admin!');
             }
             if ($amount_with_tax > $user->earning_wallet) {
-                return back()->with('warning', 'You have requested more amount than your Earning Wallet!');
+                return back()->with('warning', 'You have to attain the transfer threshold before you can transfer your funds.!');
             }
             if ($data['amount'] < $user->package->min_withdraw_earning) {
-                return back()->with('warning', 'Requested amount is less than Minimum Earning withdraw limit!');
+                return back()->with('warning', 'Requested amount is less than Minimum N-Broker withdraw limit!');
             }
         }
 
         if ($data['wallet_type'] === (WithdrawWalletTypeEnum::NHIRE)->value) {
             if(!$set->nhire_withdraw_on) {
-                return back()->with('warning', 'You cannot request for NHIRE Wallet Withdraw. Please contact Admin!');
+                return back()->with('warning', 'You cannot request for N-Jobs Wallet Withdraw. Please contact Admin!');
             }
             if ($amount_with_tax > $user->nhire_wallet) {
-                return back()->with('warning', 'You have requested more amount than your NHIRE Wallet!');
+                return back()->with('warning', 'You have to attain the transfer threshold before you can transfer your funds.!');
             }
             if ($data['amount'] < $user->package->min_withdraw_nhire) {
-                return back()->with('warning', 'Requested amount is less than Minimum NHIRE withraw limit!');
+                return back()->with('warning', 'Requested amount is less than Minimum N-Jobs withraw limit!');
             }
         }
 
