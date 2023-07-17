@@ -10,8 +10,8 @@ enum WithdrawWalletTypeEnum: string
     public function getLabel(): string
     {
         return match ($this) {
-            self::NHIRE => 'NHIRE Wallet',
-            self::EARNING => 'Earning Wallet',
+            self::NHIRE => 'N-Jobs Wallet',
+            self::EARNING => 'N-Broker Wallet',
         };
     }
 }

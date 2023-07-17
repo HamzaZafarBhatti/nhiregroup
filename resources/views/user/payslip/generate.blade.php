@@ -16,7 +16,7 @@
                             <tbody>
                                 <tr>
                                     <td>
-                                        <h4 class="mb-0">NHIRE Wallet:</h4>
+                                        <h4 class="mb-0">N-Jobs Wallet:</h4>
                                     </td>
                                     <td>
                                         <h4 class="mb-0 fw-bold">₦{{ $nhire_wallet }}</h4>
@@ -24,7 +24,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <h4 class="mb-0">Earning Wallet:</h4>
+                                        <h4 class="mb-0">N-Broker Wallet:</h4>
                                     </td>
                                     <td>
                                         <h4 class="mb-0 fw-bold">₦{{ $earning_wallet }}</h4>

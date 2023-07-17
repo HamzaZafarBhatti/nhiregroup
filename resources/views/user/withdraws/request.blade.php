@@ -15,8 +15,8 @@
                 </div>
                 <div class="card-body">
                     <div>
-                        <h4>NHIRE Wallet: {{ auth()->user()->get_nhire_wallet }}</h4>
-                        <h4>Earning Wallet: {{ auth()->user()->get_earning_wallet }}</h4>
+                        <h4>N-Jobs Wallet: {{ auth()->user()->get_nhire_wallet }}</h4>
+                        <h4>N-Broker Wallet: {{ auth()->user()->get_earning_wallet }}</h4>
                     </div>
                     <form class="row g-3" action="{{ route('user.withdraws.store') }}" method="post">
                         @csrf
