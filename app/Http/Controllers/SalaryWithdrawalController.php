@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\SalaryWithdrawal;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class SalaryWithdrawalController extends Controller
@@ -55,14 +57,19 @@ class SalaryWithdrawalController extends Controller
 
     public function accept(Request $request)
     {
+        $withdraw_request = SalaryWithdrawal::findOrFail($request->id);
+        $user = User::findOrFail($withdraw_request->user_id);
+        DB::beginTransaction();
         try {
-            $withdraw_request = SalaryWithdrawal::find($request->id);
             $withdraw_request->update(['status' => 1]);
+            $user->update(['points' => 0]);
+            DB::commit();
             return response()->json([
                 'status' => 'success',
                 'message' => 'Request Accepted!',
             ]);
         } catch (\Throwable $th) {
+            DB::rollBack();
             Log::error('Salary Withdrawal Request Accept Error: ' . $th->getMessage());
             return response()->json([
                 'status' => 'danger',
