@@ -59,10 +59,10 @@ class RegisteredUserController extends Controller
         $epin = Epin::where('serial', $request->epin)->first();
         // return $epin;
         if (!$epin) {
-            return back()->with('error', 'This E-Pin is already invalid!');
+            return back()->with('error', 'This Jobpass is invalid!');
         }
         if ($epin->is_purchased == 1) {
-            return back()->with('error', 'This E-Pin is already used!');
+            return back()->with('error', 'Jobpass already been applied and access granted!');
         }
 
         DB::beginTransaction();
