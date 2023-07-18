@@ -8,6 +8,9 @@
         .swal2-radio {
             display: unset !important;
         }
+        .dataTables_wrapper {
+            overflow: auto;
+        }
     </style>
 @endsection
 
@@ -144,7 +147,7 @@
         }
         $(document).ready(function() {
             $("#myTable").addClass("nowrap").dataTable({
-                responsive: true,
+                // responsive: true,
             });
         });
     </script>

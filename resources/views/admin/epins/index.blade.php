@@ -4,6 +4,11 @@
 
 @section('styles')
     <link rel="stylesheet" href="{{ asset('assets/cssbundle/dataTables.min.css') }}" />
+    <style>
+        .dataTables_wrapper {
+            overflow: auto;
+        }
+    </style>
 @endsection
 
 @section('content')
@@ -77,9 +82,6 @@
                                         @endif
                                     </td>
                                     <td>
-                                        {{-- <a href="{{ route('admin.epins.edit', $item->id) }}" type="button"
-                                            class="btn btn-link text-info" data-bs-toggle="tooltip" data-bs-placement="top"
-                                            aria-label="Edit" data-bs-original-title="Edit"><i class="fa fa-pencil"></i></a> --}}
                                         <a href="{{ route('admin.epins.destroy', $item->id) }}" type="button"
                                             onclick="event.preventDefault(); document.getElementById('formDelete{{ $item->id }}').submit();"
                                             class="btn btn-link text-danger" data-bs-toggle="tooltip"
@@ -106,7 +108,7 @@
     <script>
         $(document).ready(function() {
             $("#myTable").addClass("nowrap").dataTable({
-                responsive: true,
+                // responsive: true,
             });
         });
     </script>

@@ -4,6 +4,11 @@
 
 @section('styles')
     <link rel="stylesheet" href="{{ asset('assets/cssbundle/dataTables.min.css') }}" />
+    <style>
+        .dataTables_wrapper {
+            overflow: auto;
+        }
+    </style>
 @endsection
 
 @section('content')
@@ -20,7 +25,6 @@
                                 <th>Sr. #</th>
                                 <th>User</th>
                                 <th>Bank Details</th>
-                                {{-- <th>Actions</th> --}}
                             </tr>
                         </thead>
                         <tbody>
@@ -29,16 +33,6 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $item->user->username }}</td>
                                     <td>{{ $item->user->primary_bank->get_bank_details ?? 'N/A' }}</td>
-                                    {{-- <td>
-                                        <a href="{{ route('admin.salary_withdrawal_requests.accept', $item->id) }}"
-                                            type="button" class="btn btn-link text-info" data-bs-toggle="tooltip"
-                                            data-bs-placement="top" aria-label="Accept" data-bs-original-title="Accept"><i
-                                                class="fa fa-thumbs-up"></i></a>
-                                        <a href="{{ route('admin.salary_withdrawal_requests.reject', $item->id) }}"
-                                            type="button" class="btn btn-link text-danger" data-bs-toggle="tooltip"
-                                            data-bs-placement="top" aria-label="Reject" data-bs-original-title="Reject"><i
-                                                class="fa fa-thumbs-down"></i></a>
-                                    </td> --}}
                                 </tr>
                             @endforeach
                         </tbody>
@@ -54,7 +48,7 @@
     <script>
         $(document).ready(function() {
             $("#myTable").addClass("nowrap").dataTable({
-                responsive: true,
+                // responsive: true,
             });
         });
     </script>

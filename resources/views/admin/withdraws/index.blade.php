@@ -4,6 +4,11 @@
 
 @section('styles')
     <link rel="stylesheet" href="{{ asset('assets/cssbundle/dataTables.min.css') }}" />
+    <style>
+        .dataTables_wrapper {
+            overflow: auto;
+        }
+    </style>
 @endsection
 
 @section('content')
@@ -146,7 +151,7 @@
         }
         $(document).ready(function() {
             $("#myTable").addClass("nowrap").dataTable({
-                responsive: true,
+                // responsive: true,
             });
         });
     </script>
