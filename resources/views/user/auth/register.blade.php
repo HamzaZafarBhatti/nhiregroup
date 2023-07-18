@@ -13,7 +13,11 @@
                     <form class="row g-1 rounded-3 p-lg-5 p-4 @if (count($errors) > 0) was-validated @endif"
                         action="{{ route('user.do_register') }}" method="post" novalidate>
                         @csrf
-                        <h3 style="text-align: center;"><strong><img style="display: block; margin-left: auto; margin-right: auto;" src="https://nhiregroup.com/assets/front/new/images/2A138CA0-83883.png" alt="" width="224" height="106" /><span style="color: #008000;">SIGNUP Your Account</span></strong></h3>
+                        <h3 style="text-align: center;"><strong><img
+                                    style="display: block; margin-left: auto; margin-right: auto;"
+                                    src="https://nhiregroup.com/assets/front/new/images/2A138CA0-83883.png" alt=""
+                                    width="224" height="106" /><span style="color: #008000;">Fill Your Application
+                                    Form</span></strong></h3>
                         <div class="col-12">
                             <div class="form-floating">
                                 <input type="text" name="name"
