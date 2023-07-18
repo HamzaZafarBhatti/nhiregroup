@@ -28,10 +28,10 @@
                         </div> --}}
                         <div class="col-12">
                             <div class="form-floating">
-                                <input type="email" name="email" class="form-control" placeholder="name@example.com"
+                                <input type="email" name="login" class="form-control" placeholder="name@example.com"
                                     required>
                                 <label>Email address</label>
-                                @error('email')
+                                @error('login')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
