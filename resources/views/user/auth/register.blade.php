@@ -104,7 +104,7 @@
                             </div>
                         </div>
                         <div class="col-12 text-center mt-4 d-grid">
-                            <button class="btn btn-lg bg-primary-gradient lift text-uppercase" type="submit">Register
+                            <button class="btn btn-lg btn-success lift text-uppercase" type="submit">Register
                                 and Apply</button>
                         </div>
                         <div class="col-12 text-center mt-4">

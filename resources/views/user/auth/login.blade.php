@@ -46,7 +46,7 @@
                             <a class="text-primary small" href="{{ route('user.password.request') }}">Forgot Password?</a>
                         </div>
                         <div class="col-12 text-center mt-4 d-grid">
-                            <button class="btn btn-lg bg-primary-gradient lift text-uppercase" type="submit">LOG
+                            <button class="btn btn-lg btn-success lift text-uppercase" type="submit">LOG
                                 IN</button>
                         </div>
                         <div class="col-12 text-center mt-4">
