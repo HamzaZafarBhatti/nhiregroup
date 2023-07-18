@@ -55,7 +55,7 @@
                                             Completed
                                         @else
                                             <a href="{{ route('user.transfer_workflow_income_to_nhire_wallet', $item->id) }}"
-                                                class="btn btn-success" type="button">Transfer to NHIRE MAIN WALLET</a>
+                                                class="btn btn-success" type="button">Transfer to N-Jobs MAIN WALLET</a>
                                         @endif
                                     </td>
                                 </tr>
