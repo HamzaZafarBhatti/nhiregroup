@@ -108,9 +108,7 @@
                                 and Apply</button>
                         </div>
                         <div class="col-12 text-center mt-4">
-                            <span class="text-muted">Don't have an account yet? <a href="{{ route('user.login') }}">Sign
-                                    in
-                                    here</a></span>
+                            <span class="text-muted">Are you an employee? Login to office <a href="{{ route('user.login') }}">Apply Here</a></span>
                         </div>
                     </form>
                     <!-- End Form -->
