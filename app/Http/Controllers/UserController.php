@@ -126,7 +126,7 @@ class UserController extends Controller
             $list[] = [
                 'logo' => '<img src="' . $item->get_image . '" alt="' . $item->name . '" class="avatar xl rounded-5">',
                 'name' => '<h5 class="text-uppercase d-flex flex-column gap-2">' . $item->name . '<small>Job Payout: ' . $item->get_earning_amount . '</small></h5>',
-                'action' => '<a target="_blank" href="' . (!empty($item->latest_job) ? route('front.jobfortoday', $item->latest_job->slug) : null) . '" class="btn btn-success ' . (empty($item->latest_job) ? 'disabled' : '') . '" type="button">Start Job</a>',
+                'action' => '<a target="_blank" href="' . (!empty($item->latest_job) ? url('https://nhiregroup.com/') . $item->latest_job->slug : null) . '" class="btn btn-success ' . (empty($item->latest_job) ? 'disabled' : '') . '" type="button">Start Job</a>',
             ];
         }
         return response([
@@ -226,46 +226,4 @@ class UserController extends Controller
 
         return view('user.payslip.generate', $data);
     }
-
-    // public function transfer_referral_payout()
-    // {
-    //     $user = auth()->user();
-    //     $data = [
-    //         'user_id' => $user->id,
-    //         'reference' => '#' . Str::random(30),
-    //         'direct_earning' => $user->ref_bonus,
-    //         'indirect_earning' => $user->indirect_ref_bonus,
-    //         'tax' => $user->package->payslip_tax,
-    //         'status' => '1',
-    //     ];
-    //     $expected_earning = $data['direct_earning'] + $data['indirect_earning'];
-    //     if ($data['tax'] > 0) {
-    //         $expected_earning = $expected_earning - ($expected_earning * $data['tax'] / 100);
-    //     }
-    //     $data['expected_earning'] = $expected_earning;
-
-    //     DB::beginTransaction();
-    //     try {
-    //         Payslip::create($data);
-
-    //         $user->update([
-    //             'ref_bonus' => $user->ref_bonus - $data['direct_earning'],
-    //             'indirect_ref_bonus' => $user->indirect_ref_bonus - $data['indirect_earning'],
-    //             'earning_wallet' => $user->earning_wallet + $data['expected_earning'],
-    //         ]);
-    //         DB::commit();
-    //         return back()->with('success', 'Transfer of payout is successful!');
-    //     } catch (Throwable $th) {
-    //         Log::error($th->getMessage());
-    //         DB::rollBack();
-    //         return back()->with('error', 'Something went wrong!');
-    //     }
-    // }
-
-    // public function payslips()
-    // {
-    //     $payslips = Payslip::where('user_id', auth()->user()->id)->get();
-
-    //     return view('user.payslip.index', compact('payslips'));
-    // }
 }
