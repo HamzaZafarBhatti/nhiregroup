@@ -4,7 +4,11 @@
 
 @section('styles')
     <link rel="stylesheet" href="{{ asset('assets/cssbundle/dataTables.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/cssbundle/sweetalert2.min.css') }}" />
+    <style>
+        .dataTables_wrapper {
+            overflow: auto;
+        }
+    </style>
 @endsection
 
 @section('content')
@@ -33,7 +37,7 @@
                                     <td>{{ $item->name }}</td>
                                     <td>{{ $item->email }}</td>
                                     <td>{{ $item->phone ?? 'N/A' }}</td>
-                                    <td>{{ $item->timeslot->get_label  ?? 'N/A' }}</td>
+                                    <td>{{ $item->timeslot->get_label ?? 'N/A' }}</td>
                                     <td>
                                         <a href="{{ route('admin.subadmins.edit', $item->id) }}" type="button"
                                             class="btn btn-link btn-sm text-info" data-bs-toggle="tooltip"
@@ -66,7 +70,7 @@
     <script>
         $(document).ready(function() {
             $("#myTable").addClass("nowrap").dataTable({
-                responsive: true,
+                // responsive: true,
             });
         });
 
