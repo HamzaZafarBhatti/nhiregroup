@@ -77,7 +77,7 @@
     <script>
         $(document).ready(function() {
             $("#myTable").addClass("nowrap").dataTable({
-                responsive: true,
+                // responsive: true,
             });
         });
     </script>
