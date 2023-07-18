@@ -23,7 +23,7 @@
                     <h6 class="card-title mb-0">Employers</h6>
                 </div>
                 <div class="card-body">
-                    <table id="myTable" class="table display dataTable table-hover" style="width: 100%">
+                    <table class="myDataTable table table-hover mb-0">
                         <thead>
                             <tr>
                                 <th>Sr. #</th>
@@ -76,7 +76,7 @@
     <script src="{{ asset('assets/js/bundle/dataTables.bundle.js') }}"></script>
     <script>
         $(document).ready(function() {
-            $("#myTable").addClass("nowrap").dataTable({
+            $('.myDataTable').addClass('nowrap').dataTable({
                 // responsive: true,
             });
         });
