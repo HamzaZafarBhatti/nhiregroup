@@ -39,24 +39,26 @@
                         </thead>
                         <tbody>
                             @foreach ($incomes as $item)
-                                <td>{{ $loop->iteration }}</td>
-                                <td>
-                                    <img src="{{ $item->employer->get_image }}" alt="{{ $item->name }}"
-                                        class="avatar xl rounded-5">
-                                </td>
-                                <td>
-                                    {{ $item->employer->name }}
-                                </td>
-                                <td>{{ $item->get_amount }}</td>
-                                <td>{{ $item->get_time }}</td>
-                                <td>
-                                    @if ($item->cashed_out)
-                                        Completed
-                                    @else
-                                        <a href="{{ route('user.transfer_workflow_income_to_nhire_wallet', $item->id) }}"
-                                            class="btn btn-success" type="button">Transfer to NHIRE MAIN WALLET</a>
-                                    @endif
-                                </td>
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>
+                                        <img src="{{ $item->employer->get_image }}" alt="{{ $item->name }}"
+                                            class="avatar xl rounded-5">
+                                    </td>
+                                    <td>
+                                        {{ $item->employer->name }}
+                                    </td>
+                                    <td>{{ $item->get_amount }}</td>
+                                    <td>{{ $item->get_time }}</td>
+                                    <td>
+                                        @if ($item->cashed_out)
+                                            Completed
+                                        @else
+                                            <a href="{{ route('user.transfer_workflow_income_to_nhire_wallet', $item->id) }}"
+                                                class="btn btn-success" type="button">Transfer to NHIRE MAIN WALLET</a>
+                                        @endif
+                                    </td>
+                                </tr>
                             @endforeach
                         </tbody>
                     </table>
