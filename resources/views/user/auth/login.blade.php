@@ -21,10 +21,10 @@
                                     Login</span></strong></h3>
                         <div class="col-12">
                             <div class="form-floating">
-                                <input type="email" name="email" class="form-control" placeholder="name@example.com"
+                                <input type="text" name="login" class="form-control" placeholder="name@example.com"
                                     required>
-                                <label>Email address</label>
-                                @error('email')
+                                <label>Email/Username</label>
+                                @error('login')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
