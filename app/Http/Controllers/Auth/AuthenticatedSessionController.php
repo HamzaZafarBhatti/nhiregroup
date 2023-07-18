@@ -35,6 +35,8 @@ class AuthenticatedSessionController extends Controller
         $credentials[$field] = $credentials['login'];
         unset($credentials['login']);
 
+        return $credentials;
+
         $request->authenticate($credentials);
 
         $request->session()->regenerate();
