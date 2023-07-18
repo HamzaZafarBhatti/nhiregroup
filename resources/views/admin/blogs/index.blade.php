@@ -14,6 +14,10 @@
             width: 100px;
             height: 50px;
         }
+
+        .dataTables_wrapper {
+            overflow: auto;
+        }
     </style>
 @endsection
 
@@ -80,7 +84,7 @@
     <script>
         $(document).ready(function() {
             $("#myTable").addClass("nowrap").dataTable({
-                responsive: true,
+                // responsive: true,
             });
         });
     </script>
