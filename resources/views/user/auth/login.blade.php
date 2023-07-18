@@ -16,8 +16,8 @@
                         @csrf
                         <h3 style="text-align: center;"><strong><img
                                     style="display: block; margin-left: auto; margin-right: auto;"
-                                    src="{{ asset('assets/front/new/images/2A138CA0-83883.png') }}" alt=""
-                                    width="224" height="106" /><span style="color: #008000;">Account
+                                    src="{{ asset('assets/front/new/images/NhireLogo.jpg') }}" alt=""
+                                    width="200" /><span style="color: #008000;">Account
                                     Login</span></strong></h3>
                         <div class="col-12">
                             <div class="form-floating">
