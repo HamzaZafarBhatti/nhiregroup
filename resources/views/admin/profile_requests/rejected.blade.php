@@ -20,25 +20,14 @@
                                 <th>Sr. #</th>
                                 <th>User</th>
                                 <th>Subadmin</th>
-                                {{-- <th>Actions</th> --}}
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($profile_requests as $item)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $item->user->username }}</td>
-                                    <td>{{ $item->subadmin->name }}</td>
-                                    {{-- <td>
-                                        <a href="{{ route('admin.salary_profile_requests.accept', $item->id) }}"
-                                            type="button" class="btn btn-link text-info" data-bs-toggle="tooltip"
-                                            data-bs-placement="top" aria-label="Accept" data-bs-original-title="Accept"><i
-                                                class="fa fa-thumbs-up"></i></a>
-                                        <a href="{{ route('admin.salary_profile_requests.reject', $item->id) }}"
-                                            type="button" class="btn btn-link text-danger" data-bs-toggle="tooltip"
-                                            data-bs-placement="top" aria-label="Reject" data-bs-original-title="Reject"><i
-                                                class="fa fa-thumbs-down"></i></a>
-                                    </td> --}}
+                                    <td>{{ $item->user->username ?? 'N/A' }}</td>
+                                    <td>{{ $item->subadmin->name ?? 'N/A' }}</td>
                                 </tr>
                             @endforeach
                         </tbody>

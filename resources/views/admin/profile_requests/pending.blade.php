@@ -27,8 +27,8 @@
                             @foreach ($profile_requests as $item)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $item->user->username }}</td>
-                                    <td>{{ $item->subadmin->name }}</td>
+                                    <td>{{ $item->user->username ?? 'N/A' }}</td>
+                                    <td>{{ $item->subadmin->name ?? 'N/A' }}</td>
                                     <td>
                                         <button onclick="accept({{ $item->id }})" type="button"
                                             class="btn btn-link text-info" data-bs-toggle="tooltip" data-bs-placement="top"
