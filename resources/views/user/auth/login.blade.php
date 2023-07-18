@@ -46,8 +46,7 @@
                             <a class="text-primary small" href="{{ route('user.password.request') }}">Forgot Password?</a>
                         </div>
                         <div class="col-12 text-center mt-4 d-grid">
-                            <button class="btn btn-lg btn-success lift text-uppercase" type="submit">LOG
-                                IN</button>
+                            <button class="btn btn-lg btn-success lift text-uppercase" type="submit">Login to Office</button>
                         </div>
                         <div class="col-12 text-center mt-4">
                             <span class="text-muted">Don't have an account yet? <a href="{{ route('user.register') }}">Sign
