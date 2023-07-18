@@ -59,7 +59,7 @@ class AuthenticatedSessionController extends Controller
     /**
      * Destroy an authenticated session.
      */
-    public function destroy(Request $request)
+    public function destroy(Request $request): RedirectResponse
     {
         Auth::guard('web')->logout();
 
@@ -67,7 +67,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        return url('https://nhiregroup.com/');
+        return redirect()->intended('https://nhiregroup.com');
     }
     public function admindestroy(Request $request): RedirectResponse
     {
