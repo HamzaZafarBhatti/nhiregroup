@@ -67,7 +67,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect()->route('front.index');
     }
     public function admindestroy(Request $request): RedirectResponse
     {
