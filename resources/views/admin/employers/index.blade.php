@@ -12,6 +12,10 @@
         img {
             object-fit: cover;
         }
+
+        .dataTables_wrapper {
+            overflow: auto;
+        }
     </style>
 @endsection
 
