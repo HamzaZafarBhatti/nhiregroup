@@ -33,9 +33,9 @@
                             @foreach ($profile_requests as $item)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $item->user->username }}</td>
+                                    <td>{{ $item->user->username ?? 'N/A' }}</td>
                                     <td>{{ $item->get_status }}</td>
-                                    <td>{{ $item->subadmin->name }}</td>
+                                    <td>{{ $item->subadmin->name ?? 'N/A' }}</td>
                                     <td>
                                         @if ($item->status === 0)
                                             <button onclick="accept({{ $item->id }})" type="button"
