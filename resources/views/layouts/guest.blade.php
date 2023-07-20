@@ -16,14 +16,8 @@
     <!-- Jquery Core Js -->
     <script src="{{ secure_asset('assets/js/plugins.js') }}"></script>
     <style>
-        * {
-            --gold: #D4AF37;
-        }
-
-        .btn-success {
-            background-color: var(--bs-btn-hover-bg);
-            border-color: var(--bs-btn-hover-border-color);
-            color: var(--gold) !important;
+        :root [data-luno="theme-blue"] {
+            --body-color: var(--body-color) !important;
         }
 
         .btn:hover {
