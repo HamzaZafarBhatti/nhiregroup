@@ -40,6 +40,8 @@ Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'i
 //     return view('welcome');
 // })->name('home');
 
+/**
+
 Route::name('front.')->controller(FrontendController::class)->group(function () {
     Route::get('/', 'index')->name('index');
     Route::get('/about-us', 'aboutus')->name('aboutus');
@@ -70,6 +72,8 @@ Route::name('front.')->controller(FrontendController::class)->group(function () 
     Route::get('/aggumentation', 'aggumentation')->name('aggumentation');
     Route::get('/we-offer', 'weoffer')->name('weoffer');
 });
+
+**/
 
 Route::controller(SettingController::class)->prefix('settings')->name('settings.')->group(function () {
     Route::post('/set-theme', 'set_theme')->name('set_theme');
