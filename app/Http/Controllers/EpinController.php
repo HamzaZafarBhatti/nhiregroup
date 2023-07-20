@@ -9,6 +9,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Session;
 use Illuminate\View\View;
 
 class EpinController extends Controller
@@ -45,16 +46,24 @@ class EpinController extends Controller
 
             $chars = '1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ';
             $now = now();
+            $codes = array();
             for ($i = 0; $i < $qty; $i++) {
+                $code = $package->epin_prefix . '-' . substr(str_shuffle($chars), 0, $package->epin_length - strlen($package->epin_prefix) - 1);
                 $data[] = [
-                    'serial' => $package->epin_prefix . '-' . substr(str_shuffle($chars), 0, $package->epin_length - strlen($package->epin_prefix) - 1),
+                    'serial' => $code,
                     'package_id' => $request->package_id,
                     'created_at' => $now,
                     'updated_at' => $now,
                     'generated_by' => auth()->user()->id
                 ];
+                array_push($codes, $code);
             }
             Epin::insert($data);
+
+            $url = 'admin.epins.download';
+            Session::put('download_link', $url);
+            Session::put('codes', implode("\n", $codes));
+
             return back()->with('success', 'E-Pins generated successfully!');
         } catch (\Throwable $th) {
             Log::error('Epin Store Error: ' . $th->getMessage());
@@ -99,5 +108,17 @@ class EpinController extends Controller
             Log::error('Epin Delete Error: ' . $th->getMessage());
             return back()->with('error', 'Something went wrong');
         }
+    }
+
+    public function epins_download()
+    {
+        $codes = Session::get('codes');
+        Session::forget(['codes', 'download_link']);
+        return response($codes)
+            ->withHeaders([
+                'Content-Type' => 'text/plain',
+                'Cache-Control' => 'no-store, no-cache',
+                'Content-Disposition' => 'attachment; filename="latest_codes.txt',
+            ]);
     }
 }

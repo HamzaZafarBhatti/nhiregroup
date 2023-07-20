@@ -162,6 +162,7 @@ Route::middleware(['auth', 'admin'])->name('admin.')->prefix('nhiregrouptechadmi
     Route::resource('employers', EmployerController::class)->except('show');
     Route::resource('employer-posts', EmployerPostController::class)->except('show');
     Route::resource('epins', EpinController::class)->except('create', 'edit', 'show', 'update');
+    Route::get('epins/download', [EpinController::class, 'epins_download'])->name('epins.download');
     Route::resource('banks', BankController::class)->except('create', 'show');
 });
 
