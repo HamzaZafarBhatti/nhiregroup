@@ -49,9 +49,11 @@ class Employer extends Model
     protected function getStatus(): Attribute
     {
         return Attribute::make(
-            get: fn ($val, $attr) => match ($this->is_active) {
-                '1' => '<span class="badge bg-success">Active</span>',
-                '0' => '<span class="badge bg-warning">Inactive</span>',
+            get: function ($val, $attr) {
+                if ($this->is_active == 1) {
+                    return '<span class="badge bg-success">Active</span>';
+                }
+                return '<span class="badge bg-warning">Inactive</span>';
             }
         );
     }
