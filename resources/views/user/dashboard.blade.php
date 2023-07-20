@@ -17,7 +17,7 @@
 
 @section('content')
     <div class="row g-3">
-        <div class="col-md-6">
+        <div class="col-md-6 text-gold">
             <h4>NHIRE Dashboard</h4>
             <h5>Welcome, {{ $user->name }}</h5>
         </div>
