@@ -21550,7 +21550,7 @@ textarea.form-control {
     -webkit-appearance: none;
 }
 .form-check-input:checked {
-    background-color: var(--primary-color);
+    background-color: var(--bs-success);
     border-color: var(--primary-color);
 }
 .btn {
@@ -22237,7 +22237,7 @@ button:focus:not(:focus-visible) {
 }
 .page-item.active .page-link,
 .page-item:hover .page-link {
-    background-color: var(--primary-color);
+    background-color: var(--gold);
     border-color: var(--border-color);
     color: var(--color-fff);
 }

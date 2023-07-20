@@ -25,7 +25,8 @@ class UserController extends Controller
     //
     public function dashboard(): View
     {
-        return view('user.dashboard');
+        $incomes = EmployerPostUser::with('employer')->where('user_id', auth()->user()->id)->latest()->get();
+        return view('user.dashboard', compact('incomes'));
     }
     public function salary_dashboard()
     {
