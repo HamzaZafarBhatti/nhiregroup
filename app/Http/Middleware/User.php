@@ -18,7 +18,7 @@ class User
     {
         $role = auth()->user()->role;
         if (in_array($role, ['User'])) {
-            Log::info($request);
+            // Log::info($request);
             return $next($request);
         }
         abort(403);

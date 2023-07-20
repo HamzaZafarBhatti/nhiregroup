@@ -29359,9 +29359,9 @@ button:focus:not(:focus-visible) {
     border: 1px dashed var(--primary-color);
 }
 .card {
-    /* border-color: var(--border-color); */
-    background-color: var(--gold);
-    /* border-style: dashed; */
+    border-color: var(--border-color);
+    background-color: var(--card-color);
+    border-style: dashed;
     border-radius: 0.75rem;
 }
 .card .card-img-top {

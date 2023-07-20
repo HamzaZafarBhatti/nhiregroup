@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Log;
 
 class Setting extends Model
 {
@@ -29,11 +30,12 @@ class Setting extends Model
 
     public function getLogoPath()
     {
-        return $this->logo_path;
+        Log::info(asset($this->logo_path));
+        return asset($this->logo_path);
     }
 
     public function getFaviconPath()
     {
-        return $this->favicon_path;
+        return asset($this->favicon_path);
     }
 }
