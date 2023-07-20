@@ -46,7 +46,7 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td><img src="{{ $item->get_image }}" alt="{{ $item->title }}"></td>
                                     <td>{{ $item->title }}</td>
-                                    <td>{{ $item->employer->name }}</td>
+                                    <td>{{ $item->employer->name ?? 'N/A' }}</td>
                                     <td>
                                         @if ($item->is_active)
                                             <span class="badge bg-success">Active</span>
