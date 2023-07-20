@@ -60,6 +60,8 @@
                 inputPlaceholder: 'Select Salary Auditor',
                 showCancelButton: true,
                 confirmButtonText: "Confirm",
+                confirmButtonColor: "#157347",
+                cancelButtonColor: "#fc5a69",
                 showLoaderOnConfirm: true,
                 allowOutsideClick: () => !Swal.isLoading(),
             }).then((result) => {
@@ -95,6 +97,8 @@
                 inputPlaceholder: 'Select Salary Auditor',
                 showCancelButton: true,
                 confirmButtonText: "Confirm",
+                confirmButtonColor: "#157347",
+                cancelButtonColor: "#fc5a69",
                 showLoaderOnConfirm: true,
                 allowOutsideClick: () => !Swal.isLoading(),
                 inputValidator: (value) => {
