@@ -124,16 +124,18 @@ class UserController extends Controller
         if (auth()->user()->package_id === 2) {
             $employers = $employers->where('package_id', $request->package_id);
         }
+        
         if (auth()->user()->package_id === 1) {
             $employers = $employers->where('package_id', auth()->user()->package_id)->limit(3);
         }
+        
         $employers = $employers->latest('id')->get();
         $list = array();
         foreach ($employers as $item) {
             $list[] = [
                 'logo' => '<img src="' . $item->get_image . '" alt="' . $item->name . '" class="avatar xl rounded-5">',
                 'name' => '<h5 class="text-uppercase d-flex flex-column gap-2">' . $item->name . '<small>Job Payout: ' . $item->get_earning_amount . '</small></h5>',
-                'action' => '<a target="_blank" href="' . (!empty($item->latest_job) ? url('https://nhiregroup.com/') . $item->latest_job->slug : null) . '" class="btn btn-success ' . (empty($item->latest_job) ? 'disabled' : '') . '" type="button">Start Job</a>',
+                'action' => '<a target="_blank" href="' . (!empty($item->latest_job) ? route('front.jobfortoday', $item->latest_job->slug) : null) . '" class="btn btn-success ' . (empty($item->latest_job) ? 'disabled' : '') . '" type="button">Start Job</a>',
             ];
         }
         return response([

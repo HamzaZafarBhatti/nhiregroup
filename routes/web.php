@@ -60,8 +60,8 @@ Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'i
     // Route::get('/person', 'person')->name('person');
     // Route::get('/staff-and-services', 'staffandservices')->name('staffandservices');
     // Route::get('/what-we-offer', 'whatweoffer')->name('whatweoffer');
-    // Route::get('/jobs-for-today', 'jobsfortoday')->name('jobsfortoday');
-    // Route::get('/jobs-for-today/{slug}', 'jobfortoday')->name('jobfortoday');
+    Route::get('/jobs-for-today', 'jobsfortoday')->name('jobsfortoday');
+    Route::get('/jobs-for-today/{slug}', 'jobfortoday')->name('jobfortoday');
     // Route::get('/faq', 'faq')->name('faq');
     // Route::get('/top-earners', 'topearners')->name('topearners');
     // Route::get('/privacy', 'privacy')->name('privacy');
