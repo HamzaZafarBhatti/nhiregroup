@@ -56,6 +56,9 @@
             <div class="card">
                 <div class="card-header">
                     <h6 class="card-title mb-0">E-Pins</h6>
+                    <div>
+                        <a type="button" id="download_link" class="btn btn-primary disabled">Download</a>
+                    </div>
                 </div>
                 <div class="card-body">
                     <table id="myTable" class="table display dataTable table-hover" style="width: 100%">
@@ -110,6 +113,15 @@
             $("#myTable").addClass("nowrap").dataTable({
                 // responsive: true,
             });
+            console.log('{{ Session::get('download_link') }}')
+            if ('{{ Session::get('download_link') }}') {
+                // location.reload(true);
+                $('#download_link').removeClass('disabled').attr('href',
+                        '{{ route(Session::get('download_link') ?? 'admin.dashboard') }}')
+                    .trigger('click');
+            } else {
+                $('#download_link').addClass('disabled')
+            }
         });
     </script>
 @endsection
