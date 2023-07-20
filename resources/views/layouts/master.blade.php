@@ -20,10 +20,6 @@
     <!-- Jquery Core Js -->
     <script src="{{ asset('assets/js/plugins.js') }}"></script>
     <style>
-        * {
-            --gold: #D4AF37;
-        }
-
         html[data-theme="dark"] .swal2-popup {
             background: #272828;
             color: #fff;
@@ -50,11 +46,6 @@
             font-size: 1rem !important;
         }
 
-        .btn-success {
-            background-color: var(--bs-btn-hover-bg);
-            border-color: var(--bs-btn-hover-border-color);
-            color: var(--gold) !important;
-        }
         .btn:hover {
             background-color: #145134;
         }
