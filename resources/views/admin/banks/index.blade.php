@@ -42,7 +42,7 @@
         <div class="col-md-12 mt-4">
             <div class="card">
                 <div class="card-header">
-                    <h6 class="card-title mb-0">E-Pins</h6>
+                    <h6 class="card-title mb-0">Banks</h6>
                 </div>
                 <div class="card-body">
                     <table id="myTable" class="table display dataTable table-hover" style="width: 100%">
