@@ -42,15 +42,15 @@
 <body>
 
     <div id="pm_layout_wrapper" class="pm-full-mode">
-        @include('front.layouts.includes.header')
+        {{--@include('front.layouts.includes.header')--}}
         <!-- Testimonial carousel -->
-        @include('front.layouts.includes.carousel')
+        {{--@include('front.layouts.includes.carousel')--}}
 
         @yield('content')
 
     </div>
 
-    @include('front.layouts.includes.footer')
+    {{--@include('front.layouts.includes.footer')--}}
 
     </div>
     <!-- /pm_layout-wrapper -->

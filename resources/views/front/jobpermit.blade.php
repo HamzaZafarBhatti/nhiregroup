@@ -15,6 +15,9 @@
             color: red;
             font-weight: bold;
         }
+        
+        
+        header, .pm-footer-copyright, footer, .pm-containerPadding-top-4 { display: none !important; }
     </style>
 @endsection
 
