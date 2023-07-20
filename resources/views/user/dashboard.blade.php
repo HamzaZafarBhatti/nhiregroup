@@ -154,7 +154,7 @@
                 </div>
                 <div class="card-body">
                     <div class="mb-4">
-                        <h5>Account Type: <b>{{ auth()->user()->package->name }}</b></h5>
+                        <h5>Employee Status: <b>{{ auth()->user()->package->name }}</b></h5>
                     </div>
                     <table class="myDataTable table table-hover mb-0">
                         <thead>
