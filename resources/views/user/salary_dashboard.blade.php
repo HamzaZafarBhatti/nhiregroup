@@ -12,7 +12,7 @@
                 <div class="card overflow-hidden">
                     <div class="card-body">
                         <div class="mb-5">
-                            <span class="h4 text-danger">Access denied! Please contact one of our auditors on WhatsApp to
+                            <span class="h4 text-gold">Access denied! Please contact one of our auditors on WhatsApp to
                                 validate your salary dashboard. Access fee is ₦
                                 {{ auth()->user()->package->salary_dashboard_fee }}.</span>
                         </div>
