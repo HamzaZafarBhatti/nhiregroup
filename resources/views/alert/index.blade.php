@@ -22,4 +22,10 @@
             {{ session('deleted') }}
         </b>
     </div>
+{{-- @elseif(Session::has('status'))
+    <div class="alert alert-secondary d-flex align-items-center justify-content-center">
+        <b>
+            {{ session('status') }}
+        </b>
+    </div> --}}
 @endif
