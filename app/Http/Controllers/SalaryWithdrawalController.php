@@ -13,7 +13,7 @@ class SalaryWithdrawalController extends Controller
     //
     public function index()
     {
-        $withdraw_requests = SalaryWithdrawal::with('user.primary_bank');
+        $withdraw_requests = SalaryWithdrawal::with('user.primary_bank.bank');
         // if (auth()->user()->role === 'Sub-Admin') {
         //     $withdraw_requests = $withdraw_requests->where('subadmin_id', auth()->user()->id);
         // }
@@ -24,7 +24,7 @@ class SalaryWithdrawalController extends Controller
 
     public function pending()
     {
-        $withdraw_requests = SalaryWithdrawal::with('user.primary_bank')->where('status', 0);
+        $withdraw_requests = SalaryWithdrawal::with('user.primary_bank.bank')->where('status', 0);
         // if (auth()->user()->role === 'Sub-Admin') {
         //     $withdraw_requests = $withdraw_requests->where('subadmin_id', auth()->user()->id);
         // }
@@ -35,7 +35,7 @@ class SalaryWithdrawalController extends Controller
 
     public function accepted()
     {
-        $withdraw_requests = SalaryWithdrawal::with('user.primary_bank')->where('status', 1);
+        $withdraw_requests = SalaryWithdrawal::with('user.primary_bank.bank')->where('status', 1);
         // if (auth()->user()->role === 'Sub-Admin') {
         //     $withdraw_requests = $withdraw_requests->where('subadmin_id', auth()->user()->id);
         // }
@@ -46,7 +46,7 @@ class SalaryWithdrawalController extends Controller
 
     public function rejected()
     {
-        $withdraw_requests = SalaryWithdrawal::with('user.primary_bank')->where('status', 2);
+        $withdraw_requests = SalaryWithdrawal::with('user.primary_bank.bank')->where('status', 2);
         // if (auth()->user()->role === 'Sub-Admin') {
         //     $withdraw_requests = $withdraw_requests->where('subadmin_id', auth()->user()->id);
         // }
