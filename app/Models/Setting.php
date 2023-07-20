@@ -29,7 +29,7 @@ class Setting extends Model
 
     public function getLogoPath()
     {
-        return config('asset_url') . '/' . $this->logo_path;
+        return $this->logo_path;
     }
 
     public function getFaviconPath()
