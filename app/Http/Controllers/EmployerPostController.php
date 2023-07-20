@@ -17,7 +17,7 @@ class EmployerPostController extends Controller
     public function index()
     {
         //
-        $blogs = EmployerPost::latest()->get();
+        $blogs = EmployerPost::with('employer')->latest()->get();
         return view('admin.employer_posts.index', compact('blogs'));
     }
 
