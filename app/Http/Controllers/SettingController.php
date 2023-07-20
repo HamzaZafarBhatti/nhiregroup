@@ -37,7 +37,7 @@ class SettingController extends Controller
         }
     }
 
-    public function update_logos(UpdateLogoRequest $request): RedirectResponse
+    public function update_logos(UpdateLogoRequest $request)/* : RedirectResponse */
     {
         //
         $setting = Setting::first();
