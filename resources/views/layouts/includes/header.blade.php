@@ -11,7 +11,7 @@
                         <span class="line"></span>
                     </span>
                 </button> --}}
-                <button type="button" class="btn btn-link d-block d-xl-none menu-toggle p-0 text-primary">
+                <button type="button" class="btn btn-link d-block d-xl-none menu-toggle p-0 text-gold">
                     <span class="hamburger-icon">
                         <span class="line"></span>
                         <span class="line"></span>

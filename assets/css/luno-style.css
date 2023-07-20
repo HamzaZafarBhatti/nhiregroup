@@ -23592,7 +23592,7 @@ button:focus:not(:focus-visible) {
 }
 .hamburger-icon .line {
     transition: all 0.3s ease 0s;
-    background-color: var(--primary-color);
+    background-color: var(--gold);
     width: 26px;
     height: 2px;
     display: block;
@@ -23604,7 +23604,7 @@ button:focus:not(:focus-visible) {
     }
 }
 .hamburger-icon .line:nth-child(2) {
-    background-color: var(--secondary-color);
+    background-color: var(--gold);
 }
 .hamburger-icon.active .line,
 .hamburger-icon:hover .line {
@@ -23615,7 +23615,7 @@ button:focus:not(:focus-visible) {
 .hamburger-icon:hover .line:nth-child(1),
 .hamburger-icon:hover .line:nth-child(3) {
     width: 16px;
-    background-color: var(--secondary-color);
+    background-color: var(--gold);
 }
 .hamburger-icon:hover .line:nth-child(1) {
     transform: translateX(-7px) rotate(-45deg);
