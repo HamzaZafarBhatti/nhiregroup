@@ -22396,6 +22396,9 @@ button:focus:not(:focus-visible) {
 .bg-secondary {
     background: var(--secondary-color) !important;
 }
+.bg-gold {
+    background: var(--gold) !important;
+}
 .bg-primary-gradient {
     background: var(--primary-gradient) !important;
     color: #fff;

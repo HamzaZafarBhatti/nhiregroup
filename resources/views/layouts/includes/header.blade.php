@@ -294,7 +294,7 @@
                                             Profile</a>
                                     </div>
                                     <a href="{{ route('admin.logout') }}"
-                                        class="btn bg-secondary text-light text-uppercase rounded-0"
+                                        class="btn bg-gold text-light text-uppercase rounded-0"
                                         onclick="event.preventDefault(); document.getElementById('logoutform').submit();">Sign
                                         out</a>
                                     <form method="POST" action="{{ route('admin.logout') }}" id="logoutform">
@@ -307,7 +307,7 @@
                                             Profile</a>
                                     </div>
                                     <a href="{{ route('user.logout') }}"
-                                        class="btn bg-secondary text-light text-uppercase rounded-0"
+                                        class="btn bg-gold text-light text-uppercase rounded-0"
                                         onclick="event.preventDefault(); document.getElementById('logoutform').submit();">Sign
                                         out</a>
                                     <form method="POST" action="{{ route('user.logout') }}" id="logoutform">
