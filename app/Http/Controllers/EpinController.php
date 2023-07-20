@@ -20,7 +20,7 @@ class EpinController extends Controller
     public function index(): View
     {
         //
-        $epins = Epin::latest()->get();
+        $epins = Epin::with('package:id,name')->latest()->paginate(15);
         $packages = Package::select('name', 'id')->active()->get();
         return view('admin.epins.index', compact('epins', 'packages'));
     }
