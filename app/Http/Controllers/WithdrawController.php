@@ -14,7 +14,7 @@ class WithdrawController extends Controller
 {
     public function index()
     {
-        $withdraws = Withdraw::query();
+        $withdraws = Withdraw::with('user:id,username', 'bank_user.bank', 'usdt_wallet:id,wallet_address');
         // if (auth()->user()->role === 'Sub-Admin') {
         //     $withdraws = $withdraws->where('subadmin_id', auth()->user()->id);
         // }
@@ -25,7 +25,7 @@ class WithdrawController extends Controller
 
     public function pending()
     {
-        $withdraws = Withdraw::where('status', WithdrawStatusEnum::PENDING);
+        $withdraws = Withdraw::with('user:id,username', 'bank_user.bank', 'usdt_wallet:id,wallet_address')->where('status', WithdrawStatusEnum::PENDING);
         // if (auth()->user()->role === 'Sub-Admin') {
         //     $withdraws = $withdraws->where('subadmin_id', auth()->user()->id);
         // }
@@ -36,7 +36,7 @@ class WithdrawController extends Controller
 
     public function accepted()
     {
-        $withdraws = Withdraw::where('status', WithdrawStatusEnum::ACCEPTED);
+        $withdraws = Withdraw::with('user:id,username', 'bank_user.bank', 'usdt_wallet:id,wallet_address')->where('status', WithdrawStatusEnum::ACCEPTED);
         // if (auth()->user()->role === 'Sub-Admin') {
         //     $withdraws = $withdraws->where('subadmin_id', auth()->user()->id);
         // }
@@ -47,7 +47,7 @@ class WithdrawController extends Controller
 
     public function rejected()
     {
-        $withdraws = Withdraw::where('status', WithdrawStatusEnum::REJECTED);
+        $withdraws = Withdraw::with('user:id,username', 'bank_user.bank', 'usdt_wallet:id,wallet_address')->where('status', WithdrawStatusEnum::REJECTED);
         // if (auth()->user()->role === 'Sub-Admin') {
         //     $withdraws = $withdraws->where('subadmin_id', auth()->user()->id);
         // }
