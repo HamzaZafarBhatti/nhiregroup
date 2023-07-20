@@ -1,8 +1,9 @@
 <!-- start: page footer -->
 <footer class="page-footer px-xl-4 px-sm-2 px-0 py-3">
     <div class="container-fluid d-flex flex-wrap justify-content-between align-items-center">
-        <p class="col-md-4 mb-0 text-muted">© 2023 <a href="#" target="_blank"
-                title="ThemeMakker Infotech LLP">NHire Group</a>, All Rights Reserved.</p>
+        <p class="col-md-4 mb-0 text-gold">© 2023 <a href="https://nhiregroup.com" class="text-gold" target="_blank">NHire
+                Group</a>, All Rights Reserved.
+        </p>
         {{-- <a href="#" class="col-md-4 d-flex align-items-center justify-content-center my-3 my-lg-0 me-lg-auto">
             <svg height="18" viewBox="0 0 67 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path class="fill-muted" d="M0.863281 18.9997V1.14968H3.11328V16.9997H10.9133V18.9997H0.863281Z" />
