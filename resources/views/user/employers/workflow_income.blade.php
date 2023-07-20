@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Workflow Income Log')
+@section('title', 'Jobs Income Log')
 
 @section('styles')
     <link rel="stylesheet" href="{{ asset('assets/cssbundle/dataTables.min.css') }}">
@@ -20,7 +20,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h6 class="card-title mb-0">Workflow Income Log</h6>
+                    <h6 class="card-title mb-0">Jobs Income Log</h6>
                 </div>
                 <div class="card-body">
                     <div class="mb-4">

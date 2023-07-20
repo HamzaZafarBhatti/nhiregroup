@@ -23892,6 +23892,7 @@ button:focus:not(:focus-visible) {
 .layout-1 .sidebar .menu-list .ms-link.active,
 .layout-1 .sidebar .menu-list .ms-link:hover {
     color: var(--gold);
+    font-weight: bold;
 }
 .layout-1 .sidebar .menu-list .m-link.active::before,
 .layout-1 .sidebar .menu-list .m-link:hover::before,

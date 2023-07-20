@@ -5,7 +5,7 @@
 @section('content')
     <div class="row g-3">
         <div class="col-md-12">
-            <h3>Salary Dashboard</h3>
+            <h3 class="text-gold">Salary Dashboard</h3>
         </div>
         @if (!auth()->user()->salary_dashboard_access)
             <div class="col-md-12">

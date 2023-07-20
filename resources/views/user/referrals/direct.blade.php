@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Direct Referrals')
+@section('title', 'Direct Trainees')
 
 @section('styles')
     <link rel="stylesheet" href="{{ asset('assets/cssbundle/dataTables.min.css') }}">
@@ -12,7 +12,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h6 class="card-title mb-0">My Direct Referrals</h6>
+                    <h6 class="card-title mb-0">My Direct Trainees</h6>
                 </div>
                 <div class="card-body">
                     <table class="myDataTable table table-hover mb-0">
