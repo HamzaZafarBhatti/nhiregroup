@@ -19,7 +19,7 @@ class EmployerController extends Controller
     public function index()
     {
         //
-        $employers = Employer::with('package')->latest()->get();
+        $employers = Employer::with('package:id,name')->latest()->get();
         return view('admin.employers.index', compact('employers'));
     }
 
