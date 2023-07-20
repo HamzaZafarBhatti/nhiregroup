@@ -48,8 +48,15 @@ class UserController extends Controller
     public function validate_salary_profile(StoreRequest $request)
     {
         // return $request;
+        $data = $request->validated();
+        $prev_req = SalaryprofileRequest::where('user_id', auth()->user()->id)->where('status', 0)->first();
+        if($prev_req) {
+            return response()->json([
+                'status' => 'warning',
+                'message' => 'You have already requested for salary dashboard access. Please wait for Admin to validate!',
+            ]);
+        }
         try {
-            $data = $request->validated();
             $data['user_id'] = auth()->user()->id;
             SalaryprofileRequest::create($data);
             return response()->json([
