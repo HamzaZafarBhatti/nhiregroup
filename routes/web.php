@@ -40,40 +40,38 @@ Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'i
 //     return view('welcome');
 // })->name('home');
 
-/**
 
-Route::name('front.')->controller(FrontendController::class)->group(function () {
-    Route::get('/', 'index')->name('index');
-    Route::get('/about-us', 'aboutus')->name('aboutus');
-    Route::get('/services', 'services')->name('services');
-    Route::get('/workshop-services', 'workshopservices')->name('workshopservices');
-    Route::get('/workshop-services/{slug}', 'workshopservice')->name('workshopservice');
-    Route::get('/validate-code', 'validate_code')->name('validate_code');
-    Route::get('/training', 'training')->name('training');
-    Route::get('/job-permit', 'jobpermit')->name('jobpermit');
-    Route::post('/job-permit', 'jobpermit_validate');
-    Route::get('/jobs', 'jobs')->name('jobs');
-    Route::get('/how-it-works', 'howitworks')->name('howitworks');
-    Route::get('/agents', 'agents')->name('agents');
-    Route::get('/soft-skills', 'softskills')->name('softskills');
-    Route::get('/person', 'person')->name('person');
-    Route::get('/staff-and-services', 'staffandservices')->name('staffandservices');
-    Route::get('/what-we-offer', 'whatweoffer')->name('whatweoffer');
-    Route::get('/jobs-for-today', 'jobsfortoday')->name('jobsfortoday');
-    Route::get('/jobs-for-today/{slug}', 'jobfortoday')->name('jobfortoday');
-    Route::get('/faq', 'faq')->name('faq');
-    Route::get('/top-earners', 'topearners')->name('topearners');
-    Route::get('/privacy', 'privacy')->name('privacy');
-    Route::get('/terms', 'terms')->name('terms');
-    Route::get('/disclaimer', 'disclaimer')->name('disclaimer');
-    Route::get('/clients-page', 'clientspage')->name('clientspage');
-    Route::get('/testimonials', 'testimonials')->name('testimonials');
-    Route::get('/contact-us', 'contactus')->name('contactus');
-    Route::get('/aggumentation', 'aggumentation')->name('aggumentation');
-    Route::get('/we-offer', 'weoffer')->name('weoffer');
-});
+// Route::name('front.')->controller(FrontendController::class)->group(function () {
+//     Route::get('/', 'index')->name('index');
+//     Route::get('/about-us', 'aboutus')->name('aboutus');
+//     Route::get('/services', 'services')->name('services');
+//     Route::get('/workshop-services', 'workshopservices')->name('workshopservices');
+//     Route::get('/workshop-services/{slug}', 'workshopservice')->name('workshopservice');
+//     Route::get('/validate-code', 'validate_code')->name('validate_code');
+//     Route::get('/training', 'training')->name('training');
+//     Route::get('/job-permit', 'jobpermit')->name('jobpermit');
+//     Route::post('/job-permit', 'jobpermit_validate');
+//     Route::get('/jobs', 'jobs')->name('jobs');
+//     Route::get('/how-it-works', 'howitworks')->name('howitworks');
+//     Route::get('/agents', 'agents')->name('agents');
+//     Route::get('/soft-skills', 'softskills')->name('softskills');
+//     Route::get('/person', 'person')->name('person');
+//     Route::get('/staff-and-services', 'staffandservices')->name('staffandservices');
+//     Route::get('/what-we-offer', 'whatweoffer')->name('whatweoffer');
+//     Route::get('/jobs-for-today', 'jobsfortoday')->name('jobsfortoday');
+//     Route::get('/jobs-for-today/{slug}', 'jobfortoday')->name('jobfortoday');
+//     Route::get('/faq', 'faq')->name('faq');
+//     Route::get('/top-earners', 'topearners')->name('topearners');
+//     Route::get('/privacy', 'privacy')->name('privacy');
+//     Route::get('/terms', 'terms')->name('terms');
+//     Route::get('/disclaimer', 'disclaimer')->name('disclaimer');
+//     Route::get('/clients-page', 'clientspage')->name('clientspage');
+//     Route::get('/testimonials', 'testimonials')->name('testimonials');
+//     Route::get('/contact-us', 'contactus')->name('contactus');
+//     Route::get('/aggumentation', 'aggumentation')->name('aggumentation');
+//     Route::get('/we-offer', 'weoffer')->name('weoffer');
+// });
 
-**/
 
 Route::controller(SettingController::class)->prefix('settings')->name('settings.')->group(function () {
     Route::post('/set-theme', 'set_theme')->name('set_theme');
