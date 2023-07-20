@@ -45,6 +45,7 @@ class SettingController extends Controller
             if ($image = $request->file('site_logo')) {
                 $filename = 'logo_' . time() . '.' . $image->getClientOriginalExtension();
                 $location =  $setting->getLogoPath() . $filename;
+                return $location;
                 move_uploaded_file($request->site_logo, $location);
                 $data['site_logo'] = $filename;
                 if ($setting->site_logo && file_exists($setting->getLogoPath() . $setting->site_logo)) {
