@@ -35,7 +35,7 @@
                         <tbody>
                             @foreach ($profile_requests as $item)
                                 <tr>
-                                    <td>{{ $loop->iteration + ($epins->currentPage() - 1) * 15 }}</td>
+                                    <td>{{ $loop->iteration + ($profile_requests->currentPage() - 1) * 15 }}</td>
                                     <td>{{ $item->user->username ?? 'N/A' }}</td>
                                     <td>{{ $item->get_status }}</td>
                                     <td>{{ $item->subadmin->name ?? 'N/A' }}</td>
