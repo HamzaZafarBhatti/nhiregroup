@@ -47,6 +47,10 @@ class UserWithdrawController extends Controller
 
         $amount_with_tax = $data['amount'] + ($data['amount'] * $user->package->payslip_tax);
 
+        Log::info($data['amount'] * $user->package->payslip_tax / 100);
+        Log::info($data['amount'] * $user->package->payslip_tax);
+        Log::info($amount_with_tax);
+
         if ($data['wallet_type'] === (WithdrawWalletTypeEnum::EARNING)->value) {
             if(!$set->earning_withdraw_on) {
                 return back()->with('warning', 'Oops! It`s not yet time to request for payment. Check back later!');
