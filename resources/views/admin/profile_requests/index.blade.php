@@ -3,14 +3,14 @@
 @section('title', 'All Requests')
 
 @section('styles')
-    <link rel="stylesheet" href="{{ asset('assets/cssbundle/dataTables.min.css') }}" />
+    {{-- <link rel="stylesheet" href="{{ asset('assets/cssbundle/dataTables.min.css') }}" /> --}}
     <style>
         .swal2-radio {
             display: unset !important;
         }
-        .dataTables_wrapper {
+        /* .dataTables_wrapper {
             overflow: auto;
-        }
+        } */
     </style>
 @endsection
 
@@ -35,7 +35,7 @@
                         <tbody>
                             @foreach ($profile_requests as $item)
                                 <tr>
-                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $loop->iteration + ($epins->currentPage() - 1) * 15 }}</td>
                                     <td>{{ $item->user->username ?? 'N/A' }}</td>
                                     <td>{{ $item->get_status }}</td>
                                     <td>{{ $item->subadmin->name ?? 'N/A' }}</td>
@@ -55,6 +55,7 @@
                             @endforeach
                         </tbody>
                     </table>
+                    {!! $profile_requests->links() !!}
                 </div>
             </div>
         </div>
@@ -62,7 +63,7 @@
 @endsection
 
 @section('scripts')
-    <script src="{{ asset('assets/js/bundle/dataTables.bundle.js') }}"></script>
+    {{-- <script src="{{ asset('assets/js/bundle/dataTables.bundle.js') }}"></script> --}}
     <script>
         function accept(id) {
             Swal.fire({
@@ -145,10 +146,10 @@
                 }
             });
         }
-        $(document).ready(function() {
-            $("#myTable").addClass("nowrap").dataTable({
-                // responsive: true,
-            });
-        });
+        // $(document).ready(function() {
+        //     $("#myTable").addClass("nowrap").dataTable({
+        //         // responsive: true,
+        //     });
+        // });
     </script>
 @endsection

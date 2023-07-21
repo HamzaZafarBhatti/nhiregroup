@@ -16,7 +16,7 @@ class SalaryprofileRequestController extends Controller
         if (auth()->user()->role === 'Sub-Admin') {
             $profile_requests = $profile_requests->where('subadmin_id', auth()->user()->id);
         }
-        $profile_requests = $profile_requests->orderBy('status', 'asc')->latest('id')->get();
+        $profile_requests = $profile_requests->orderBy('status', 'asc')->latest('id')->paginate(15);
         // return $profile_requests;
         return view('admin.profile_requests.index', compact('profile_requests'));
     }
