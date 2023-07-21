@@ -27,6 +27,7 @@
                             <tr>
                                 <th>Sr. #</th>
                                 <th>User</th>
+                                <th>Package</th>
                                 <th>Status</th>
                                 <th>Subadmin</th>
                                 <th>Actions</th>
@@ -37,10 +38,11 @@
                                 <tr>
                                     <td>{{ $loop->iteration + ($profile_requests->currentPage() - 1) * 15 }}</td>
                                     <td>{{ $item->user->username ?? 'N/A' }}</td>
+                                    <td>{{ $item->user->package->name ?? 'N/A' }}</td>
                                     <td>{{ $item->get_status }}</td>
                                     <td>{{ $item->subadmin->name ?? 'N/A' }}</td>
                                     <td>
-                                        @if ($item->status === 0)
+                                        @if ($item->status == 0)
                                             <button onclick="accept({{ $item->id }})" type="button"
                                                 class="btn btn-link text-info" data-bs-toggle="tooltip"
                                                 data-bs-placement="top" aria-label="Accept"

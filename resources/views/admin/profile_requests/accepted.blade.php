@@ -24,6 +24,7 @@
                             <tr>
                                 <th>Sr. #</th>
                                 <th>User</th>
+                                <th>Package</th>
                                 <th>Subadmin</th>
                             </tr>
                         </thead>
@@ -32,6 +33,7 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $item->user->username ?? 'N/A' }}</td>
+                                    <td>{{ $item->user->package->name ?? 'N/A' }}</td>
                                     <td>{{ $item->subadmin->name ?? 'N/A' }}</td>
                                 </tr>
                             @endforeach

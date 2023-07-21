@@ -24,6 +24,7 @@
                             <tr>
                                 <th>Sr. #</th>
                                 <th>User</th>
+                                <th>Package</th>
                                 <th>Subadmin</th>
                                 <th>Actions</th>
                             </tr>
@@ -33,6 +34,7 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $item->user->username ?? 'N/A' }}</td>
+                                    <td>{{ $item->user->package->name ?? 'N/A' }}</td>
                                     <td>{{ $item->subadmin->name ?? 'N/A' }}</td>
                                     <td>
                                         <button onclick="accept({{ $item->id }})" type="button"
