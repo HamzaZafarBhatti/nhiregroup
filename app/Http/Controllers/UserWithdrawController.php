@@ -45,18 +45,14 @@ class UserWithdrawController extends Controller
 
         $user = auth()->user();
 
-        $amount_with_tax = $data['amount'] + ($data['amount'] * $user->package->payslip_tax);
-
-        Log::info($data['amount'] * $user->package->payslip_tax / 100);
-        Log::info($data['amount'] * $user->package->payslip_tax);
-        Log::info($amount_with_tax);
+        $amount_with_tax = $data['amount'] + ($data['amount'] * $user->package->payslip_tax / 100);
 
         if ($data['wallet_type'] === (WithdrawWalletTypeEnum::EARNING)->value) {
             if(!$set->earning_withdraw_on) {
                 return back()->with('warning', 'Oops! It`s not yet time to request for payment. Check back later!');
             }
             if ($amount_with_tax > $user->earning_wallet) {
-                return back()->with('warning', 'You have to attain the transfer threshold before you can transfer your funds.!');
+                return back()->with('warning', 'You have to attain the transfer threshold before you can transfer your funds!');
             }
             if ($data['amount'] < $user->package->min_withdraw_earning) {
                 return back()->with('warning', 'Requested amount is less than Minimum N-Broker withdraw limit!');
@@ -68,7 +64,7 @@ class UserWithdrawController extends Controller
                 return back()->with('warning', 'Oops! It`s not yet time to request for payment. Check back later!');
             }
             if ($amount_with_tax > $user->nhire_wallet) {
-                return back()->with('warning', 'You have to attain the transfer threshold before you can transfer your funds.!');
+                return back()->with('warning', 'You have to attain the transfer threshold before you can transfer your funds!');
             }
             if ($data['amount'] < $user->package->min_withdraw_nhire) {
                 return back()->with('warning', 'Requested amount is less than Minimum N-Jobs withraw limit!');
