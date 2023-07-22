@@ -64,7 +64,7 @@ class WithdrawController extends Controller
         try {
             $withdraw->update(['status' => WithdrawStatusEnum::ACCEPTED]);
 
-            $amount_with_tax = $withdraw->amount + ($withdraw->amount * $user->package->payslip_tax);
+            $amount_with_tax = $withdraw->amount + ($withdraw->amount * $user->package->payslip_tax / 100);
             
             if ($withdraw->wallet_type === WithdrawWalletTypeEnum::EARNING) {
                 $user->update([
