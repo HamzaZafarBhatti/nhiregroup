@@ -44,7 +44,7 @@
                                         @endif
                                         @if ($item->withdraw_to === App\Enum\WithdrawToEnum::BANK)
                                             <b>
-                                                {{ $item->bank_user->get_bank_details }}
+                                                {{ $item->bank_user->get_bank_details ?? 'N/A' }}
                                             </b>
                                         @endif
                                     </td>
