@@ -135,7 +135,7 @@ class UserController extends Controller
         foreach ($employers as $item) {
             $list[] = [
                 'logo' => '<img src="' . $item->get_image . '" alt="' . $item->name . '" class="avatar xl rounded-5">',
-                'name' => '<h5 class="text-uppercase d-flex flex-column gap-2">' . $item->name . '<small>Job Payout: ' . $item->get_earning_amount . '</small></h5>',
+                'name' => '<h5 class="text-uppercase d-flex flex-column gap-2 fw-bold">' . $item->name . '<small>Job Payout: ' . $item->get_earning_amount . '</small></h5>',
                 'action' => '<a target="_blank" href="' . (!empty($item->latest_job) ? route('front.jobfortoday', $item->latest_job->slug) : null) . '" class="btn btn-success ' . (empty($item->latest_job) ? 'disabled' : '') . '" type="button">Start Job</a>',
             ];
         }
