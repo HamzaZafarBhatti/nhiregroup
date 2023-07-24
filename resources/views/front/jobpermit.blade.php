@@ -60,6 +60,7 @@
                                 @if ($code->used_by->parent->parent)
                                     <h5>Coach 2 <b>{{ $code->used_by->parent->parent->username }}</b></h5>
                                 @endif
+                                <h5>Date/Time <b>{{ $code->updated_at->toDateTimeString() }}</b></h5>
                             @else
                                 <h5 class="valid">Status of Jobpass is valid and can be used to secure jobs on NHIRE</h5>
                             @endif
