@@ -3,15 +3,10 @@
 @section('title', 'All Requests')
 
 @section('styles')
-    {{-- <link rel="stylesheet" href="{{ asset('assets/cssbundle/dataTables.min.css') }}" /> --}}
     <style>
         .swal2-radio {
             display: unset !important;
         }
-
-        /* .dataTables_wrapper {
-                    overflow: auto;
-                } */
     </style>
 @endsection
 
@@ -30,6 +25,7 @@
                                     <th>Sr. #</th>
                                     <th>User</th>
                                     <th>Package</th>
+                                    <th>Proof</th>
                                     <th>Status</th>
                                     <th>Subadmin</th>
                                     <th>Actions</th>
@@ -41,6 +37,9 @@
                                         <td>{{ $loop->iteration + ($profile_requests->currentPage() - 1) * 15 }}</td>
                                         <td>{{ $item->user->username ?? 'N/A' }}</td>
                                         <td>{{ $item->user->package->name ?? 'N/A' }}</td>
+                                        <td><img src="{{ $item->get_image_proof }}" alt=""
+                                                onclick="enlargeImg(event)" width="100">
+                                        </td>
                                         <td>{{ $item->get_status }}</td>
                                         <td>{{ $item->subadmin->name ?? 'N/A' }}</td>
                                         <td>
@@ -69,7 +68,6 @@
 @endsection
 
 @section('scripts')
-    {{-- <script src="{{ asset('assets/js/bundle/dataTables.bundle.js') }}"></script> --}}
     <script>
         function accept(id) {
             Swal.fire({
@@ -152,10 +150,14 @@
                 }
             });
         }
-        // $(document).ready(function() {
-        //     $("#myTable").addClass("nowrap").dataTable({
-        //         // responsive: true,
-        //     });
-        // });
+
+        function enlargeImg(event) {
+            let _this = event.currentTarget;
+            let src = _this.src;
+            Swal.fire({
+                imageUrl: src,
+                showConfirmButton: false
+            })
+        }
     </script>
 @endsection

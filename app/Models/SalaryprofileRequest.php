@@ -10,6 +10,8 @@ class SalaryprofileRequest extends Model
 {
     use HasFactory;
 
+    protected $image_path = 'assets/uploads/salary_profile_proofs/';
+
     protected $fillable = [
         'user_id',
         'status', // 0 => pending, 1 => accepted, 2 => rejected
@@ -17,7 +19,13 @@ class SalaryprofileRequest extends Model
         'subadmin_id',
         'is_paid',
         'subadmin_approve_payment',
+        'image_proof',
     ];
+
+    public function getImagePath()
+    {
+        return $this->image_path;
+    }
 
     public function user()
     {
@@ -48,6 +56,13 @@ class SalaryprofileRequest extends Model
                         break;
                 }
             }
+        );
+    }
+
+    protected function getImageProof(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($val, $attr) => $this->image_proof ? asset($this->image_path . $this->image_proof) : null
         );
     }
 }

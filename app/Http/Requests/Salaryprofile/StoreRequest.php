@@ -25,6 +25,7 @@ class StoreRequest extends FormRequest
             //
             'subadmin_id' => 'required',
             'is_paid' => 'required',
+            'image_proof' => 'required_unless:is_paid,0|image',
         ];
     }
 }
