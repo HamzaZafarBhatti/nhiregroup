@@ -110,6 +110,7 @@ class UserController extends Controller
         return view('user.referrals.indirect', compact('referrals'));
     }
 
+/**
     public function employer_list()
     {
         if (!auth()->user()->salary_dashboard_access) {
@@ -117,6 +118,23 @@ class UserController extends Controller
         }
         $packages = Package::active()->pluck('name', 'id');
         return view('user.employers.index', compact('packages'));
+    }
+    **/
+    
+    public function employer_list()
+    {
+        $packages = Package::active()->pluck('name', 'id');
+        $employers = Employer::with('latest_job')->active();
+
+        if (auth()->user()->package_id == 2) {
+            $employers = $employers->latest('id')->paginate(20);
+        }
+
+        if (auth()->user()->package_id == 1) {
+            $employers = $employers->where('package_id', auth()->user()->package_id)->latest('id')->limit(3)->get();
+        }
+
+        return view('user.employers.index', compact('packages', 'employers'));
     }
 
     public function get_employer_list(Request $request)

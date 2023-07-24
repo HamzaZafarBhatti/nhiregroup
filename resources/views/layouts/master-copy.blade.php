@@ -20,10 +20,6 @@
     <!-- Jquery Core Js -->
     <script src="{{ asset('assets/js/plugins.js') }}"></script>
     <style>
-        * {
-            --gold: #FFD700;
-        }
-
         html[data-theme="dark"] .swal2-popup {
             background: #272828;
             color: #fff;
@@ -42,6 +38,18 @@
             color: var(--gold) !important;
         }
 
+        .swal2-title {
+            font-size: 1.5rem !important;
+        }
+
+        .swal2-popup.swal2-toast .swal2-title {
+            font-size: 1rem !important;
+        }
+
+        .btn:hover {
+            background-color: #145134;
+        }
+
         @keyframes scale_up {
             from {
                 transform: scale(1);
@@ -52,8 +60,6 @@
             }
         }
     </style>
-
-    @stack('style')
 </head>
 
 <body class="layout-1 font-quicksand" data-luno="theme-blue">
@@ -124,7 +130,7 @@
                 icon: 'success',
                 allowOutsideClick: false,
                 title: "CONGRATULATIONS!",
-                text: "You've been successfully enrolled for NHIRE jobs.",
+                html: "<div class='text-gold text-uppercase'>{{ $user->username }}<div> <div class='text-black'>You've been successfully enrolled for NHIRE jobs.<div>",
                 confirmButtonText: "Access Office",
                 confirmButtonColor: "#4dca88"
             }).then((result) => {
