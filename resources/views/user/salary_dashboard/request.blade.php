@@ -20,7 +20,7 @@
                             <label class="form-label">Salary Auditor</label>
                             <select name="subadmin_id" id="subadmin_id" required
                                 class="form-control @error('subadmin_id') is-invalid @enderror">
-                                <option value="">Select Bank</option>
+                                <option value="">Select Auditor</option>
                                 @foreach ($subadmins as $key => $value)
                                     <option value="{{ $key }}">{{ $value }}</option>
                                 @endforeach
@@ -42,7 +42,7 @@
                             @enderror
                         </div>
                         <div class="col-md-6">
-                            <label class="form-label">Proof</label>
+                            <label class="form-label">Proof of payment</label>
                             <input type="file" name="image_proof" id="image_proof" class="form-control @error('image_proof') is-invalid @enderror">
                             @error('image_proof')
                                 <div class="invalid-feedback">{{ $message }}</div>
