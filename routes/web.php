@@ -92,7 +92,7 @@ Route::middleware(['auth', /* 'verified', */ 'user'])->name('user.')->prefix('us
         Route::post('/validate-salary-profile', 'request_validate_salary_profile');
         Route::post('/salary-withdraw-request', 'salary_withdraw_request')->name('withdraw.request');
         Route::get('/employers', 'employer_list')->name('employers.index');
-        Route::get('/get-employers', 'get_employer_list')->name('employers.list');
+        // Route::get('/get-employers', 'get_employer_list')->name('employers.list');
         Route::get('/workflow-income-page', 'workflow_income')->name('workflow_income');
         Route::get('/earn-workflow-income', 'earn_workflow_income')->name('earn_workflow_income');
         Route::get('/workflow-income-to-nhire-wallet/{id}', 'transfer_workflow_income_to_nhire_wallet')->name('transfer_workflow_income_to_nhire_wallet');

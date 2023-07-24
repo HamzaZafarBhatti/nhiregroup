@@ -115,19 +115,20 @@ class UserController extends Controller
         return view('user.referrals.indirect', compact('referrals'));
     }
 
-/**
+    // public function employer_list()
+    // {
+    //     if (!auth()->user()->salary_dashboard_access) {
+    //         return back()->with('warning', 'Office is locked. Please To access it, you have to pay ₦ ' . auth()->user()->package->salary_dashboard_fee . ' fee.');
+    //     }
+    //     $packages = Package::active()->pluck('name', 'id');
+    //     return view('user.employers.index', compact('packages'));
+    // }
+
     public function employer_list()
     {
         if (!auth()->user()->salary_dashboard_access) {
             return back()->with('warning', 'Office is locked. Please To access it, you have to pay ₦ ' . auth()->user()->package->salary_dashboard_fee . ' fee.');
         }
-        $packages = Package::active()->pluck('name', 'id');
-        return view('user.employers.index', compact('packages'));
-    }
-    **/
-    
-    public function employer_list()
-    {
         $packages = Package::active()->pluck('name', 'id');
         $employers = Employer::with('latest_job')->active();
 
