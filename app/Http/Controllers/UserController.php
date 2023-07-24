@@ -46,30 +46,35 @@ class UserController extends Controller
         }
     }
 
-    public function validate_salary_profile(StoreRequest $request)
+    public function validate_salary_profile()
     {
-        // return $request;
+        $subadmins = User::select('id', DB::raw("CONCAT(name,' - ',phone) AS name"))->where('role', 'Sub-Admin')->pluck('name', 'id');
+        return view('user.salary_dashboard.request', compact('subadmins'));
+    }
+
+    public function request_validate_salary_profile(StoreRequest $request)
+    {
         $data = $request->validated();
         $prev_req = SalaryprofileRequest::where('user_id', auth()->user()->id)->where('status', 0)->first();
-        if($prev_req) {
-            return response()->json([
-                'status' => 'warning',
-                'message' => 'You have already requested for salary dashboard access. Please wait for Admin to validate!',
-            ]);
+        if ($prev_req) {
+            return redirect()->route('user.dashboard.salary')->with('warning', 'You have already requested for salary dashboard access. Please wait for Admin to validate!');
         }
         try {
+
+            if ($request->has('image_proof')) {
+                $salary_request = new SalaryprofileRequest();
+                $file = $request->file('image_proof');
+                $image_proof = time() . '.' . $file->getClientOriginalExtension();
+                $file->move($salary_request->getImagePath(), $image_proof);
+                $data['image_proof'] = $image_proof;
+            }
+
             $data['user_id'] = auth()->user()->id;
             SalaryprofileRequest::create($data);
-            return response()->json([
-                'status' => 'success',
-                'message' => 'Salary Dashboard Acess Request submitted successfully!',
-            ]);
+            return redirect()->route('user.dashboard.salary')->with('success', 'Salary Dashboard Acess Request submitted successfully!');
         } catch (\Throwable $th) {
             Log::error('Salary Dashboard Request Error: ' . $th->getMessage());
-            return response()->json([
-                'status' => 'danger',
-                'message' => 'Something went wrong!',
-            ]);
+            return redirect()->route('user.dashboard.salary')->with('error', 'Something went wrong!');
         }
     }
 
@@ -125,11 +130,11 @@ class UserController extends Controller
         if (auth()->user()->package_id === 2) {
             $employers = $employers->where('package_id', $request->package_id);
         }
-        
+
         if (auth()->user()->package_id === 1) {
             $employers = $employers->where('package_id', auth()->user()->package_id)->limit(3);
         }
-        
+
         $employers = $employers->latest('id')->get();
         $list = array();
         foreach ($employers as $item) {

@@ -87,7 +87,8 @@ Route::middleware(['auth', /* 'verified', */ 'user'])->name('user.')->prefix('us
         Route::get('/update-is-first-login', 'updateIsFirstLogin')->name('updateIsFirstLogin');
         Route::get('/referrals/direct', 'referrals_direct')->name('referrals.direct');
         Route::get('/referrals/indirect', 'referrals_indirect')->name('referrals.indirect');
-        Route::post('/validate-salary-profile', 'validate_salary_profile')->name('validate_salary_profile');
+        Route::get('/validate-salary-profile', 'validate_salary_profile')->name('validate_salary_profile');
+        Route::post('/validate-salary-profile', 'request_validate_salary_profile');
         Route::post('/salary-withdraw-request', 'salary_withdraw_request')->name('withdraw.request');
         Route::get('/employers', 'employer_list')->name('employers.index');
         Route::get('/get-employers', 'get_employer_list')->name('employers.list');
