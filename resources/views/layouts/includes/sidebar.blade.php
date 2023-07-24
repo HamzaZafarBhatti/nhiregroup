@@ -211,6 +211,13 @@
                 @endif
                 @if ($user->role === 'Admin')
                     <li>
+                        <a class="m-link @if (Route::is('admin.users.index')) active @endif"
+                            href="{{ route('admin.users.index') }}">
+                            @include('layouts.includes.sidebar_icon_home')
+                            <span class="ms-2">Users</span>
+                        </a>
+                    </li>
+                    <li>
                         <a class="m-link @if (Route::is('admin.epins.index')) active @endif"
                             href="{{ route('admin.epins.index') }}">
                             @include('layouts.includes.sidebar_icon_home')
