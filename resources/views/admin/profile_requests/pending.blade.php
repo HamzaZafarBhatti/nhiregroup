@@ -33,7 +33,8 @@
                         <tbody>
                             @foreach ($profile_requests as $item)
                                 <tr>
-                                    <td>{{ $loop->iteration + ($profile_requests->currentPage() - 1) * 15 }}</td>
+                                    {{-- <td>{{ $loop->iteration + ($profile_requests->currentPage() - 1) * 15 }}</td> --}}
+                                    <td>{{ $loop->iteration }}</td>
                                     <td>{{ $item->user->username ?? 'N/A' }}</td>
                                     <td>{{ $item->user->package->name ?? 'N/A' }}</td>
                                     <td>{{ $item->subadmin->name ?? 'N/A' }}</td>
