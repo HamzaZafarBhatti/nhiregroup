@@ -56,9 +56,9 @@
                                 <h5>Jobpass is used by <b>{{ $code->used_by->username }}</b></h5>
                                 @if ($code->used_by->parent)
                                     <h5>Coach 1 <b>{{ $code->used_by->parent->username }}</b></h5>
-                                @endif
-                                @if ($code->used_by->parent->parent)
-                                    <h5>Coach 2 <b>{{ $code->used_by->parent->parent->username }}</b></h5>
+                                    @if ($code->used_by->parent->parent)
+                                        <h5>Coach 2 <b>{{ $code->used_by->parent->parent->username }}</b></h5>
+                                    @endif
                                 @endif
                                 <h5>Date/Time <b>{{ $code->updated_at->toDateTimeString() }}</b></h5>
                             @else
