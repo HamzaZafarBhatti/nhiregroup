@@ -3,12 +3,6 @@
 @section('title', 'Pending Requests')
 
 @section('styles')
-    <link rel="stylesheet" href="{{ asset('assets/cssbundle/dataTables.min.css') }}" />
-    <style>
-        .dataTables_wrapper {
-            overflow: auto;
-        }
-    </style>
 @endsection
 
 @section('content')
@@ -19,37 +13,40 @@
                     <h6 class="card-title mb-0">Pending Requests</h6>
                 </div>
                 <div class="card-body">
-                    <table id="myTable" class="table display dataTable table-hover" style="width: 100%">
-                        <thead>
-                            <tr>
-                                <th>Sr. #</th>
-                                <th>User</th>
-                                <th>Package</th>
-                                <th>Subadmin</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($profile_requests as $item)
+                    <div style="overflow: auto">
+                        <table id="myTable" class="table display dataTable table-hover" style="width: 100%">
+                            <thead>
                                 <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $item->user->username ?? 'N/A' }}</td>
-                                    <td>{{ $item->user->package->name ?? 'N/A' }}</td>
-                                    <td>{{ $item->subadmin->name ?? 'N/A' }}</td>
-                                    <td>
-                                        <button onclick="accept({{ $item->id }})" type="button"
-                                            class="btn btn-link text-info" data-bs-toggle="tooltip" data-bs-placement="top"
-                                            aria-label="Accept" data-bs-original-title="Accept"><i
-                                                class="fa fa-thumbs-up"></i></button>
-                                        <button onclick="reject({{ $item->id }})" type="button"
-                                            class="btn btn-link text-danger" data-bs-toggle="tooltip"
-                                            data-bs-placement="top" aria-label="Reject" data-bs-original-title="Reject"><i
-                                                class="fa fa-thumbs-down"></i></button>
-                                    </td>
+                                    <th>Sr. #</th>
+                                    <th>User</th>
+                                    <th>Package</th>
+                                    <th>Subadmin</th>
+                                    <th>Actions</th>
                                 </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                @foreach ($profile_requests as $item)
+                                    <tr>
+                                        <td>{{ $loop->iteration + ($profile_requests->currentPage() - 1) * 15 }}</td>
+                                        <td>{{ $item->user->username ?? 'N/A' }}</td>
+                                        <td>{{ $item->user->package->name ?? 'N/A' }}</td>
+                                        <td>{{ $item->subadmin->name ?? 'N/A' }}</td>
+                                        <td>
+                                            <button onclick="accept({{ $item->id }})" type="button"
+                                                class="btn btn-link text-info" data-bs-toggle="tooltip"
+                                                data-bs-placement="top" aria-label="Accept"
+                                                data-bs-original-title="Accept"><i class="fa fa-thumbs-up"></i></button>
+                                            <button onclick="reject({{ $item->id }})" type="button"
+                                                class="btn btn-link text-danger" data-bs-toggle="tooltip"
+                                                data-bs-placement="top" aria-label="Reject"
+                                                data-bs-original-title="Reject"><i class="fa fa-thumbs-down"></i></button>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                    {!! $profile_requests->links() !!}
                 </div>
             </div>
         </div>
@@ -57,7 +54,6 @@
 @endsection
 
 @section('scripts')
-    <script src="{{ asset('assets/js/bundle/dataTables.bundle.js') }}"></script>
     <script>
         function accept(id) {
             Swal.fire({
@@ -140,10 +136,5 @@
                 }
             });
         }
-        $(document).ready(function() {
-            $("#myTable").addClass("nowrap").dataTable({
-                // responsive: true,
-            });
-        });
     </script>
 @endsection

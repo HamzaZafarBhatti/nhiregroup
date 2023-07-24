@@ -17,9 +17,10 @@
                                 {{ auth()->user()->package->salary_dashboard_fee }}.</span>
                         </div>
                         <div class="text-center">
-                            <button class="btn btn-success btn-lg @if (!empty(auth()->user()->salaryprofile_request) && auth()->user()->salaryprofile_request->status === 0) disabled @endif"
-                                onclick="validatePayment()" type="button">Request for
-                                Salary Dashboard Access</button>
+                            <a href="{{ route('user.validate_salary_profile') }}"
+                                class="btn btn-success btn-lg @if (!empty(auth()->user()->salaryprofile_request) && auth()->user()->salaryprofile_request->status === 0) disabled @endif"
+                                type="button">Request for
+                                Salary Dashboard Access</a>
                         </div>
                     </div>
                 </div>
@@ -85,71 +86,6 @@
                             }
                         }
                     })
-                }
-            });
-        }
-
-        function validatePayment() {
-            Swal.fire({
-                title: "Select Salary Auditor",
-                input: "select",
-                inputOptions: @php echo $subadmins @endphp,
-                inputPlaceholder: 'Select Salary Auditor',
-                showCancelButton: true,
-                confirmButtonText: "Confirm",
-                confirmButtonColor: "#157347",
-                cancelButtonColor: "#fc5a69",
-                showLoaderOnConfirm: true,
-                allowOutsideClick: () => !Swal.isLoading(),
-                inputValidator: (value) => {
-                    if (!value) {
-                        return 'You need to choose something!'
-                    }
-                },
-            }).then((result) => {
-                if (result.isConfirmed && result.value) {
-                    Swal.fire({
-                        title: "Have you paid the payment to the auditor?",
-                        input: "radio",
-                        inputOptions: {
-                            '0': 'Not yet!',
-                            '1': 'Yes paid!',
-                        },
-                        inputValidator: (value) => {
-                            if (!value) {
-                                return 'You need to choose something!'
-                            }
-                        },
-                        showCancelButton: true,
-                        confirmButtonText: "Confirm",
-                        showLoaderOnConfirm: true,
-                        allowOutsideClick: () => !Swal.isLoading(),
-                    }).then((result2) => {
-                        if (result2.isConfirmed) {
-                            console.log(result);
-                            console.log(result2);
-                            $.ajax({
-                                url: "{{ route('user.validate_salary_profile') }}",
-                                type: "POST",
-                                data: {
-                                    subadmin_id: result.value,
-                                    is_paid: result2.value,
-                                },
-                                success: function(response) {
-                                    console.log(response);
-                                    Toast.fire({
-                                        icon: response.status,
-                                        title: response.message
-                                    })
-                                    if (response.status === 'success') {
-                                        setTimeout(() => {
-                                            window.location.reload();
-                                        }, 3000);
-                                    }
-                                }
-                            })
-                        }
-                    });
                 }
             });
         }

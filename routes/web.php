@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\BankController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\EmployerController;
@@ -41,9 +42,9 @@ Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'i
 // })->name('home');
 
 
- Route::name('front.')->controller(FrontendController::class)->group(function () {
+Route::name('front.')->controller(FrontendController::class)->group(function () {
     Route::get('/', function () {
-    return redirect('/user/login');
+        return redirect('/user/login');
     })->name('index');
     // Route::get('/about-us', 'aboutus')->name('aboutus');
     // Route::get('/services', 'services')->name('services');
@@ -51,8 +52,8 @@ Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'i
     // Route::get('/workshop-services/{slug}', 'workshopservice')->name('workshopservice');
     // Route::get('/validate-code', 'validate_code')->name('validate_code');
     Route::get('/training', 'training')->name('training');
-     Route::get('/job-permit', 'jobpermit')->name('jobpermit');
-     Route::post('/job-permit', 'jobpermit_validate');
+    Route::get('/job-permit', 'jobpermit')->name('jobpermit');
+    Route::post('/job-permit', 'jobpermit_validate');
     // Route::get('/jobs', 'jobs')->name('jobs');
     // Route::get('/how-it-works', 'howitworks')->name('howitworks');
     // Route::get('/agents', 'agents')->name('agents');
@@ -72,7 +73,7 @@ Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'i
     // Route::get('/contact-us', 'contactus')->name('contactus');
     // Route::get('/aggumentation', 'aggumentation')->name('aggumentation');
     // Route::get('/we-offer', 'weoffer')->name('weoffer');
- });
+});
 
 
 Route::controller(SettingController::class)->prefix('settings')->name('settings.')->group(function () {
@@ -87,7 +88,8 @@ Route::middleware(['auth', /* 'verified', */ 'user'])->name('user.')->prefix('us
         Route::get('/update-is-first-login', 'updateIsFirstLogin')->name('updateIsFirstLogin');
         Route::get('/referrals/direct', 'referrals_direct')->name('referrals.direct');
         Route::get('/referrals/indirect', 'referrals_indirect')->name('referrals.indirect');
-        Route::post('/validate-salary-profile', 'validate_salary_profile')->name('validate_salary_profile');
+        Route::get('/validate-salary-profile', 'validate_salary_profile')->name('validate_salary_profile');
+        Route::post('/validate-salary-profile', 'request_validate_salary_profile');
         Route::post('/salary-withdraw-request', 'salary_withdraw_request')->name('withdraw.request');
         Route::get('/employers', 'employer_list')->name('employers.index');
         Route::get('/get-employers', 'get_employer_list')->name('employers.list');
@@ -157,6 +159,11 @@ Route::middleware(['auth', 'admin'])->name('admin.')->prefix('nhiregrouptechadmi
         Route::get('/rejected', 'rejected')->name('rejected');
         Route::post('/accept', 'accept')->name('accept');
         Route::post('/reject', 'reject')->name('reject');
+    });
+    Route::controller(AdminUserController::class)->prefix('users')->name('users.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/{id}/edit', 'edit')->name('edit');
+        Route::put('/{id}/update_password', 'update_password')->name('update_password');
     });
     Route::resource('vendors', VendorController::class)->except('show');
     Route::resource('blogs', BlogController::class)->except('show');

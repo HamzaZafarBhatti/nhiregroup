@@ -15,9 +15,14 @@
             color: red;
             font-weight: bold;
         }
-        
-        
-        header, .pm-footer-copyright, footer, .pm-containerPadding-top-4 { display: none !important; }
+
+
+        header,
+        .pm-footer-copyright,
+        footer,
+        .pm-containerPadding-top-4 {
+            display: none !important;
+        }
     </style>
 @endsection
 
@@ -49,6 +54,13 @@
                                 <h5 class="invalid">Jobpass already been used. Jobpass can't be used to secure any job on
                                     NHIRE</h5>
                                 <h5>Jobpass is used by <b>{{ $code->used_by->username }}</b></h5>
+                                @if ($code->used_by->parent)
+                                    <h5>Coach 1 <b>{{ $code->used_by->parent->username }}</b></h5>
+                                    @if ($code->used_by->parent->parent)
+                                        <h5>Coach 2 <b>{{ $code->used_by->parent->parent->username }}</b></h5>
+                                    @endif
+                                @endif
+                                <h5>Date/Time <b>{{ $code->updated_at->toDateTimeString() }}</b></h5>
                             @else
                                 <h5 class="valid">Status of Jobpass is valid and can be used to secure jobs on NHIRE</h5>
                             @endif

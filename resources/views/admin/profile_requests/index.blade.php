@@ -3,14 +3,10 @@
 @section('title', 'All Requests')
 
 @section('styles')
-    {{-- <link rel="stylesheet" href="{{ asset('assets/cssbundle/dataTables.min.css') }}" /> --}}
     <style>
         .swal2-radio {
             display: unset !important;
         }
-        /* .dataTables_wrapper {
-            overflow: auto;
-        } */
     </style>
 @endsection
 
@@ -22,41 +18,48 @@
                     <h6 class="card-title mb-0">All Requests</h6>
                 </div>
                 <div class="card-body">
-                    <table id="myTable" class="table display dataTable table-hover" style="width: 100%">
-                        <thead>
-                            <tr>
-                                <th>Sr. #</th>
-                                <th>User</th>
-                                <th>Package</th>
-                                <th>Status</th>
-                                <th>Subadmin</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($profile_requests as $item)
+                    <div style="overflow: auto">
+                        <table id="myTable" class="table display dataTable table-hover" style="width: 100%">
+                            <thead>
                                 <tr>
-                                    <td>{{ $loop->iteration + ($profile_requests->currentPage() - 1) * 15 }}</td>
-                                    <td>{{ $item->user->username ?? 'N/A' }}</td>
-                                    <td>{{ $item->user->package->name ?? 'N/A' }}</td>
-                                    <td>{{ $item->get_status }}</td>
-                                    <td>{{ $item->subadmin->name ?? 'N/A' }}</td>
-                                    <td>
-                                        @if ($item->status == 0)
-                                            <button onclick="accept({{ $item->id }})" type="button"
-                                                class="btn btn-link text-info" data-bs-toggle="tooltip"
-                                                data-bs-placement="top" aria-label="Accept"
-                                                data-bs-original-title="Accept"><i class="fa fa-thumbs-up"></i></button>
-                                            <button onclick="reject({{ $item->id }})" type="button"
-                                                class="btn btn-link text-danger" data-bs-toggle="tooltip"
-                                                data-bs-placement="top" aria-label="Reject"
-                                                data-bs-original-title="Reject"><i class="fa fa-thumbs-down"></i></button>
-                                        @endif
-                                    </td>
+                                    <th>Sr. #</th>
+                                    <th>User</th>
+                                    <th>Package</th>
+                                    <th>Proof</th>
+                                    <th>Status</th>
+                                    <th>Subadmin</th>
+                                    <th>Actions</th>
                                 </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                @foreach ($profile_requests as $item)
+                                    <tr>
+                                        <td>{{ $loop->iteration + ($profile_requests->currentPage() - 1) * 15 }}</td>
+                                        <td>{{ $item->user->username ?? 'N/A' }}</td>
+                                        <td>{{ $item->user->package->name ?? 'N/A' }}</td>
+                                        <td><img src="{{ $item->get_image_proof }}" alt=""
+                                                onclick="enlargeImg(event)" width="100">
+                                        </td>
+                                        <td>{{ $item->get_status }}</td>
+                                        <td>{{ $item->subadmin->name ?? 'N/A' }}</td>
+                                        <td>
+                                            @if ($item->status == 0)
+                                                <button onclick="accept({{ $item->id }})" type="button"
+                                                    class="btn btn-link text-info" data-bs-toggle="tooltip"
+                                                    data-bs-placement="top" aria-label="Accept"
+                                                    data-bs-original-title="Accept"><i class="fa fa-thumbs-up"></i></button>
+                                                <button onclick="reject({{ $item->id }})" type="button"
+                                                    class="btn btn-link text-danger" data-bs-toggle="tooltip"
+                                                    data-bs-placement="top" aria-label="Reject"
+                                                    data-bs-original-title="Reject"><i
+                                                        class="fa fa-thumbs-down"></i></button>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                     {!! $profile_requests->links() !!}
                 </div>
             </div>
@@ -65,7 +68,6 @@
 @endsection
 
 @section('scripts')
-    {{-- <script src="{{ asset('assets/js/bundle/dataTables.bundle.js') }}"></script> --}}
     <script>
         function accept(id) {
             Swal.fire({
@@ -148,10 +150,14 @@
                 }
             });
         }
-        // $(document).ready(function() {
-        //     $("#myTable").addClass("nowrap").dataTable({
-        //         // responsive: true,
-        //     });
-        // });
+
+        function enlargeImg(event) {
+            let _this = event.currentTarget;
+            let src = _this.src;
+            Swal.fire({
+                imageUrl: src,
+                showConfirmButton: false
+            })
+        }
     </script>
 @endsection
