@@ -310,7 +310,7 @@
                         <a class="m-link @if (Route::is('user.usdt_wallet.index')) active @endif"
                             href="{{ route('user.usdt_wallet.index') }}">
                             @include('layouts.includes.sidebar_icon_home')
-                            <span class="ms-2">USDT Wallet</span>
+                            <span class="ms-2">USDT (TRC20) Wallet</span>
                         </a>
                     </li>
                 @endif

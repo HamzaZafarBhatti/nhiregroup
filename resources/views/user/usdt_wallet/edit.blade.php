@@ -10,7 +10,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h5 class="card-title mb-0">Edit USDT Wallet
+                    <h5 class="card-title mb-0">Edit USDT (TRC20) Wallet
                     </h5>
                 </div>
                 <div class="card-body">
