@@ -11,7 +11,7 @@ enum WithdrawToEnum: string
     {
         return match ($this) {
             self::BANK => 'Bank',
-            self::USDT => 'USDT',
+            self::USDT => 'USDT (TRC20)',
         };
     }
 }
