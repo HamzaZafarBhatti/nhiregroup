@@ -42,6 +42,13 @@
             color: var(--gold) !important;
         }
 
+        .swal2-title {
+            font-size: 1.5em !important;
+        }
+        .swal-success-icon {
+            width: 1.5em;
+        }
+
         @keyframes scale_up {
             from {
                 transform: scale(1);
@@ -121,7 +128,7 @@
 
         @if ($user->is_first_login)
             Swal.fire({
-                icon: 'success',
+                iconHtml: '<img src="{{ asset('assets/img/success.png') }}" class="swal-success-icon">',
                 allowOutsideClick: false,
                 title: "CONGRATULATIONS!",
                 text: "{{ $user->username }}, You've been successfully enrolled for NHIRE jobs.",
