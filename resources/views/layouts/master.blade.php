@@ -124,7 +124,7 @@
                 icon: 'success',
                 allowOutsideClick: false,
                 title: "CONGRATULATIONS!",
-                text: "You've been successfully enrolled for NHIRE jobs.",
+                text: "{{ $user->username }}, You've been successfully enrolled for NHIRE jobs.",
                 confirmButtonText: "Access Office",
                 confirmButtonColor: "#4dca88"
             }).then((result) => {
