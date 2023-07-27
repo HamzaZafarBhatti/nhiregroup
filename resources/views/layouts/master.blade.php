@@ -131,9 +131,9 @@
                 iconHtml: '<img src="{{ asset('assets/img/success.png') }}" class="swal-success-icon">',
                 allowOutsideClick: false,
                 title: "CONGRATULATIONS!",
-                text: "{{ $user->username }}, You've been successfully enrolled for NHIRE jobs.",
+                html: "<h5 class='text-uppercase text-gold'>{{ $user->username }}</h5><h5 class='text-uppercase'>You've been successfully enrolled for NHIRE jobs.</h5>",
                 confirmButtonText: "Access Office",
-                confirmButtonColor: "#4dca88"
+                confirmButtonClass: "btn-success",
             }).then((result) => {
                 if (result.isConfirmed) {
                     updateIsFirstLogin();
