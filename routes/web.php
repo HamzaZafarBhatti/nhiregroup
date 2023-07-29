@@ -86,6 +86,8 @@ Route::middleware(['auth', /* 'verified', */ 'user'])->name('user.')->prefix('us
         Route::get('/dashboard', 'dashboard');
         Route::get('/salary-dashboard', 'salary_dashboard')->name('dashboard.salary');
         Route::get('/update-is-first-login', 'updateIsFirstLogin')->name('updateIsFirstLogin');
+        Route::get('/accept-offer', 'acceptOffer')->name('accept.offer');
+        Route::get('/reject-offer', 'rejectOffer')->name('reject.offer');
         Route::get('/referrals/direct', 'referrals_direct')->name('referrals.direct');
         Route::get('/referrals/indirect', 'referrals_indirect')->name('referrals.indirect');
         Route::get('/validate-salary-profile', 'validate_salary_profile')->name('validate_salary_profile');
@@ -161,7 +163,10 @@ Route::middleware(['auth', 'admin'])->name('admin.')->prefix('nhiregrouptechadmi
         Route::post('/reject', 'reject')->name('reject');
     });
     Route::controller(AdminUserController::class)->prefix('users')->name('users.')->group(function () {
-        Route::get('/', 'index')->name('index');
+        Route::get('/', 'index')->name('index');    //getUserList
+        Route::get('/search', 'searchUsers')->name('search.users');
+        Route::post('/employ-users', 'employUsers')->name('employ.workers');
+        Route::get('/employ-user/{id}', 'employUser')->name('employ.worker');
         Route::get('/{id}/edit', 'edit')->name('edit');
         Route::put('/{id}/update_password', 'update_password')->name('update_password');
     });

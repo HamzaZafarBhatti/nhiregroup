@@ -6,6 +6,7 @@ use App\Http\Requests\EmployerPost\StoreRequest;
 use App\Http\Requests\EmployerPost\UpdateRequest;
 use App\Models\Employer;
 use App\Models\EmployerPost;
+use App\Models\JobStep;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -38,6 +39,7 @@ class EmployerPostController extends Controller
     {
         //
         $data = $request->validated();
+
         $data['post_date'] = now();
         $data['slug'] = Str::slug($data['title'], '-');
 
@@ -47,7 +49,17 @@ class EmployerPostController extends Controller
         $file->move($blog->getImagePath(), $image);
         $data['image'] = $image;
 
-        EmployerPost::create($data);
+        $post = EmployerPost::create($data);
+
+        $steps = $data['steps'];
+        foreach ($steps as $step => $value) {
+            JobStep::create([
+               'employer_post_id'   => $post->id,
+               'step'               => 'Step ' . $step + 1,
+               'description'        => $value,
+                'priority'          => $step + 1,
+            ]);
+        }
 
         return to_route('admin.employer-posts.index')->with('success', 'Post is created!');
     }
@@ -67,7 +79,8 @@ class EmployerPostController extends Controller
     {
         //
         $employers = Employer::select('id', 'name')->active()->get();
-        return view('admin.employer_posts.edit', compact('employer_post', 'employers'));
+        $count = count($employer_post->steps);
+        return view('admin.employer_posts.edit', compact('employer_post', 'employers', 'count'));
     }
 
     /**
@@ -92,6 +105,20 @@ class EmployerPostController extends Controller
         }
 
         $employerPost->update($data);
+
+        $steps = $data['steps'];
+        foreach ($steps as $step => $value) {
+            $employerPost->steps()->updateOrCreate(
+                [
+                    'employer_post_id' => $employerPost->id,
+                    'step'             => 'Step ' . $step + 1,
+                    'priority'          => $step + 1,
+                ],
+                [
+                    'description'        => $value,
+                ]
+            );
+        }
 
         return to_route('admin.employer-posts.index')->with('success', 'Post is updated!');
     }

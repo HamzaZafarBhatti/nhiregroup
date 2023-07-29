@@ -38,13 +38,13 @@
                         <div class="n-expected__card n-type px-4 py-2 w-50 text-white">
                             <small>Expected Salary</small>
                             <h5 class="fw-bold fs-6">
-                                @if(auth()->user()->package_id == 1)
-                                    ₦60,000
-                                @elseif(auth()->user()->package_id == 2)
-                                    ₦120,000
+                                @if(auth()->user()->package_id == 1) 
+                                    ₦60,000 
+                                @elseif(auth()->user()->package_id == 2) 
+                                    ₦120,000 
                                 @else
                                     ₦0
-                                @endif
+                                @endif 
                             </h5>
                         </div>
                         <div class="n-progress__card n-type px-2 text-white w-50">
@@ -80,7 +80,7 @@
                                     </div>
                                 </div>
                                 <div>
-                                    @if(!empty($employer->latest_job) && auth()->user()->employed == 2)
+                                    @if(!empty($employer->latest_job))
                                         <a href="{{ route('front.jobfortoday', $employer->latest_job->slug) }}" class="p-2 rounded color-fff n-btn__enabled">Start Job</a>
                                     @else
                                         <button disabled class="rounded color-fff job-dis n-btn__disabled">Start Job</button>
@@ -108,7 +108,7 @@
                                         </div>
                                     </div>
                                     <div>
-                                        @if(!empty($employer->latest_job) && auth()->user()->employed == 2)
+                                        @if(!empty($employer->latest_job))
                                             <a href="{{ route('front.jobfortoday', $employer->latest_job->slug) }}" class="py-2 px-3 rounded color-fff n-btn__enabled">Start Job</a>
                                         @else
                                             <button disabled class="py-1 px-2 rounded color-fff n-btn__disabled">Start Job</button>
@@ -190,7 +190,6 @@
         }
         .n-btn__disabled:hover {
             color: #ffffff;
-            pointer-events: none;
         }
 
         .n-btn__enabled {

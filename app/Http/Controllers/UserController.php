@@ -45,6 +45,34 @@ class UserController extends Controller
             return response('Something went wrong');
         }
     }
+    
+    public function acceptOffer()
+    {
+        
+        try {
+            $user = auth()->user();
+            $user->employed = 2;
+            $user->save();  //([ 'employed' => 2 ]);
+            return redirect()->back()->with('success', 'Employment offer accepted');
+            
+        } catch (\Throwable $th) {
+            Log::error('User Status Update Error: ' . $th->getMessage());
+            return response('Something went wrong');
+        }
+    }
+
+    public function rejectOffer()
+    {
+        try {
+            $user = auth()->user();
+            $user->employed = -1;
+            $user->save();
+            return redirect()->back()->with('success', 'Employment offer rejected');
+        } catch (\Throwable $th) {
+            Log::error('User Status Update Error: ' . $th->getMessage());
+            return response('Something went wrong');
+        }
+    }
 
     public function validate_salary_profile()
     {

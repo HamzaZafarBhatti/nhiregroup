@@ -41,6 +41,7 @@
         .text-gold {
             color: var(--gold) !important;
         }
+
         .swal2-title {
             font-size: 1.5em !important;
         }
@@ -123,49 +124,6 @@
                 icon: 'warning',
                 title: "{{ session('warning') }}"
             })
-        @endif
-
-        @if ($user->role == 'User' && $user->employed == 1)
-        $(document).ready(function () {
-            $('#ringBell').click(function () {
-                Swal.fire({
-                    icon: 'success',
-                    allowOutsideClick: false,
-                    showDenyButton: true,
-                    title: "<b style='color: #107501; font-size: 18px'>CONGRATULATIONS!</b>",
-                    html: '<b style="color: #cc9c03;">{{ strtoupper(auth()->user()->username) }}</b><br>You have been offered a <b style="color: #cc9c03;">{{ auth()->user()->package->expiry_time }} MONTHS</b> contract job on <b style="color: #cc9c03;">NHIRE.</b> You will be working as an ads manager for our company. You are to resume immediately and accelerate ads forthwith. You will be working <b style="color: #cc9c03;">{{ auth()->user()->package->name }}</b> and earning <b style="color: #cc9c03;">₦{{ number_format(auth()->user()->package->monthly_salary) }}</b> monthly',
-                    confirmButtonText: 'Accept Offer',
-                    confirmButtonColor: "#118546",
-                    denyButtonText: 'Reject Offer',
-                    denyButtonColor: "rgba(186,6,12,0.9)",
-                })
-                    .then((result) => {
-                    if (result.isConfirmed) {
-                        window.location.href = '{{ route('user.accept.offer') }}';
-                    } else if (result.isDenied) {
-                        window.location.href = '{{ route('user.reject.offer') }}';
-                    }
-                })
-            })
-        });
-
-        function acceptOffer() {
-            $.ajax({
-                url: "{{ route('user.accept.offer') }}",
-                success: function(response) {
-                    console.log(response);
-                }
-            })
-        }
-
-        function rejectOffer() {
-            $.ajax({
-                url: "{{ route('user.reject.offer') }}",
-                success: function(response) {
-                    console.log(response);
-                }
-            })
-        }
         @endif
 
         @if ($user->is_first_login)

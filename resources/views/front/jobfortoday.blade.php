@@ -72,6 +72,17 @@
                 {!! $blog->description !!}
             </div>
 
+            @if(count($blog->steps) > 0)
+            <h5 class="fw-bold"><u>Steps to perform job</u></h5>
+            <ol>
+                @forelse($blog->steps as $step)
+                    <li>{{ $step->description }}</li>
+                @empty
+                    No steps for this job
+                @endforelse
+            </ol>
+            @endif
+
 
             <div class="text-center">
                 <button data-post_id="{{ $blog->id }}" type="button" class="btn btn-success earn_btn">BOOST ADS AND
