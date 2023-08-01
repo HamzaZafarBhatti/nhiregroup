@@ -12,13 +12,17 @@ class SalaryprofileRequestController extends Controller
     //
     public function index()
     {
-        $profile_requests = SalaryprofileRequest::with('user.package', 'subadmin:id,name');
+        $requests = SalaryprofileRequest::with('user.package', 'subadmin:id,name');
         if (auth()->user()->role === 'Sub-Admin') {
-            $profile_requests = $profile_requests->where('subadmin_id', auth()->user()->id);
+            $requests = $requests->where('subadmin_id', auth()->user()->id);
         }
-        $profile_requests = $profile_requests->orderBy('status', 'asc')->latest('id')->paginate(15);
+        $profile_requests = $requests->orderBy('status', 'asc')->latest('id')->paginate(15);
         // return $profile_requests;
-        return view('admin.profile_requests.index', compact('profile_requests'));
+        $data['all'] = $requests->count();
+        $data['accepted'] = $requests->where('status', 1)->count();
+        $data['pending'] = $requests->where('status', 0)->count();
+        $data['rejected'] = $requests->where('status', 2)->count();
+        return view('admin.profile_requests.index', compact('profile_requests', 'data'));
     }
 
     public function pending()

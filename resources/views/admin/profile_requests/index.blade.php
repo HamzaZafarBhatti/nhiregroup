@@ -11,6 +11,48 @@
 @endsection
 
 @section('content')
+    <div class="row row-cols-md-4 row-cols-sm-2 row-cols-2 g-3 mb-3 row-deck">
+        <div class="col">
+            <div class="card">
+                <div class="card-body d-flex align-items-center">
+                    <div class="flex-fill ms-3 text-truncate">
+                        <div class="small text-uppercase">All</div>
+                        <div><span class="h6 mb-0 fw-bold">{{ $data['all'] }}</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card">
+                <div class="card-body d-flex align-items-center">
+                    <div class="flex-fill ms-3 text-truncate">
+                        <div class="small text-uppercase">Accepted</div>
+                        <div><span class="h6 mb-0 fw-bold">{{ $data['accepted'] }}</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card">
+                <div class="card-body d-flex align-items-center">
+                    <div class="flex-fill ms-3 text-truncate">
+                        <div class="small text-uppercase">Pending</div>
+                        <div><span class="h6 mb-0 fw-bold">{{ $data['pending'] }}</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card">
+                <div class="card-body d-flex align-items-center">
+                    <div class="flex-fill ms-3 text-truncate">
+                        <div class="small text-uppercase">Rejected</div>
+                        <div><span class="h6 mb-0 fw-bold">{{ $data['rejected'] }}</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="row g-3 row-deck">
         <div class="col-md-12 mt-4">
             <div class="card">
