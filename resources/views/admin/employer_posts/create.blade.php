@@ -58,6 +58,14 @@
                             @enderror
                         </div>
                         <div class="col-md-12">
+                            <label class="form-label">Link to copy (optional)</label>
+                            <input type="text" name="link" id="link" value="{{ old('link') }}"
+                                   class="form-control @error('link') is-invalid @enderror">
+                            @error('link')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="col-md-12">
                             <label class="form-label">Description</label>
                             <textarea name="description" id="description" cols="30" rows="5">{{ old('description') }}</textarea>
                             @error('description')

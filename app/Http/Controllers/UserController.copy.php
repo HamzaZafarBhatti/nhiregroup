@@ -45,12 +45,16 @@ class UserController extends Controller
             return response('Something went wrong');
         }
     }
-
+    
     public function acceptOffer()
     {
+        
         try {
-            auth()->user()->update(['employed' => 2]);
+            $user = auth()->user();
+            $user->employed = 2;
+            $user->save();  //([ 'employed' => 2 ]);
             return redirect()->back()->with('success', 'Employment offer accepted');
+            
         } catch (\Throwable $th) {
             Log::error('User Status Update Error: ' . $th->getMessage());
             return response('Something went wrong');
@@ -60,8 +64,10 @@ class UserController extends Controller
     public function rejectOffer()
     {
         try {
-            auth()->user()->update(['employed' => -1]);
-            return redirect()->back()->with('error', 'Employment offer rejected');
+            $user = auth()->user();
+            $user->employed = -1;
+            $user->save();
+            return redirect()->back()->with('success', 'Employment offer rejected');
         } catch (\Throwable $th) {
             Log::error('User Status Update Error: ' . $th->getMessage());
             return response('Something went wrong');
@@ -205,42 +211,25 @@ class UserController extends Controller
             ]);
         }
 
-        /*
-        $count = EmployerPostUser::where([
-            'user_id' => auth()->user()->id,
-            'employer_post_id' => $request->post_id,
-        ])->count();
-
-        if ($count == 2) {
-            return response([
-                'success' => 'warning',
-                'message' => 'You have already completed this job!'
-            ]);
-        }
-        */
-        $social = $request->get('shareMedia');
-
         $earning = EmployerPostUser::where([
             'user_id' => auth()->user()->id,
-            'employer_post_id' => $request->post_id,
+            'employer_post_id' => $request->post_id
         ])->first();
 
         if (!empty($earning)) {
             return response([
                 'success' => 'warning',
-                'message' => 'You have already boosted this ad!',
+                'message' => 'You have already done this job!'
             ]);
         }
 
         $post = EmployerPost::with('employer')->find($request->post_id);
-
         $res = EmployerPostUser::create([
             'user_id' => auth()->user()->id,
             'employer_post_id' => $request->post_id,
             'employer_id' => $post->employer_id,
             'cashed_out' => 0,
             'amount' => $post->employer->earning_amount,
-            'social_media' => $social,
         ]);
 
         return response([

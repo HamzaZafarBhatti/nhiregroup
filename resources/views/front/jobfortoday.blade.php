@@ -52,6 +52,10 @@
             flex-direction: column;
             gap: .5rem;
         }
+
+        .copydiv { display: flex; position: relative; margin: 20px 5px;}
+        .copybtn { display: inline-block; position: absolute; right: 5px; top: 4px; }
+        .copyfield { display: inline-block; padding: 20px; }
     </style>
 @endsection
 
@@ -71,6 +75,13 @@
             <div class="blog-desription">
                 {!! $blog->description !!}
             </div>
+
+            @if($blog->link)
+                <div class="input-group copydiv">
+                    <input value="{{ $blog->link }}" class="form-control copyfield" id="ref" readonly>
+                    <button type="button" class="btn btn-success copybtn" data-copytarget="#ref">Copy</button>
+                </div>
+            @endif
 
             @if(count($blog->steps) > 0)
             <h5 class="fw-bold"><u>Steps to perform job</u></h5>
@@ -94,11 +105,12 @@
 
 @section('scripts')
     <script>
-        function postShared(postId) {
+        function postShared(postId, sharer) {
             $.ajax({
                 url: "{{ route('user.earn_workflow_income') }}",
                 data: {
                     post_id: postId,
+                    shareMedia: sharer,
                 },
                 success: function(response) {
                     console.log(response);
@@ -106,6 +118,10 @@
                         icon: response.success,
                         title: response.message,
                         confirmButtonText: 'Access Office',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = '{{ route('user.dashboard.main') }}';
+                        }
                     })
                 }
             })
@@ -115,21 +131,66 @@
                 const postId = $(this).data('post_id');
                 console.log(postId);
                 Swal.fire({
-                    icon: 'info',
-                    title: 'Share post!',
+                    imageUrl: '{{ asset('assets/img/share/speak.png') }}',
+                    imageWidth: 150,
+                    padding: '2em 1em',
+                    background: '#CEB247',
+                    width: 600,
+                    imageAlt: 'Shout Out',
+                    title: 'Accelerate Ads!',
                     html: `
-                    <div class="facebook padding-y-half padding-x-one" onclick="postShared(${postId})">
-                        <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(route('front.jobfortoday', $blog->slug)) }}" target="_blank" rel="noopener noreferrer">Share to Facebook</a>
+                    <div class="padding-y-half padding-x-one" onclick="postShared(${postId}, 'facebook')">
+                        <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(route('front.jobfortoday', $blog->slug)) }}" target="_blank" rel="noopener noreferrer"><img src="{{ asset('assets/img/share/facebook.png') }}" alt="facebook" style="width: 100%;"></a>
                     </div>
-                    <div class="twitter padding-y-half padding-x-one" onclick="postShared(${postId})">
-                        <a href="https://twitter.com/intent/tweet?text={{ urlencode(route('front.jobfortoday', $blog->slug)) }}" target="_blank" rel="noopener noreferrer">Share to Twitter</a>
+                    <div class="padding-y-half padding-x-one" onclick="postShared(${postId}, 'twitter')">
+                        <a href="https://twitter.com/intent/tweet?text={{ urlencode(route('front.jobfortoday', $blog->slug)) }}" target="_blank" rel="noopener noreferrer"><img src="{{ asset('assets/img/share/twitter.png') }}" alt="facebook" style="width: 100%;"></a>
                     </div>
-                    <div class="whatsapp padding-y-half padding-x-one" onclick="postShared(${postId})">
-                        <a href="whatsapp://send?text={{ $blog->title . ' - ' . route('front.jobfortoday', $blog->slug) }}" target="_blank" rel="noopener noreferrer">Share to Whatsapp</a>
+                    <div class="padding-y-half padding-x-one" onclick="postShared(${postId}, 'whatsapp')">
+                        <a href="whatsapp://send?text={{ $blog->title . ' - ' . route('front.jobfortoday', $blog->slug) }}" target="_blank" rel="noopener noreferrer"><img src="{{ asset('assets/img/share/whatsapp.png') }}" alt="facebook" style="width: 100%;"></a>
                     </div>`,
                     showConfirmButton: false
                 })
             })
         })
+    </script>
+
+    <script>
+        'use strict';
+
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            // timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
+
+        document.querySelectorAll('.copybtn').forEach((element)=>{
+            element.addEventListener('click', copy, true);
+        })
+
+        function copy(e) {
+            var
+                t = e.target,
+                c = t.dataset.copytarget,
+                inp = (c ? document.querySelector(c) : null);
+            if (inp && inp.select) {
+                inp.select();
+                try {
+                    document.execCommand('copy');
+                    inp.blur();
+                    Toast.fire({
+                        icon: 'success',
+                        title: '<p style="color: #0c0b0b; font-size: 18px;">Link Copied Successfully!</p>'
+                    })
+                }catch (err) {
+                    alert(`@lang('Please press Ctrl/Cmd+C to copy')`);
+                }
+            }
+        }
     </script>
 @endsection

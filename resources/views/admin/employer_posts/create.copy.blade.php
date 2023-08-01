@@ -1,12 +1,9 @@
 @extends('layouts.master')
 
-@section('title', 'Edit Post')
+@section('title', 'Add Post')
 
 @section('styles')
     <link rel="stylesheet" href="{{ asset('assets/cssbundle/summernote.min.css') }}" />
-    <style>
-        .tvtarea { white-space: normal }
-    </style>
 @endsection
 
 @section('content')
@@ -14,19 +11,18 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h5 class="card-title mb-0">Edit Post
+                    <h5 class="card-title mb-0">Add Post
                     </h5>
                 </div>
 
                 <div class="card-body">
-                    <form class="row g-3" action="{{ route('admin.employer-posts.update', $employer_post->id) }}"
-                        method="post" enctype="multipart/form-data">
+                    <form class="row g-3" action="{{ route('admin.employer-posts.store') }}" method="post"
+                        enctype="multipart/form-data">
                         @csrf
-                        @method('patch')
                         <div class="col-md-6">
                             <label class="form-label">Title</label>
                             <input type="text" class="form-control @error('title') is-invalid @enderror"
-                                value="{{ old('title', $employer_post->title) }}" name="title" required />
+                                value="{{ old('title') }}" name="title" required />
                             @error('title')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -37,7 +33,7 @@
                                 class="form-control @error('employer_id') is-invalid @enderror" required>
                                 <option value="">Choose Employer</option>
                                 @foreach ($employers as $item)
-                                    <option value="{{ $item->id }}" @if (old('employer_id', $employer_post->employer_id) === $item->id) selected @endif>
+                                    <option value="{{ $item->id }}" @if (old('employer_id') === $item->id) selected @endif>
                                         {{ $item->name }}</option>
                                 @endforeach
                             </select>
@@ -48,30 +44,22 @@
                         <div class="col-md-6">
                             <label class="form-label">Image</label>
                             <input type="file" name="image" id="image"
-                                class="form-control @error('image') is-invalid @enderror">
+                                class="form-control @error('image') is-invalid @enderror" required>
                             @error('image')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">Number of Workers</label>
-                            <input type="number" name="workers" id="workers" value="{{ old('workers', $employer_post->workers) }}"
+                            <input type="number" name="workers" id="workers"
                                    class="form-control @error('workers') is-invalid @enderror" required>
                             @error('workers')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="col-md-12">
-                            <label class="form-label">Link to copy (optional)</label>
-                            <input type="text" name="link" id="link" value="{{ old('link', $employer_post->link) }}"
-                                   class="form-control @error('link') is-invalid @enderror">
-                            @error('link')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="col-md-12">
                             <label class="form-label">Description</label>
-                            <textarea name="description" id="description" cols="30" rows="5">{{ old('description', $employer_post->description) }}</textarea>
+                            <textarea name="description" id="description" cols="30" rows="5">{{ old('description') }}</textarea>
                             @error('description')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -80,7 +68,7 @@
                             <div class="form-check form-switch">
                                 <input class="form-check-input @error('is_active') is-invalid @enderror" type="checkbox"
                                     value="1" role="switch" id="is_active" name="is_active"
-                                    @if (old('is_active', $employer_post->is_active)) checked @endif>
+                                    @if (old('is_active')) checked @endif>
                                 <label class="form-check-label" for="is_active">Active</label>
                                 @error('is_active')
                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -89,40 +77,35 @@
                         </div>
 
                         <h5 class="fw-bold mt-4">Add Job Steps</h5>
-
                         <div class="row stepsContainer">
-                            @forelse($employer_post->steps as $step)
-                                <div class="my-3">
-                                    <label class="fw-700" for="step{{$step->priority}}">{{ $step->step }}</label>
-                                    <textarea name="steps[]" class="form-control tvtarea" id="step{{$step->priority}}">
-                                        {{ old('steps[]', trim(htmlspecialchars($step->description))) }}
-                                    </textarea>
-                                    @error('steps[]')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            @empty
-                                <div class="mt-3">
-                                    <label class="fw-700" for="step1">Step 1</label>
-                                    <textarea name="steps[]" class="form-control tvtarea" id="step1"></textarea>
-                                    @error('steps[]')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            @endforelse
+                            <div class="mt-3">
+                                <label class="fw-700" for="step1">Step 1</label>
+                                <textarea name="steps[]" class="form-control tvtarea" id="step1"></textarea>
+                                @error('steps[]')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="my-3">
+                                <label class="fw-700" for="step2">Step 2</label>
+                                <textarea name="steps[]" class="form-control tvtarea" id="step2"></textarea>
+                                @error('steps[]')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
                         </div>
 
                         <div class="col-xl-12 col-lg-12">
                             <div class="form-group">
                                 <a href="javascript:void(0)" class="btn btn-dark rounded add-more-btn" title="Add more steps">
-                                    Add steps <i class="fa fa-plus"></i>
+                                    Add more steps <i class="fa fa-plus"></i>
                                 </a>
                             </div>
                         </div>
 
                         <div class="col-12">
                             <button class="btn btn-primary" type="submit">
-                                Update Post
+                                Add Post
                             </button>
                         </div>
                     </form>
@@ -148,7 +131,7 @@
         'use strict';
         (function($){
 
-            var itr = {{ $count }};
+            var itr = 2;
 
             $('.add-more-btn').on('click', function(){
                 itr++
@@ -179,4 +162,5 @@
 
         })(jQuery)
     </script>
+
 @endsection

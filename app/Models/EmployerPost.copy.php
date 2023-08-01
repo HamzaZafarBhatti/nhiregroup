@@ -18,10 +18,8 @@ class EmployerPost extends Model
         'slug',
         'description',
         'image',
-        'workers',
         'is_active',
         'post_date',
-        'link',
     ];
 
     public function getImagePath()
@@ -32,11 +30,6 @@ class EmployerPost extends Model
     public function employer()
     {
         return $this->belongsTo(Employer::class);
-    }
-
-    public function steps()
-    {
-        return $this->hasMany(JobStep::class);
     }
 
     public function scopeActive($query)

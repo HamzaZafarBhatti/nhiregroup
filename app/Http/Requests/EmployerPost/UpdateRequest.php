@@ -27,7 +27,10 @@ class UpdateRequest extends FormRequest
             'title' => 'required|string',
             'description' => 'required|string',
             'image' => 'sometimes|required|image',
-            'is_active' => 'sometimes|boolean'
+            'is_active' => 'sometimes|boolean',
+            'workers' => 'required|numeric',
+            'steps' => 'sometimes|nullable|array',
+            'link' => 'sometimes|nullable|string',
         ];
     }
 }

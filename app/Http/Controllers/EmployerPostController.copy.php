@@ -53,7 +53,6 @@ class EmployerPostController extends Controller
 
         $steps = $data['steps'];
         foreach ($steps as $step => $value) {
-            if($value == '') { continue; }
             JobStep::create([
                'employer_post_id'   => $post->id,
                'step'               => 'Step ' . $step + 1,
@@ -109,7 +108,6 @@ class EmployerPostController extends Controller
 
         $steps = $data['steps'];
         foreach ($steps as $step => $value) {
-            if($value == '') { continue; }
             $employerPost->steps()->updateOrCreate(
                 [
                     'employer_post_id' => $employerPost->id,

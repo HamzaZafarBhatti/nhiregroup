@@ -16,7 +16,6 @@ class EmployerPostUser extends Model
         'user_id',
         'cashed_out',
         'amount',
-        'social_media',
     ];
 
     public function employer()
