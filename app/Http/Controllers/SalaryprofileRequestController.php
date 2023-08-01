@@ -63,7 +63,7 @@ class SalaryprofileRequestController extends Controller
         DB::beginTransaction();
         try {
             $profile_request = SalaryprofileRequest::with('user')->find($request->id);
-            $profile_request->update(['status' => 1, 'subadmin_approve_payment' => 1]);
+            $profile_request->update(['status' => 1, 'subadmin_approve_payment' => 1, 'subadmin_id' => auth()->user()->id]);
             $profile_request->user->update(['salary_dashboard_access' => 1]);
             DB::commit();
             return response()->json([

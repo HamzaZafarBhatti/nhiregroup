@@ -6,6 +6,38 @@
 @endsection
 
 @section('content')
+    <div class="row row-cols-md-3 row-cols-sm-3 row-cols-1 g-3 mb-3 row-deck">
+        <div class="col">
+            <div class="card">
+                <div class="card-body d-flex align-items-center">
+                    <div class="flex-fill ms-3 text-truncate">
+                        <div class="small text-uppercase">All</div>
+                        <div><span class="h6 mb-0 fw-bold">{{ $data['all'] }}</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card">
+                <div class="card-body d-flex align-items-center">
+                    <div class="flex-fill ms-3 text-truncate">
+                        <div class="small text-uppercase">Part Time</div>
+                        <div><span class="h6 mb-0 fw-bold">{{ $data['part_time'] }}</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card">
+                <div class="card-body d-flex align-items-center">
+                    <div class="flex-fill ms-3 text-truncate">
+                        <div class="small text-uppercase">Full Time</div>
+                        <div><span class="h6 mb-0 fw-bold">{{ $data['full_time'] }}</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="row g-3 row-deck">
         <div class="col-12">
             <div class="card">

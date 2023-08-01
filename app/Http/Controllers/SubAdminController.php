@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Subadmin\StoreRequest;
 use App\Http\Requests\Subadmin\UpdateRequest;
+use App\Models\SalaryprofileRequest;
 use App\Models\Timeslot;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -69,7 +70,15 @@ class SubAdminController extends Controller
         //
         $subadmin = User::find($id);
         $timeslots = Timeslot::latest()->get();
-        return view('admin.subadmins.edit', compact('subadmin', 'timeslots'));
+        $profile_reqs = SalaryprofileRequest::where('subadmin_id', $id);
+        $data['all'] = $profile_reqs->count();
+        $data['part_time'] = $profile_reqs->whereHas('user', function ($q) {
+            $q->where('package_id', 1);
+        })->count();
+        $data['full_time'] = $profile_reqs->whereHas('user', function ($q) {
+            $q->where('package_id', 2);
+        })->count();
+        return view('admin.subadmins.edit', compact('subadmin', 'timeslots', 'data'));
     }
 
     /**
