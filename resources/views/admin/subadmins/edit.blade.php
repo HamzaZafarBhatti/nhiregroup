@@ -11,7 +11,7 @@
             <div class="card">
                 <div class="card-body d-flex align-items-center">
                     <div class="flex-fill ms-3 text-truncate">
-                        <div class="small text-uppercase">All</div>
+                        <div class="small text-uppercase">Accepted</div>
                         <div><span class="h6 mb-0 fw-bold">{{ $data['all'] }}</span></div>
                     </div>
                 </div>

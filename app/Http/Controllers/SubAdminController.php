@@ -70,12 +70,11 @@ class SubAdminController extends Controller
         //
         $subadmin = User::find($id);
         $timeslots = Timeslot::latest()->get();
-        $profile_reqs = SalaryprofileRequest::where('subadmin_id', $id);
-        $data['all'] = $profile_reqs->count();
-        $data['part_time'] = $profile_reqs->whereHas('user', function ($q) {
+        $data['all'] = SalaryprofileRequest::where('subadmin_id', $id)->where('status', 1)->count();
+        $data['part_time'] = SalaryprofileRequest::where('subadmin_id', $id)->where('status', 1)->whereHas('user', function ($q) {
             $q->where('package_id', 1);
         })->count();
-        $data['full_time'] = $profile_reqs->whereHas('user', function ($q) {
+        $data['full_time'] = SalaryprofileRequest::where('subadmin_id', $id)->where('status', 1)->whereHas('user', function ($q) {
             $q->where('package_id', 2);
         })->count();
         return view('admin.subadmins.edit', compact('subadmin', 'timeslots', 'data'));

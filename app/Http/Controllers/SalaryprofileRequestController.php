@@ -18,10 +18,10 @@ class SalaryprofileRequestController extends Controller
         }
         $profile_requests = $requests->orderBy('status', 'asc')->latest('id')->paginate(15);
         // return $profile_requests;
-        $data['all'] = $requests->count();
-        $data['accepted'] = $requests->where('status', 1)->count();
-        $data['pending'] = $requests->where('status', 0)->count();
-        $data['rejected'] = $requests->where('status', 2)->count();
+        $data['all'] = SalaryprofileRequest::count();
+        $data['accepted'] = SalaryprofileRequest::where('status', 1)->count();
+        $data['pending'] = SalaryprofileRequest::where('status', 0)->count();
+        $data['rejected'] = SalaryprofileRequest::where('status', 2)->count();
         return view('admin.profile_requests.index', compact('profile_requests', 'data'));
     }
 
