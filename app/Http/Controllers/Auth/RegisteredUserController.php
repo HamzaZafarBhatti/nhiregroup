@@ -38,7 +38,7 @@ class RegisteredUserController extends Controller
     public function store(Request $request)/* : RedirectResponse|Request */
     {
         return back()->with('warning', 'Enrollment is closed!');
-        // return $request;
+        return $request;
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'username' => ['required', 'string', 'max:255', 'unique:users,username', 'regex:/^\S*$/u'],
