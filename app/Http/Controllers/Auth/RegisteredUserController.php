@@ -27,7 +27,7 @@ class RegisteredUserController extends Controller
     public function create(Request $request): View
     {
         $referral = $request->referral;
-        return view('user.auth.register', compact('referral'));
+        return view('user.auth.register2', compact('referral'));
     }
 
     /**
