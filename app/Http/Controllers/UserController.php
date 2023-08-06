@@ -46,11 +46,15 @@ class UserController extends Controller
         }
     }
 
-    public function acceptOffer()
+     public function acceptOffer()
     {
+        
         try {
-            auth()->user()->update(['employed' => 2]);
+            $user = auth()->user();
+            $user->employed = 2;
+            $user->save();  //([ 'employed' => 2 ]);
             return redirect()->back()->with('success', 'Employment offer accepted');
+            
         } catch (\Throwable $th) {
             Log::error('User Status Update Error: ' . $th->getMessage());
             return response('Something went wrong');
@@ -60,14 +64,16 @@ class UserController extends Controller
     public function rejectOffer()
     {
         try {
-            auth()->user()->update(['employed' => -1]);
-            return redirect()->back()->with('error', 'Employment offer rejected');
+            $user = auth()->user();
+            $user->employed = -1;
+            $user->save();
+            return redirect()->back()->with('success', 'Employment offer rejected');
         } catch (\Throwable $th) {
             Log::error('User Status Update Error: ' . $th->getMessage());
             return response('Something went wrong');
         }
     }
-
+    
     public function validate_salary_profile()
     {
         $subadmins = User::select('id', DB::raw("CONCAT(name,' - ',phone) AS name"))->where('role', 'Sub-Admin')->pluck('name', 'id');
@@ -148,21 +154,24 @@ class UserController extends Controller
 
     public function employer_list()
     {
+
         if (!auth()->user()->salary_dashboard_access) {
             return back()->with('warning', 'Office is locked. Please To access it, you have to pay ₦ ' . auth()->user()->package->salary_dashboard_fee . ' fee.');
         }
+        $user = auth()->user();
         $packages = Package::active()->pluck('name', 'id');
         $employers = Employer::with('latest_job')->active();
+        $userSalary = EmployerPostUser::with('user')->where('user_id', $user->id)->where('cashed_out', 0)->sum('amount');
 
-        if (auth()->user()->package_id == 2) {
+        if ($user->package_id == 2) {
             $employers = $employers->latest('id')->paginate(20);
         }
 
-        if (auth()->user()->package_id == 1) {
+        if ($user->package_id == 1) {
             $employers = $employers->where('package_id', auth()->user()->package_id)->latest('id')->limit(3)->get();
         }
 
-        return view('user.employers.index', compact('packages', 'employers'));
+        return view('user.employers.index', compact('packages', 'employers', 'userSalary'));
     }
 
     public function get_employer_list(Request $request)

@@ -5,9 +5,9 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Responsive Bootstrap 5 admin dashboard template & web App ui kit.">
+    <meta name="description" content="Nhire group. Jobs Inventory. Work with any company of your choice.">
     <meta name="keyword"
-        content="LUNO, Bootstrap 5, ReactJs, Angular, Laravel, VueJs, ASP .Net, Admin Dashboard, Admin Theme, HRMS, Projects, Hospital Admin, CRM Admin, Events, Fitness, Music, Inventory, Job Portal">
+        content="Nhire Group, Job Inventory.">
     <link rel="icon" href="{{ secure_asset('assets/img/favicon.ico') }}" type="image/x-icon"> <!-- Favicon-->
     <title>@yield('title') | NHire Group</title>
     <!-- Application vendor css url -->

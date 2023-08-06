@@ -52,6 +52,12 @@
             flex-direction: column;
             gap: .5rem;
         }
+        
+        p {
+            color: #000000 !important;
+            font-size: 16px !important;
+            font-weight: 400 !important;
+        }
 
         .copydiv { display: flex; position: relative; margin: 20px 5px;}
         .copybtn { display: inline-block; position: absolute; right: 5px; top: 4px; }
@@ -72,7 +78,7 @@
             <div class="blog-image">
                 <img src="{{ $blog->get_image }}" alt="{{ $blog->title }}">
             </div>
-            <div class="blog-desription">
+            <div class="blog-desription font-medium" style="font-weight: 500; color: #000000 !important;">
                 {!! $blog->description !!}
             </div>
 
@@ -96,8 +102,7 @@
 
 
             <div class="text-center">
-                <button data-post_id="{{ $blog->id }}" type="button" class="btn btn-success earn_btn">BOOST ADS AND
-                    EARN</button>
+                <button data-post_id="{{ $blog->id }}" type="button" class="btn btn-success earn_btn">ACCELERATE ADS</button>
             </div>
         </div>
     </div>
@@ -106,25 +111,27 @@
 @section('scripts')
     <script>
         function postShared(postId, sharer) {
-            $.ajax({
-                url: "{{ route('user.earn_workflow_income') }}",
-                data: {
-                    post_id: postId,
-                    shareMedia: sharer,
-                },
-                success: function(response) {
-                    console.log(response);
-                    Swal.fire({
-                        icon: response.success,
-                        title: response.message,
-                        confirmButtonText: 'Access Office',
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            window.location.href = '{{ route('user.dashboard.main') }}';
-                        }
-                    })
-                }
-            })
+            setTimeout(function () {
+                $.ajax({
+                    url: "{{ route('user.earn_workflow_income') }}",
+                    data: {
+                        post_id: postId,
+                        shareMedia: sharer,
+                    },
+                    success: function(response) {
+                        console.log(response);
+                        Swal.fire({
+                            icon: response.success,
+                            title: response.message,
+                            confirmButtonText: 'Access Office',
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = '{{ route('user.dashboard.main') }}';
+                            }
+                        })
+                    }
+                })
+            }, 5000);
         }
         $(document).ready(function() {
             $('.earn_btn').click(function() {

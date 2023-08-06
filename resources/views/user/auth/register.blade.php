@@ -81,6 +81,7 @@
                                 @enderror
                             </div>
                         </div>
+                        <p><a href="/agents" target="_blank" style="color: blue; font-weight: 700; font-size: 16px;"><u>Don't have a pass, click here to buy.</u></a></p>
                         @if ($referral)
                             <div class="col-12">
                                 <div class="form-floating">

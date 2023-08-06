@@ -118,10 +118,16 @@ class FrontendController extends Controller
         return view('front.faq');
     }
 
-    public function agents()
+    /*public function agents()
     {
         
         $vendors = User::where('role', 'Vendor')->latest('id')->get();
+        return view('front.agents', compact('vendors'));
+    }*/
+    
+    public function agents()
+    {
+        $vendors = User::where('is_vendor', '1')->whereNotNull('priority')->orderBy('priority')->get();
         return view('front.agents', compact('vendors'));
     }
 

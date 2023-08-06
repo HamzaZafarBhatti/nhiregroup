@@ -56,7 +56,7 @@ Route::name('front.')->controller(FrontendController::class)->group(function () 
     Route::post('/job-permit', 'jobpermit_validate');
     // Route::get('/jobs', 'jobs')->name('jobs');
     // Route::get('/how-it-works', 'howitworks')->name('howitworks');
-    // Route::get('/agents', 'agents')->name('agents');
+    Route::get('/agents', 'agents')->name('agents');
     // Route::get('/soft-skills', 'softskills')->name('softskills');
     // Route::get('/person', 'person')->name('person');
     // Route::get('/staff-and-services', 'staffandservices')->name('staffandservices');

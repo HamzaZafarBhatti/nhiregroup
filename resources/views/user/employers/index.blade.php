@@ -49,7 +49,7 @@
                         </div>
                         <div class="n-progress__card n-type px-2 text-white w-50">
                             <small>Salary Progress</small>
-                            <h5 class="fw-bold fs-6">₦{{ auth()->user()->earning_wallet }}</h5>
+                            <h5 class="fw-bold fs-6">₦{{ number_format($userSalary) }}</h5>
                         </div>
                     </div>
                     <div class="btn-group d-flex mb-4 n-tabs">
